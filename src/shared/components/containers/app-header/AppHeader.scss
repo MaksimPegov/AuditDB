@@ -1,0 +1,21 @@
+.AppHeader {
+  background-color: lightskyblue;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 0px 6px grey;
+
+  &-Header {
+    margin-left: 3%;
+  }
+
+  &-Links {
+    display: flex;
+    width: -webkit-fill-available;
+    justify-content: right;
+  }
+  &-Link {
+    padding-right: 2%;
+    color: black !important;
+    align-self: center;
+  }
+}
