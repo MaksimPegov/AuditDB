@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { cn } from '@bem-react/classname'
-import { Link } from '@mui/material'
+import { Avatar, IconButton, Link, Menu, MenuItem } from '@mui/material'
 
 import React, { useEffect } from 'react'
 
 import { SharedState } from 'shared/state/shared.reducer'
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import './AppHeader.scss'
+import { User } from 'shared/models/User'
 
 const componentId = 'AppHeader'
 const bem = cn(componentId)
@@ -14,6 +15,15 @@ const bem = cn(componentId)
 export const AppHeader: React.FC = () => {
   const user = useSelector((state: SharedState) => state.user)
   const dispatch = useDispatch()
+
+  // const user: User = {
+  //   id: 1,
+  //   name: 'Makism',
+  //   email: 'maksim.peg@gmail.com',
+  //   role: 'auditor',
+  //   created: '28.11.2021',
+  //   updated: '28.11.2021',
+  // }
 
   return (
     <div className={bem()} data-testid={bem()}>
