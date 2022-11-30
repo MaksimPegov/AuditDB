@@ -19,18 +19,25 @@ import {
   Visibility,
   Login as LoginIcon,
 } from '@mui/icons-material'
+import { cn } from '@bem-react/classname'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import './Login.scss'
 
-import { useNavigate } from 'react-router-dom'
 import { onlySpaces } from 'shared/helpers/dataValodation'
-import { RegistrationData, userDataValidation } from 'auth/helpers/RegistrationDataCheck'
-import { cn } from '@bem-react/classname'
+import { authActions, AuthState } from 'auth/state/auth.reducer'
 import { loginDataValidation } from 'auth/helpers/LoginDataCheck'
+import { selectLogin } from 'auth/state/auth.selectors'
+import { AppState } from 'state'
 
 const componentId = 'Login'
 const bem = cn(componentId)
 
 export const Login: React.FC = () => {
+  const loging = useSelector(selectLogin)
+
+  const dispatch = useDispatch()
+
   const [state, setState] = React.useState({
     emailError: false,
     passwordError: false,
@@ -42,7 +49,6 @@ export const Login: React.FC = () => {
     email: '',
     password: '',
   })
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (
@@ -88,7 +94,7 @@ export const Login: React.FC = () => {
     let resp = loginDataValidation(userData)
 
     if (resp.status) {
-      console.log('login')
+      dispatch(authActions.login(userData))
     } else if (!resp.status && resp.emailError) {
       console.log(resp.message)
       setState((old) => ({
@@ -178,7 +184,7 @@ export const Login: React.FC = () => {
           className={bem('Container-button')}
           variant="contained"
           color={'info'}
-          disabled={!state.canLog}
+          disabled={!state.canLog || loging}
           sx={{ mt: 4 }}
           onClick={handleLogin}
         >

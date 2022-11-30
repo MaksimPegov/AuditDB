@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { registration } from 'auth/api/auth.api'
+import { login, registration } from 'auth/api/auth.api'
 import { combineEpics, Epic } from 'redux-observable'
 import { catchError, filter, from, map, of, switchMap, Observable } from 'rxjs'
 import { authActions, authReducer, AuthState } from './auth.reducer'
@@ -18,4 +18,15 @@ const registerUser: Epic = (action$: Actions, state$: States) =>
     ),
   )
 
-export const authEpics = combineEpics(registerUser)
+const loginUser: Epic = (action$: Actions, state$: States) =>
+  action$.pipe(
+    filter(authActions.login.match),
+    switchMap(({ payload }) =>
+      from(login(payload)).pipe(
+        map((user) => authActions.loginSuccess(user)),
+        catchError((error) => of(authActions.loginError(error))),
+      ),
+    ),
+  )
+
+export const authEpics = combineEpics(registerUser, loginUser)

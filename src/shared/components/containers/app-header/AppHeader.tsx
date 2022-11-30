@@ -1,30 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
 import { Link } from '@mui/material'
 
 import React, { useEffect } from 'react'
 
-import { SharedState } from 'shared/state/shared.reducer'
 import { UserControl } from 'shared/components/user-contol/UserControl'
+import { SharedState } from 'shared/state/shared.reducer'
 import './AppHeader.scss'
-import { User } from 'shared/models/User'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { AppState } from 'state'
 
 const componentId = 'AppHeader'
 const bem = cn(componentId)
 
 export const AppHeader: React.FC = () => {
-  const user = useSelector((state: SharedState) => state.user)
-  const dispatch = useDispatch()
-
-  // const user: User = {
-  //   id: 1,
-  //   name: 'Makism',
-  //   email: 'maksim.peg@gmail.com',
-  //   role: 'auditor',
-  //   created: '28.11.2021',
-  //   updated: '28.11.2021',
-  // }
+  const user = useSelector((state: AppState) => state.shared.user)
 
   return (
     <div className={bem()} data-testid={bem()}>
@@ -36,7 +26,13 @@ export const AppHeader: React.FC = () => {
         Audit
       </h1>
       {user == null ? (
-        <div className={bem('Links')} data-testd={bem('Links')}>
+        <motion.div
+          className={bem('Links')}
+          data-testd={bem('Links')}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
           <Link className={bem('Link')} data-testid={bem('signIn')} href="/sign-in">
             Sign in
           </Link>
@@ -47,7 +43,7 @@ export const AppHeader: React.FC = () => {
           >
             Registration
           </Link>
-        </div>
+        </motion.div>
       ) : (
         <UserControl user={user} />
       )}

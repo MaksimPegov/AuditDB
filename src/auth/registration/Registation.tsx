@@ -21,19 +21,21 @@ import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { cn } from '@bem-react/classname'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { RegistrationData, userDataValidation } from 'auth/helpers/RegistrationDataCheck'
 import { onlySpaces } from 'shared/helpers/dataValodation'
-import './Registration.scss'
-import { useDispatch } from 'react-redux'
 import { authActions } from 'auth/state/auth.reducer'
+import './Registration.scss'
+import { selectRegistration } from 'auth/state/auth.selectors'
 
 const componentId = 'Registration'
 const bem = cn(componentId)
 
 export const Registation: React.FC = () => {
+  const registrating = useSelector(selectRegistration)
+
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const [state, setState] = React.useState({
     userNameError: false,
     emailError: false,
@@ -286,7 +288,7 @@ export const Registation: React.FC = () => {
           className={bem('Container-button')}
           variant="contained"
           color={'info'}
-          disabled={!state.canLog}
+          disabled={!state.canLog || registrating}
           sx={{ mt: 4 }}
           onClick={handleLogin}
         >
