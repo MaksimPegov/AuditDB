@@ -1,7 +1,10 @@
-import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
 import React, { useState } from 'react'
+import { cn } from '@bem-react/classname'
 import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 
+import { sharedActions } from 'shared/state/shared.reducer'
+import { useDispatch } from 'react-redux'
 import { User } from 'shared/models/User'
 import './UserControl.scss'
 
@@ -9,9 +12,10 @@ const componentId = 'UserControl'
 const bem = cn(componentId)
 
 export const UserControl: React.FC<{ user: User }> = ({ user }) => {
+  const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
-  const open = Boolean(anchorEl)
+  // const open = Boolean(anchorEl)
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -19,9 +23,18 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
   const handleIconClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
+  const handleLogout = () => {
+    dispatch(sharedActions.clearUser())
+  }
 
   return (
-    <div className={bem()} data-testid={bem()}>
+    <motion.div
+      className={bem()}
+      data-testid={bem()}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Typography
         className={bem('UserName')}
         data-testid={bem('UserName')}
@@ -121,11 +134,11 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
         <MenuItem
           className={bem('Logout')}
           data-testid={bem('Logout')}
-          onClick={handleClose}
+          onClick={handleLogout}
         >
           Logout
         </MenuItem>
       </Menu>
-    </div>
+    </motion.div>
   )
 }

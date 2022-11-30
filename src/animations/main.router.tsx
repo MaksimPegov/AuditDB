@@ -15,10 +15,10 @@ export const MainRouter = () => {
     <AnimatePresence>
       <div className={bem()} data-testid={bem()}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/wellcome-page" element={<div>hello</div>} />
+          <Route path="/main-page" element={<div>hello</div>} />
           <Route path="/sign-in" element={<Login />} />
           <Route path="/registration" element={<Registation />} />
-          <Route path="/*" element={<Navigate to="/wellcome-page" />} />
+          <Route path="/*" element={<Navigate to="/main-page" />} />
         </Routes>
       </div>
     </AnimatePresence>

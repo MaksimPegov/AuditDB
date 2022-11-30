@@ -38,6 +38,7 @@ export const loginDataValidation = (user: LoginData): LoginDataStatus => {
     response.message = 'Password cant be longer 30 characters'
     response.passwordError = true
   } else {
+    response.status = true
     response.message = 'User data is valid'
   }
   return response

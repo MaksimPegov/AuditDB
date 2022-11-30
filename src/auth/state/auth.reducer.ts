@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { LoginData } from 'auth/helpers/LoginDataCheck'
 import { RegistrationData } from 'auth/helpers/RegistrationDataCheck'
 import { User } from 'shared/models/User'
 
 export type AuthState = {
   user: User | null
-  spiners: {
+  spinners: {
     login: boolean
     registration: boolean
   }
@@ -12,7 +13,7 @@ export type AuthState = {
 
 export const initialAuthState: AuthState = {
   user: null,
-  spiners: {
+  spinners: {
     login: false,
     registration: false,
   },
@@ -23,27 +24,28 @@ export const authSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     resetAuth: (state, action: PayloadAction<string>) => initialAuthState,
-    login: (state, action: PayloadAction<User>) => {
-      state.spiners.login = true
+
+    login: (state, action: PayloadAction<LoginData>) => {
+      state.spinners.login = true
     },
 
     loginSuccess: (state, action: PayloadAction<User>) => {
       state.user = action.payload
-      state.spiners.login = false
+      state.spinners.login = false
     },
     loginError: (state, action: PayloadAction<string>) => {
-      state.spiners.login = false
+      state.spinners.login = false
     },
 
     registration: (state, action: PayloadAction<RegistrationData>) => {
-      state.spiners.registration = true
+      state.spinners.registration = true
     },
     registrationSuccess: (state, action: PayloadAction<User>) => {
       state.user = action.payload
-      state.spiners.registration = false
+      state.spinners.registration = false
     },
     registrationError: (state, action: PayloadAction<string>) => {
-      state.spiners.registration = false
+      state.spinners.registration = false
     },
   },
 })
