@@ -1,8 +1,8 @@
 export type User = {
-  id: number
+  _id: number
   name: string
   email: string
-  role: UserRole
+  role?: UserRole
   created: string
   updated: string
 }

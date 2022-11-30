@@ -4,8 +4,10 @@ import {
   Visibility,
   VisibilityOff,
   VpnKey,
+  Person,
 } from '@mui/icons-material'
 import {
+  Alert,
   Box,
   Button,
   FormControl,
@@ -20,16 +22,20 @@ import React, { useEffect } from 'react'
 import { cn } from '@bem-react/classname'
 import { useNavigate } from 'react-router-dom'
 
-import { userDataValidation } from 'shared/helpers/userDataValidation'
+import { RegistrationData, userDataValidation } from 'auth/helpers/RegistrationDataCheck'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import './Registration.scss'
+import { useDispatch } from 'react-redux'
+import { authActions } from 'auth/state/auth.reducer'
 
 const componentId = 'Registration'
 const bem = cn(componentId)
 
 export const Registation: React.FC = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [state, setState] = React.useState({
+    userNameError: false,
     emailError: false,
     passwordError1: false,
     passwordError2: false,
@@ -40,7 +46,8 @@ export const Registation: React.FC = () => {
     errorMessage: '',
   })
 
-  const [userData, setUserData] = React.useState({
+  const [userData, setUserData] = React.useState<RegistrationData>({
+    userName: '',
     email: '',
     password: '',
   })
@@ -48,13 +55,14 @@ export const Registation: React.FC = () => {
 
   useEffect(() => {
     if (
+      !onlySpaces(userData.userName) &&
+      userData.userName.length > 0 &&
       !onlySpaces(userData.email) &&
-      userData.email.length > 5 &&
-      userData.email.includes('@') &&
+      userData.email.length > 0 &&
       !onlySpaces(userData.password) &&
-      userData.password.length > 5 &&
+      userData.password.length > 0 &&
       !onlySpaces(password2) &&
-      password2.length > 5
+      password2.length > 0
     ) {
       setState((old) => ({ ...old, canLog: true }))
     } else {
@@ -77,6 +85,14 @@ export const Registation: React.FC = () => {
     setState((prevState) => ({
       ...prevState,
       showPassword2: !prevState.showPassword2,
+    }))
+  }
+
+  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData((prevState) => ({ ...prevState, userName: event.target.value.trim() }))
+    setState((prevState) => ({
+      ...prevState,
+      userNameError: false,
     }))
   }
   const hadnleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -115,11 +131,17 @@ export const Registation: React.FC = () => {
         passwordError2: true,
         errorMessage: 'Passwords do not match',
       }))
+    } else if (userData.userName.toLowerCase() === userData.email) {
+      setState((prevState) => ({
+        ...prevState,
+        userNameError: true,
+        errorMessage: 'User name can not be the same as e-mail',
+      }))
     } else {
       let resp = userDataValidation(userData)
 
       if (resp.status) {
-        console.log('registration')
+        dispatch(authActions.registration(userData))
       } else if (!resp.status && resp.emailError) {
         console.log(resp.message)
         setState((old) => ({
@@ -132,6 +154,13 @@ export const Registation: React.FC = () => {
         setState((old) => ({
           ...old,
           passwordError: resp.passwordError,
+          errorMessage: resp.message,
+        }))
+      } else if (!resp.status && resp.userNameError) {
+        console.log(resp.message)
+        setState((old) => ({
+          ...old,
+          userNameError: resp.userNameError,
           errorMessage: resp.message,
         }))
       } else {
@@ -155,7 +184,24 @@ export const Registation: React.FC = () => {
         </div>
         <form autoComplete="off">
           <Box
+            className={bem('Container-userName')}
+            data-testid={bem('Container-userName')}
+            sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
+          >
+            <Person sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
+            <TextField
+              id="standard-basic"
+              label="Your user name"
+              error={state.userNameError}
+              variant="standard"
+              sx={{ width: '100%' }}
+              onChange={handleUserNameChange}
+            />
+          </Box>
+
+          <Box
             className={bem('Container-email')}
+            data-testid={bem('Container-email')}
             sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
           >
             <MailOutline sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
@@ -168,6 +214,7 @@ export const Registation: React.FC = () => {
               onChange={hadnleEmailChange}
             />
           </Box>
+
           <Box
             className={bem('Container-password')}
             data-testid={bem('Container-password')}
@@ -200,6 +247,7 @@ export const Registation: React.FC = () => {
               />
             </FormControl>
           </Box>
+
           <Box
             className={bem('Container-password')}
             data-testid={bem('Container-password2')}
@@ -245,8 +293,13 @@ export const Registation: React.FC = () => {
           Registrate
         </Button>
 
-        {state.emailError || state.passwordError2 || state.passwordError1 ? (
-          <div className="Login__Container__Error">{state.errorMessage}</div>
+        {state.userNameError ||
+        state.emailError ||
+        state.passwordError2 ||
+        state.passwordError1 ? (
+          <Alert className={bem('Container-Error')} severity="error">
+            {state.errorMessage}
+          </Alert>
         ) : null}
       </div>
     </motion.div>

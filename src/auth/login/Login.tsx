@@ -10,6 +10,7 @@ import {
   Input,
   FormControl,
   InputLabel,
+  Alert,
 } from '@mui/material'
 import {
   MailOutline,
@@ -22,8 +23,9 @@ import './Login.scss'
 
 import { useNavigate } from 'react-router-dom'
 import { onlySpaces } from 'shared/helpers/dataValodation'
-import { UserData, userDataValidation } from 'shared/helpers/userDataValidation'
+import { RegistrationData, userDataValidation } from 'auth/helpers/RegistrationDataCheck'
 import { cn } from '@bem-react/classname'
+import { loginDataValidation } from 'auth/helpers/LoginDataCheck'
 
 const componentId = 'Login'
 const bem = cn(componentId)
@@ -36,7 +38,7 @@ export const Login: React.FC = () => {
     canLog: false,
     errorMessage: '',
   })
-  const [userData, setUserData] = React.useState<UserData>({
+  const [userData, setUserData] = React.useState({
     email: '',
     password: '',
   })
@@ -44,9 +46,8 @@ export const Login: React.FC = () => {
 
   useEffect(() => {
     if (
-      userData.email.length > 5 &&
-      userData.email.includes('@') &&
-      userData.password.length > 5 &&
+      userData.email.length > 0 &&
+      userData.password.length > 0 &&
       !onlySpaces(userData.email) &&
       !onlySpaces(userData.password)
     ) {
@@ -84,7 +85,7 @@ export const Login: React.FC = () => {
   }
 
   const handleLogin = (): void => {
-    let resp = userDataValidation(userData)
+    let resp = loginDataValidation(userData)
 
     if (resp.status) {
       console.log('login')
@@ -185,7 +186,9 @@ export const Login: React.FC = () => {
         </Button>
 
         {state.emailError || state.passwordError ? (
-          <div className={bem('Container-Error')}>{state.errorMessage}</div>
+          <Alert className={bem('Container-Error')} severity="error">
+            {state.errorMessage}
+          </Alert>
         ) : null}
       </div>
     </motion.div>

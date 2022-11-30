@@ -2,6 +2,11 @@ export type InputValidatorResponse = {
   status: boolean
   message: string
 }
+
+export const onlySpaces = (str: string): boolean => {
+  return /^\s*$/.test(str)
+}
+
 export const inputValidator = (data: string): InputValidatorResponse => {
   let response = {
     status: true,
@@ -13,6 +18,9 @@ export const inputValidator = (data: string): InputValidatorResponse => {
   } else if (data.includes(`'`) || data.includes(`"`)) {
     response.status = false
     response.message = `Brackets are not alowed ( ' and " )`
+  } else if (onlySpaces(data)) {
+    response.status = false
+    response.message = 'Input is empty'
   }
   return response
 }
@@ -25,8 +33,3 @@ export const validateEmail = (input: string): boolean => {
     return false
   }
 }
-
-export const onlySpaces = (str: string): boolean => {
-  return /^\s*$/.test(str)
-}
-

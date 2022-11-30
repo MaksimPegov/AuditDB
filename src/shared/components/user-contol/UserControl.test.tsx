@@ -4,7 +4,7 @@ import { UserControl } from './UserControl'
 
 describe('UserControl', () => {
   const user: User = {
-    id: 1,
+    _id: 1,
     name: 'Makism',
     email: 'maksim.peg@gmail.com',
     role: 'project',

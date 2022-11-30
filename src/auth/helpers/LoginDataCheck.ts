@@ -1,17 +1,18 @@
-import { inputValidator, onlySpaces, validateEmail } from './dataValodation'
+import { inputValidator, validateEmail } from '../../shared/helpers/dataValodation'
 
-export type UserData = {
+export type LoginData = {
   email: string
   password: string
 }
-export type UserDataStatus = {
+
+export type LoginDataStatus = {
   status: boolean
   emailError: boolean
   passwordError: boolean
   message: string
 }
 
-export const userDataValidation = (user: UserData): UserDataStatus => {
+export const loginDataValidation = (user: LoginData): LoginDataStatus => {
   const response = {
     status: false,
     emailError: false,
@@ -27,31 +28,17 @@ export const userDataValidation = (user: UserData): UserDataStatus => {
   } else if (!passwordCheck.status) {
     response.message = passwordCheck.message
     response.passwordError = true
-  } else if (user.email.includes(' ')) {
-    response.message = 'You cant use spaces in e-mail'
+  } else if (!validateEmail(user.email)) {
+    response.message = 'Email is invalid'
     response.emailError = true
-  } else if (user.password.includes(' ')) {
-    response.message = 'You cant use spaces in password'
-    response.passwordError = true
-  } else if (!user.email || onlySpaces(user.email)) {
-    response.message = 'Email is required'
-    response.emailError = true
-  } else if (!user.password || onlySpaces(user.password)) {
-    response.message = 'Password is required'
-    response.passwordError = true
   } else if (user.password.length < 6) {
     response.message = 'Password must be at least 6 characters'
     response.passwordError = true
   } else if (user.password.length > 30) {
     response.message = 'Password cant be longer 30 characters'
     response.passwordError = true
-  } else if (!validateEmail(user.email)) {
-    response.message = 'Email is not valid'
-    response.emailError = true
   } else {
-    response.status = true
     response.message = 'User data is valid'
   }
   return response
 }
-
