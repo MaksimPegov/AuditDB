@@ -7,8 +7,9 @@ export const registration = (user: RegistrationData): Promise<User> => {
     setTimeout(() => {
       resolve({
         _id: 1,
-        name: 'maksim',
-        email: 'maksim.peg@gmail.com',
+        name: user.userName,
+        role: user.role,
+        email: user.email,
         created: '2021-01-01',
         updated: '2021-01-01',
       })

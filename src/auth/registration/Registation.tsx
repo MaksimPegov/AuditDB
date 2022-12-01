@@ -16,6 +16,9 @@ import {
   InputAdornment,
   InputLabel,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
 } from '@mui/material'
 import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
@@ -28,12 +31,14 @@ import { onlySpaces } from 'shared/helpers/dataValodation'
 import { authActions } from 'auth/state/auth.reducer'
 import './Registration.scss'
 import { selectRegistration } from 'auth/state/auth.selectors'
+import { UserRole } from 'shared/models/User'
 
 const componentId = 'Registration'
 const bem = cn(componentId)
 
 export const Registation: React.FC = () => {
   const registrating = useSelector(selectRegistration)
+  const [alignment, setAlignment] = React.useState('undefined')
 
   const dispatch = useDispatch()
   const [state, setState] = React.useState({
@@ -49,6 +54,7 @@ export const Registation: React.FC = () => {
   })
 
   const [userData, setUserData] = React.useState<RegistrationData>({
+    role: undefined,
     userName: '',
     email: '',
     password: '',
@@ -171,6 +177,16 @@ export const Registation: React.FC = () => {
     }
   }
 
+  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+    setAlignment(newAlignment)
+    if (newAlignment !== 'undefined') {
+      setUserData((prevState) => ({
+        ...prevState,
+        role: newAlignment as UserRole,
+      }))
+    }
+  }
+
   return (
     <motion.div
       className={bem()}
@@ -185,6 +201,44 @@ export const Registation: React.FC = () => {
           <div className={bem('Container-Header-text')}>Create your account</div>
         </div>
         <form autoComplete="off">
+          <Typography
+            className={bem('Roles-head')}
+            variant="caption"
+            display="block"
+            gutterBottom
+          >
+            Choose who you want to be
+          </Typography>
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+          >
+            <ToggleButton
+              className={bem('Roles')}
+              data-testid={bem('Roles-null')}
+              value="undefined"
+            >
+              I dont know
+            </ToggleButton>
+            <ToggleButton
+              className={bem('Roles')}
+              data-testid={bem('Roles-auditor')}
+              value="auditor"
+            >
+              Auditor
+            </ToggleButton>
+            <ToggleButton
+              className={bem('Roles')}
+              data-testid={bem('Roles-project')}
+              value="project"
+            >
+              Project
+            </ToggleButton>
+          </ToggleButtonGroup>
+
           <Box
             className={bem('Container-userName')}
             data-testid={bem('Container-userName')}
@@ -287,7 +341,7 @@ export const Registation: React.FC = () => {
         <Button
           className={bem('Container-button')}
           variant="contained"
-          color={'info'}
+          color={'primary'}
           disabled={!state.canLog || registrating}
           sx={{ mt: 4 }}
           onClick={handleLogin}
@@ -299,9 +353,11 @@ export const Registation: React.FC = () => {
         state.emailError ||
         state.passwordError2 ||
         state.passwordError1 ? (
-          <Alert className={bem('Container-Error')} severity="error">
-            {state.errorMessage}
-          </Alert>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Alert className={bem('Container-Error')} severity="error">
+              {state.errorMessage}
+            </Alert>
+          </motion.div>
         ) : null}
       </div>
     </motion.div>

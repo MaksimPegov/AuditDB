@@ -6,7 +6,6 @@ import { Link } from '@mui/material'
 import React, { useEffect } from 'react'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
-import { SharedState } from 'shared/state/shared.reducer'
 import './AppHeader.scss'
 import { AppState } from 'state'
 
