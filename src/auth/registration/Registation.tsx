@@ -187,6 +187,11 @@ export const Registation: React.FC = () => {
     }
   }
 
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log('submit')
+  }
+
   return (
     <motion.div
       className={bem()}
@@ -200,7 +205,7 @@ export const Registation: React.FC = () => {
           <PersonAdd sx={{ m: 'auto', pr: 1, fontSize: 30 }} />{' '}
           <div className={bem('Container-Header-text')}>Create your account</div>
         </div>
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={submitForm}>
           <Typography
             className={bem('Roles-head')}
             variant="caption"
@@ -336,18 +341,20 @@ export const Registation: React.FC = () => {
               />
             </FormControl>
           </Box>
-        </form>
 
-        <Button
-          className={bem('Container-button')}
-          variant="contained"
-          color={'primary'}
-          disabled={!state.canLog || registrating}
-          sx={{ mt: 4 }}
-          onClick={handleLogin}
-        >
-          Registrate
-        </Button>
+          <Button
+            className={bem('Container-button')}
+            data-testid={bem('Container-button')}
+            type="submit"
+            variant="contained"
+            color={'primary'}
+            disabled={!state.canLog || registrating}
+            sx={{ mt: 4 }}
+            onClick={handleLogin}
+          >
+            Registrate
+          </Button>
+        </form>
 
         {state.userNameError ||
         state.emailError ||

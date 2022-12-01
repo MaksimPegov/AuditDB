@@ -37,6 +37,11 @@
         margin: auto;
       }
     }
+
+    &-button {
+      width: -webkit-fill-available;
+    }
+
     &-Error {
       margin: 4% 0 -2% !important;
       background-color: #fcdfdf !important;
