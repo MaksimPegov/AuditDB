@@ -22,7 +22,7 @@ export const login = (user: LoginData): Promise<User> => {
     setTimeout(() => {
       resolve({
         _id: 1,
-        name: 'maksim',
+        name: user.email,
         email: 'maksim.peg@gmail.com',
         created: '2021-01-01',
         updated: '2021-01-01',
