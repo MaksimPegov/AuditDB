@@ -25,10 +25,9 @@ import { useNavigate } from 'react-router-dom'
 import './Login.scss'
 
 import { onlySpaces } from 'shared/helpers/dataValodation'
-import { authActions, AuthState } from 'auth/state/auth.reducer'
+import { authActions } from 'auth/state/auth.reducer'
 import { loginDataValidation } from 'auth/helpers/LoginDataCheck'
 import { selectLogin } from 'auth/state/auth.selectors'
-import { AppState } from 'state'
 
 const componentId = 'Login'
 const bem = cn(componentId)
@@ -114,6 +113,11 @@ export const Login: React.FC = () => {
     }
   }
 
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log('submit')
+  }
+
   return (
     <motion.div
       className={bem()}
@@ -128,7 +132,7 @@ export const Login: React.FC = () => {
           <div className={bem('Container-Header-text')}>Autorization</div>
         </div>
 
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={submitForm}>
           <Box
             className={bem('Container-email')}
             data-testid={bem('Container-email')}
@@ -178,18 +182,20 @@ export const Login: React.FC = () => {
               />
             </FormControl>
           </Box>
-        </form>
 
-        <Button
-          className={bem('Container-button')}
-          variant="contained"
-          color={'primary'}
-          disabled={!state.canLog || loging}
-          sx={{ mt: 4 }}
-          onClick={handleLogin}
-        >
-          Sign in
-        </Button>
+          <Button
+            className={bem('Container-button')}
+            data-testid={bem('Container-button')}
+            type="submit"
+            variant="contained"
+            color={'primary'}
+            disabled={!state.canLog || loging}
+            sx={{ mt: 4 }}
+            onClick={handleLogin}
+          >
+            Sign in
+          </Button>
+        </form>
 
         {state.emailError || state.passwordError ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
