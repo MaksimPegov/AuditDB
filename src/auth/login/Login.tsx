@@ -183,7 +183,7 @@ export const Login: React.FC = () => {
         <Button
           className={bem('Container-button')}
           variant="contained"
-          color={'info'}
+          color={'primary'}
           disabled={!state.canLog || loging}
           sx={{ mt: 4 }}
           onClick={handleLogin}
@@ -192,9 +192,11 @@ export const Login: React.FC = () => {
         </Button>
 
         {state.emailError || state.passwordError ? (
-          <Alert className={bem('Container-Error')} severity="error">
-            {state.errorMessage}
-          </Alert>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Alert className={bem('Container-Error')} severity="error">
+              {state.errorMessage}
+            </Alert>
+          </motion.div>
         ) : null}
       </div>
     </motion.div>

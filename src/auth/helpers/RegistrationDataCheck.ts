@@ -1,3 +1,4 @@
+import { UserRole } from 'shared/models/User'
 import {
   inputValidator,
   onlySpaces,
@@ -5,6 +6,7 @@ import {
 } from '../../shared/helpers/dataValodation'
 
 export type RegistrationData = {
+  role?: UserRole
   userName: string
   email: string
   password: string
