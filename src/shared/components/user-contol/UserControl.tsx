@@ -64,7 +64,7 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
         data-testid={bem('Menu')}
         id="account-menu"
         onClose={handleClose}
-        open={Boolean(anchorEl)}
+        open={!!anchorEl}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'bottom',
