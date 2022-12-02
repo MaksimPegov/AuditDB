@@ -1,15 +1,15 @@
 import React, { ReactNode, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { AppState } from 'app.store'
+import { selectUser } from 'user/state/auth.selectors'
 
 export const AuthGuard = ({ comp }: { comp: ReactNode }) => {
-  const user = useSelector((state: AppState) => state.shared.user)
+  const user = useSelector(selectUser)
   const navigate = useNavigate()
 
   useEffect(() => {
     checkToken()
-  }, [comp])
+  }, [comp, user])
 
   const checkToken = () => {
     if (!user) {

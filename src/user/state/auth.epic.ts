@@ -16,10 +16,9 @@ import {
   of,
   switchMap,
   Observable,
-  tap,
   withLatestFrom,
 } from 'rxjs'
-import { authActions, authReducer, AuthState } from './auth.reducer'
+import { authActions, AuthState } from './auth.reducer'
 import { User } from 'shared/models/User'
 
 type Actions = Observable<PayloadAction>

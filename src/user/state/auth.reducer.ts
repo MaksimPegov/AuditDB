@@ -33,6 +33,14 @@ export const authSlice = createSlice({
   reducers: {
     resetAuth: (state, action: PayloadAction<string>) => initialAuthState,
 
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload
+    },
+
+    clearUser: (state, action: PayloadAction) => {
+      state.user = null
+    },
+
     login: (state, action: PayloadAction<LoginData>) => {
       state.spinners.login = true
     },
@@ -62,7 +70,7 @@ export const authSlice = createSlice({
     },
 
     setUserEmailSuccess: (state, action: PayloadAction<User>) => {
-      state.user = action.payload
+      state.user!.email = action.payload.email // TODO: fix this
       state.spinners.emailEdit = false
     },
 
@@ -75,7 +83,7 @@ export const authSlice = createSlice({
     },
 
     setUserNameSuccess: (state, action: PayloadAction<User>) => {
-      state.user = action.payload
+      state.user!.name = action.payload.name // TODO: fix this line
       state.spinners.userNameEdit = false
     },
 

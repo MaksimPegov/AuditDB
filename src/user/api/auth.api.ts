@@ -80,7 +80,7 @@ export const emailChange = (email: string, id: number): Promise<User> =>
             email: email,
             created: '2021-01-01',
             updated: '2021-01-01',
-          } as User)
+          })
         }, 1000)
       })
     : axiosForUsers.put('/users/email', { email }).then((response) => response.data)
@@ -95,7 +95,7 @@ export const nameChange = (name: string, id: number): Promise<User> =>
             email: 'test@gmail.com',
             created: '2021-01-01',
             updated: '2021-01-01',
-          } as User)
+          })
         }, 1000)
       })
     : axiosForUsers.put('/users/name', { name }).then((response) => response.data)
@@ -108,10 +108,10 @@ export const passwordChange = (password: string, id: number): Promise<User> =>
             _id: 1,
             name: 'test',
             email: 'test@gmail.com',
-            password: password,
+            // password: password,
             created: '2021-01-01',
             updated: '2021-01-01',
-          } as User)
+          })
         }, 1000)
       })
     : axiosForUsers.put('/users/password', { password }).then((response) => response.data)
