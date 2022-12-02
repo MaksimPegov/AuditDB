@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LoginData } from 'auth/helpers/LoginDataCheck'
 import { RegistrationData } from 'auth/helpers/RegistrationDataCheck'
 import { User } from 'shared/models/User'
@@ -47,6 +47,7 @@ export const authSlice = createSlice({
     registrationError: (state, action: PayloadAction<string>) => {
       state.spinners.registration = false
     },
+    fetchUserInfo: (state, action: Action) => {},
   },
 })
 

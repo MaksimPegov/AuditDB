@@ -1,16 +1,36 @@
+import { SnackbarProvider } from 'notistack'
+import { AnimatePresence } from 'framer-motion'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { Slide } from '@mui/material'
 import ReactDOM from 'react-dom/client'
 import React from 'react'
 
-import App from 'App'
 import 'index.css'
-import { Provider } from 'react-redux'
-import { store } from 'state'
+import App from 'App'
+import { store } from 'app.store'
+import { AppHeader } from 'shared/containers/app-header/AppHeader'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        TransitionComponent={Slide}
+        maxSnack={3}
+      >
+        <BrowserRouter>
+          <AppHeader />
+
+          <AnimatePresence>
+            <App />
+          </AnimatePresence>
+        </BrowserRouter>
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
 )

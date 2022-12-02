@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
-import { AppState } from 'state'
+import { AppState } from 'app.store'
 
 export const selectAuthSlice = (state: AppState) => state.auth
 

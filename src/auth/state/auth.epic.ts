@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { login, registration } from 'auth/api/auth.api'
 import { combineEpics, Epic } from 'redux-observable'
-import { catchError, filter, from, map, of, switchMap, Observable } from 'rxjs'
+import { catchError, filter, from, map, of, switchMap, Observable, tap } from 'rxjs'
 import { authActions, authReducer, AuthState } from './auth.reducer'
 
 type Actions = Observable<PayloadAction>

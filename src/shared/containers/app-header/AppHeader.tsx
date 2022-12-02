@@ -6,7 +6,7 @@ import { Link } from '@mui/material'
 import { cn } from '@bem-react/classname'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
-import { AppState } from 'state'
+import { AppState } from 'app.store'
 import './AppHeader.scss'
 
 const componentId = 'AppHeader'
@@ -35,7 +35,12 @@ export const AppHeader: React.FC = () => {
           About Us
         </Link>
 
-        <Link underline="none" className={bem('Link')} data-testd={bem('Community')}>
+        <Link
+          underline="none"
+          className={bem('Link')}
+          data-testd={bem('Community')}
+          onClick={() => navigate('/cabinet')}
+        >
           Community
         </Link>
       </div>
