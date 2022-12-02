@@ -6,6 +6,7 @@ import { Link } from '@mui/material'
 import { cn } from '@bem-react/classname'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
+import { selectUser } from 'user/state/auth.selectors'
 import { AppState } from 'app.store'
 import './AppHeader.scss'
 
@@ -13,7 +14,7 @@ const componentId = 'AppHeader'
 const bem = cn(componentId)
 
 export const AppHeader: React.FC = () => {
-  const user = useSelector((state: AppState) => state.shared.user)
+  const user = useSelector(selectUser)
   const navigate = useNavigate()
 
   return (

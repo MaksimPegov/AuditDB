@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { authActions } from 'auth/state/auth.reducer'
+import { authActions } from 'user/state/auth.reducer'
 import { combineEpics, Epic } from 'redux-observable'
 import { filter, from, map, Observable, switchMap, tap } from 'rxjs'
 import { sharedActions, SharedState } from './shared.reducer'

@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
-import { Login } from 'auth/login/Login'
-import { Cabinet } from 'auth/cabinet/Cabinet'
-import { Registation } from 'auth/registration/Registation'
+import { Login } from 'user/login/Login'
+import { Cabinet } from 'user/cabinet/Cabinet'
+import { Registation } from 'user/registration/Registation'
 import { AuthGuard, UnAuthGuard } from 'shared/guards'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
-import { authActions } from 'auth/state/auth.reducer'
+import { authActions } from 'user/state/auth.reducer'
 
 function App() {
   const location = useLocation()

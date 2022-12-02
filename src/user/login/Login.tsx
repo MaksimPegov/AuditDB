@@ -25,9 +25,9 @@ import { useNavigate } from 'react-router-dom'
 import './Login.scss'
 
 import { onlySpaces } from 'shared/helpers/dataValodation'
-import { authActions } from 'auth/state/auth.reducer'
-import { loginDataValidation } from 'auth/helpers/LoginDataCheck'
-import { selectLogin } from 'auth/state/auth.selectors'
+import { authActions } from 'user/state/auth.reducer'
+import { loginDataValidation } from 'user/helpers/LoginDataCheck'
+import { selectLogin } from 'user/state/auth.selectors'
 
 const componentId = 'Login'
 const bem = cn(componentId)

@@ -1,6 +1,6 @@
 import { cn } from '@bem-react/classname'
-import { Login } from 'auth/login/Login'
-import { Registation } from 'auth/registration/Registation'
+import { Login } from 'user/login/Login'
+import { Registation } from 'user/registration/Registation'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
