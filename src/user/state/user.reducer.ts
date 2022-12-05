@@ -69,7 +69,7 @@ export const userSlice = createSlice({
     },
 
     setUserNameSuccess: (state, action: PayloadAction<User>) => {
-      state.user!.name = action.payload.name // TODO: fix this line
+      state.user!.name = action.payload.name
       state.progress.changName = false
     },
 

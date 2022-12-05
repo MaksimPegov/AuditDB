@@ -32,7 +32,7 @@ export const registration = async (user: RegistrationData): Promise<User> => {
       setTimeout(() => {
         resolve({
           _id: 1,
-          name: user.userName,
+          name: user.name,
           role: user.role,
           email: user.email,
           created: '2021-01-01',
@@ -42,7 +42,7 @@ export const registration = async (user: RegistrationData): Promise<User> => {
     })
   }
 
-  const response = await axios.post('/users', user)
+  const response = await axiosNoAuth.post('/users', user)
 
   return response.data.user
 }

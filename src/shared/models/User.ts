@@ -7,4 +7,4 @@ export type User = {
   updated: string
 }
 
-export type UserRole = 'admin' | 'auditor' | 'project'
+export type UserRole = 'admin' | 'user'

@@ -1,13 +1,12 @@
-import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import React from 'react'
 import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
 import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 
-import { sharedActions } from 'shared/state/shared.reducer'
 import { useDispatch } from 'react-redux'
+import { userActions } from 'user/state/user.reducer'
 import { User } from 'shared/models/User'
 import './UserControl.scss'
-import { userActions } from 'user/state/user.reducer'
 
 const componentId = 'UserControl'
 const bem = cn(componentId)
@@ -102,7 +101,7 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
           },
         }}
       >
-        {user.role === 'project' ? (
+        {/* {user.role === 'project' ? (
           <MenuItem
             className={bem('MyProject')}
             data-testid={bem('MyProject')}
@@ -110,7 +109,7 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
           >
             My project
           </MenuItem>
-        ) : null}
+        ) : null} */}
         <MenuItem
           className={bem('Alerts')}
           data-testid={bem('Alerts')}

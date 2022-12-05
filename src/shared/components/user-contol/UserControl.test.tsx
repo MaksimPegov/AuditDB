@@ -7,7 +7,7 @@ describe('UserControl', () => {
     _id: 1,
     name: 'Makism',
     email: 'maksim.peg@gmail.com',
-    role: 'project',
+    role: 'user',
     created: '234234',
     updated: '234234',
   }

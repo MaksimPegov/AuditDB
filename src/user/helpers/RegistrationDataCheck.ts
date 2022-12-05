@@ -7,7 +7,7 @@ import {
 
 export type RegistrationData = {
   role?: UserRole
-  userName: string
+  name: string
   email: string
   password: string
 }
@@ -29,7 +29,7 @@ export const userDataValidation = (user: RegistrationData): RegistrationDataStat
   }
   const emailCheck = inputValidator(user.email)
   const passwordCheck = inputValidator(user.password)
-  const userNameCheck = inputValidator(user.userName)
+  const userNameCheck = inputValidator(user.name)
 
   if (!emailCheck.status) {
     response.message = emailCheck.message
@@ -40,10 +40,10 @@ export const userDataValidation = (user: RegistrationData): RegistrationDataStat
   } else if (!userNameCheck.status) {
     response.message = userNameCheck.message
     response.userNameError = true
-  } else if (user.userName.length < 3) {
+  } else if (user.name.length < 3) {
     response.message = 'User name must be at least 3 characters long'
     response.userNameError = true
-  } else if (user.userName.length > 30) {
+  } else if (user.name.length > 30) {
     response.message = 'User name cant be longer 30 characters'
     response.userNameError = true
   } else if (user.password.includes(' ')) {

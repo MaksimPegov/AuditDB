@@ -54,7 +54,7 @@ export const Registation: React.FC = () => {
 
   const [userData, setUserData] = React.useState<RegistrationData>({
     role: undefined,
-    userName: '',
+    name: '',
     email: '',
     password: '',
   })
@@ -62,8 +62,8 @@ export const Registation: React.FC = () => {
 
   useEffect(() => {
     if (
-      !onlySpaces(userData.userName) &&
-      userData.userName.length > 0 &&
+      !onlySpaces(userData.name) &&
+      userData.name.length > 0 &&
       !onlySpaces(userData.email) &&
       userData.email.length > 0 &&
       !onlySpaces(userData.password) &&
@@ -80,7 +80,7 @@ export const Registation: React.FC = () => {
       ...old,
       errorMessage: '',
     }))
-  }, [userData.userName, userData.email, userData.password, password2])
+  }, [userData.name, userData.email, userData.password, password2])
 
   const hidePassword1 = (): void => {
     setState((prevState) => ({
@@ -96,7 +96,7 @@ export const Registation: React.FC = () => {
   }
 
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserData((prevState) => ({ ...prevState, userName: event.target.value.trim() }))
+    setUserData((prevState) => ({ ...prevState, name: event.target.value.trim() }))
     setState((prevState) => ({
       ...prevState,
       userNameError: false,
@@ -138,7 +138,7 @@ export const Registation: React.FC = () => {
         passwordError2: true,
         errorMessage: 'Passwords do not match',
       }))
-    } else if (userData.userName.toLowerCase() === userData.email) {
+    } else if (userData.name.toLowerCase() === userData.email) {
       setState((prevState) => ({
         ...prevState,
         userNameError: true,
@@ -178,7 +178,7 @@ export const Registation: React.FC = () => {
     if (newAlignment !== 'undefined') {
       setUserData((prevState) => ({
         ...prevState,
-        role: newAlignment as UserRole,
+        role: 'user' as UserRole, //todo: path user account request
       }))
     }
   }
