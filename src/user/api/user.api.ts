@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 import { SERVER, PORT_USERS, MOCK_API } from 'app.constants'
-import { RegistrationData } from 'auth/helpers/RegistrationDataCheck'
-import { LoginData } from 'auth/helpers/LoginDataCheck'
+import { RegistrationData } from 'user/helpers/RegistrationDataCheck'
+import { LoginData } from 'user/helpers/LoginDataCheck'
 import { User } from 'shared/models/User'
 
 export const axiosNoAuth = axios.create({
@@ -20,7 +20,6 @@ axiosForUsers.interceptors.request.use(
     if (!config.headers['Authorization']) {
       const token = localStorage.getItem('token')
       config.headers['Authorization'] = `Bearer ${token}`
-      console.log('Token added to request')
     }
     return config
   },
@@ -44,8 +43,6 @@ export const registration = async (user: RegistrationData): Promise<User> => {
   }
 
   const response = await axios.post('/users', user)
-  debugger
-  localStorage.setItem('token', response.data.token)
 
   return response.data.user
 }
@@ -63,4 +60,44 @@ export const login = (data: LoginData): Promise<User> =>
           })
         }, 1000)
       })
-    : axiosNoAuth.post('/auth/login', data).then((response) => response.data)
+    : axiosNoAuth.post('/user/login', data).then((response) => response.data)
+
+export const changeName = (name: string, email: string): Promise<User> =>
+  MOCK_API
+    ? new Promise<User>((resolve, reject) => {
+        setTimeout(() => {
+          resolve({
+            _id: 1,
+            name: name,
+            email: 'test@gmail.com',
+            created: '2021-01-01',
+            updated: '2021-01-01',
+          })
+        }, 1000)
+      })
+    : axiosForUsers.put('/users/name', { name }).then((response) => response.data)
+
+export const changePassword = (password: string, id: number): Promise<User> =>
+  MOCK_API
+    ? new Promise<User>((resolve, reject) => {
+        setTimeout(() => {
+          resolve({
+            _id: 1,
+            name: 'test',
+            email: 'test@gmail.com',
+            // password: password,
+            created: '2021-01-01',
+            updated: '2021-01-01',
+          })
+        }, 1000)
+      })
+    : axiosForUsers.put('/users/password', { password }).then((response) => response.data)
+
+export const userDelete = (email: string): Promise<User> =>
+  MOCK_API
+    ? new Promise<null>((resolve, reject) => {
+        setTimeout(() => {
+          resolve(null)
+        }, 1000)
+      })
+    : axiosForUsers.delete('/users').then((response) => response.data)

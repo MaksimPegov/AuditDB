@@ -15,14 +15,6 @@ export const sharedSlice = createSlice({
   initialState: initialSharedState,
   reducers: {
     resetState: (state, action: PayloadAction<string>) => initialSharedState,
-
-    setUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload
-    },
-
-    clearUser: (state, action: PayloadAction) => {
-      state.user = null
-    },
   },
 })
 
