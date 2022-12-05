@@ -121,85 +121,80 @@ export const Login: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className={bem('Container')} data-testid={bem('Container')}>
-        <div className={bem('Header')}>
-          <LoginIcon sx={{ m: 'auto', pr: 1, fontSize: 30 }} />{' '}
-          <div className={bem('Header-text')}>Autorization</div>
-        </div>
-
-        <form autoComplete="off" onSubmit={submitForm}>
-          <Box
-            className={bem('email')}
-            data-testid={bem('email')}
-            sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
-          >
-            <MailOutline sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
-            <TextField
-              id="standard-basic"
-              label="E-mail"
-              error={state.emailError}
-              variant="standard"
-              sx={{ width: '100%' }}
-              onChange={hadnleEmailChange}
-            />
-          </Box>
-
-          <Box
-            className={bem('password')}
-            sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
-          >
-            <VpnKey sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
-
-            <FormControl sx={{ width: '100%' }} variant="standard">
-              <InputLabel
-                htmlFor="standard-adornment-password"
-                error={state.passwordError}
-              >
-                Password
-              </InputLabel>
-
-              <Input
-                id="standard-adornment-password"
-                type={state.showPassword ? 'text' : 'password'}
-                error={state.passwordError}
-                onChange={hadnlePasswordChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      tabIndex={-1}
-                      aria-label="toggle password visibility"
-                      onClick={hidePassword}
-                    >
-                      {state.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          </Box>
-
-          <Button
-            className={bem('button')}
-            data-testid={bem('button')}
-            type="submit"
-            variant="contained"
-            color={'primary'}
-            disabled={!state.canLog || loging}
-            sx={{ mt: 4 }}
-            onClick={handleLogin}
-          >
-            Sign in
-          </Button>
-        </form>
-
-        {state.emailError || state.passwordError ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <Alert className={bem('Error')} severity="error">
-              {state.errorMessage}
-            </Alert>
-          </motion.div>
-        ) : null}
+      <div className={bem('Header')}>
+        <LoginIcon sx={{ m: 'auto', pr: 1, fontSize: 30 }} />{' '}
+        <div className={bem('HeadeText')}>Autorization</div>
       </div>
+
+      <form autoComplete="off" onSubmit={submitForm}>
+        <Box
+          className={bem('Email')}
+          data-testid={bem('Email')}
+          sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
+        >
+          <MailOutline sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
+          <TextField
+            id="standard-basic"
+            label="E-mail"
+            error={state.emailError}
+            variant="standard"
+            sx={{ width: '100%' }}
+            onChange={hadnleEmailChange}
+          />
+        </Box>
+
+        <Box
+          className={bem('Password')}
+          sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
+        >
+          <VpnKey sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
+
+          <FormControl sx={{ width: '100%' }} variant="standard">
+            <InputLabel htmlFor="standard-adornment-password" error={state.passwordError}>
+              Password
+            </InputLabel>
+
+            <Input
+              id="standard-adornment-password"
+              type={state.showPassword ? 'text' : 'password'}
+              error={state.passwordError}
+              onChange={hadnlePasswordChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    tabIndex={-1}
+                    aria-label="toggle password visibility"
+                    onClick={hidePassword}
+                  >
+                    {state.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Box>
+
+        <Button
+          className={bem('Button')}
+          data-testid={bem('Button')}
+          type="submit"
+          variant="contained"
+          color={'primary'}
+          disabled={!state.canLog || loging}
+          sx={{ mt: 4 }}
+          onClick={handleLogin}
+        >
+          Sign in
+        </Button>
+      </form>
+
+      {state.emailError || state.passwordError ? (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Alert className={bem('Error')} severity="error">
+            {state.errorMessage}
+          </Alert>
+        </motion.div>
+      ) : null}
     </motion.div>
   )
 }
