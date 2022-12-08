@@ -1,0 +1,30 @@
+.MainPage {
+  margin: auto;
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+
+  &-Header {
+    text-align: center;
+    color: #53176d;
+  }
+
+  &-Buttons {
+    display: flex;
+  }
+
+  &-Button {
+    margin: 0 30px !important;
+    min-width: fit-content !important;
+
+    &_auditor {
+      background-color: #53176d !important;
+    }
+
+    &_client {
+      background-color: #ff9902 !important;
+    }
+  }
+}

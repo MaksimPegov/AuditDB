@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { userActions } from 'user/state/user.reducer'
 import { User } from 'shared/models/User'
 import './UserControl.scss'
+import { useNavigate } from 'react-router-dom'
 
 const componentId = 'UserControl'
 const bem = cn(componentId)
@@ -14,6 +15,7 @@ const bem = cn(componentId)
 export const UserControl: React.FC<{ user: User }> = ({ user }) => {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const navigate = useNavigate()
 
   // const open = Boolean(anchorEl)
 
@@ -127,7 +129,10 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
         <MenuItem
           className={bem('MyAccount')}
           data-testid={bem('MyAccount')}
-          onClick={handleClose}
+          onClick={() => {
+            navigate('/cabinet')
+            handleClose()
+          }}
         >
           My account
         </MenuItem>

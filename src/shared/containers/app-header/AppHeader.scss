@@ -1,14 +1,19 @@
 .AppHeader {
-  background-color: rgb(25, 118, 210);
   display: flex;
   flex-direction: row;
-  box-shadow: 0px 0px 6px grey;
   padding-right: 20px;
 
   &-Logo {
     color: white;
     cursor: pointer;
     margin-left: 3%;
+    display: inline-flex;
+  }
+  &-Audit {
+    color: #53176d;
+  }
+  &-DB {
+    color: #ff9902;
   }
 
   &-Panel {
@@ -22,13 +27,27 @@
   &-Links {
     display: flex;
     justify-content: right;
+    margin-right: 2%;
   }
 
   &-Link {
     align-self: center;
-    color: white !important;
+    margin: 1.5% !important;
+    color: black !important;
     cursor: pointer;
-    min-width: 80px;
-    padding-right: 2%;
+  }
+
+  &-Sign {
+    min-width: fit-content !important;
+    box-shadow: 0 0 !important;
+    margin: 5% !important;
+
+    &_in {
+      background-color: #ff9902 !important;
+    }
+    &_up {
+      color: #53176d !important;
+      border: 1.5px solid #53176d !important;
+    }
   }
 }

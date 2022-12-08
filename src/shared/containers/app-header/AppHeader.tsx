@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Link } from '@mui/material'
+import { Button, Link } from '@mui/material'
 import { cn } from '@bem-react/classname'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import { selectUser } from 'user/state/user.selectors'
-import { AppState } from 'app.store'
 import './AppHeader.scss'
 
 const componentId = 'AppHeader'
@@ -19,14 +18,10 @@ export const AppHeader: React.FC = () => {
 
   return (
     <div className={bem()} data-testid={bem()}>
-      <h1
-        className={bem('Logo')}
-        data-testid={bem('Logo')}
-        onClick={() => navigate('/main')}
-      >
-        Audit
-      </h1>
-
+      <div className={bem('Logo')} onClick={() => navigate('/main')}>
+        <h1 className={bem('Audit')}>Audit</h1>
+        <h1 className={bem('DB')}>DB</h1>
+      </div>
       <div className={bem('Panel')}>
         <Link underline="none" className={bem('Link')} data-testd={bem('Product')}>
           Product
@@ -45,7 +40,6 @@ export const AppHeader: React.FC = () => {
           Community
         </Link>
       </div>
-
       {user == null ? (
         <div className={bem('Links')} data-testd={bem('Links')}>
           <motion.div
@@ -54,23 +48,24 @@ export const AppHeader: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <Link
-              underline="none"
-              className={bem('Link')}
+            <Button
+              variant="contained"
+              color="warning"
+              className={bem('Sign', { in: true })}
               data-testid={bem('SignIn')}
               onClick={() => navigate('/sign-in')}
             >
               Sign In
-            </Link>
+            </Button>
 
-            <Link
-              underline="none"
-              className={bem('Link')}
+            <Button
+              variant="outlined"
+              className={bem('Sign', { up: true })}
               data-testid={bem('SignUp')}
               onClick={() => navigate('/sign-up')}
             >
               Sign Up
-            </Link>
+            </Button>
           </motion.div>
         </div>
       ) : (

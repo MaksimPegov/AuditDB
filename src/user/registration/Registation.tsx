@@ -364,7 +364,7 @@ export const Registation: React.FC = () => {
           data-testid={bem('Button')}
           type="submit"
           variant="contained"
-          color={'primary'}
+          color={'warning'}
           disabled={!state.canLog || registrating}
           sx={{ mt: 4 }}
           onClick={handleLogin}

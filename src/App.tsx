@@ -8,6 +8,7 @@ import { Cabinet } from 'user/cabinet/Cabinet'
 import { Registation } from 'user/registration/Registation'
 import { userActions } from 'user/state/user.reducer'
 import { AuthGuard, UnAuthGuard } from 'shared/guards'
+import { MainPage } from 'main/MainPage'
 
 function App() {
   const location = useLocation()
@@ -21,7 +22,7 @@ function App() {
   return (
     <main className="App" style={{ width: '100vh' }}>
       <Routes location={location} key={location.pathname}>
-        <Route path="/main" element={<div>hello</div>} />
+        <Route path="/main" element={<MainPage />} />
         <Route path="/sign-in" element={<UnAuthGuard comp={<Login />} />} />
         <Route path="/sign-up" element={<UnAuthGuard comp={<Registation />} />} />
         <Route path="/cabinet" element={<AuthGuard comp={<Cabinet />} />} />

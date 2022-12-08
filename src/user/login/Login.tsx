@@ -210,7 +210,7 @@ export const Login: React.FC = () => {
           data-testid={bem('Button')}
           type="submit"
           variant="contained"
-          color={'primary'}
+          color={'warning'}
           disabled={!state.canLog || loging}
           sx={{ mt: 4 }}
           onClick={handleLogin}
