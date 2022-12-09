@@ -22,12 +22,19 @@
     flex: 1;
     justify-content: center;
     margin-left: 3%;
+
+    @media screen and (max-width: 700px) {
+      width: 0;
+      opacity: 0;
+      height: 0;
+    }
   }
 
   &-Links {
     display: flex;
     justify-content: right;
     margin-right: 2%;
+    margin-left: auto;
   }
 
   &-Link {

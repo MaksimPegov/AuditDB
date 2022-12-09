@@ -24,25 +24,32 @@ export const AppHeader: React.FC = () => {
         <h1 className={bem('Audit')}>Audit</h1>
         <h1 className={bem('DB')}>DB</h1>
       </div>
-      <div className={bem('Panel')}>
-        <Link underline="none" className={bem('Link')} data-testd={bem('Product')}>
-          Product
-        </Link>
-
-        <Link underline="none" className={bem('Link')} data-testd={bem('AboutUs')}>
-          About Us
-        </Link>
-
-        <Link
-          underline="none"
-          className={bem('Link')}
-          data-testd={bem('Community')}
-          href={SWAGGER}
-          target="_blank"
+      {user === null ? (
+        <motion.div
+          className={bem('Panel')}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
-          API
-        </Link>
-      </div>
+          <Link underline="none" className={bem('Link')} data-testd={bem('Product')}>
+            Product
+          </Link>
+
+          <Link underline="none" className={bem('Link')} data-testd={bem('AboutUs')}>
+            About Us
+          </Link>
+
+          <Link
+            underline="none"
+            className={bem('Link')}
+            data-testd={bem('Community')}
+            href={SWAGGER}
+            target="_blank"
+          >
+            API
+          </Link>
+        </motion.div>
+      ) : null}
       {user == null ? (
         <div className={bem('Links')} data-testd={bem('Links')}>
           <motion.div
