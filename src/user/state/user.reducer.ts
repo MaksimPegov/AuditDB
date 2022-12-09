@@ -2,7 +2,7 @@ import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RegistrationData } from 'user/helpers/RegistrationDataCheck'
 import { LoginData } from 'user/helpers/LoginDataCheck'
-import { AccountType, User } from 'shared/models/User'
+import { AccountType, mockUser, User } from 'shared/models/User'
 
 export type UserState = {
   user: User | null
@@ -21,7 +21,7 @@ export type UserState = {
 }
 
 export const initialUserState: UserState = {
-  user: null,
+  user: mockUser, //mockUser
   progress: {
     login: false,
     registration: false,

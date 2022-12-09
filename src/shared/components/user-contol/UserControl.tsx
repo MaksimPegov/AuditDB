@@ -103,15 +103,6 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
           },
         }}
       >
-        {/* {user.role === 'project' ? (
-          <MenuItem
-            className={bem('MyProject')}
-            data-testid={bem('MyProject')}
-            onClick={handleClose}
-          >
-            My project
-          </MenuItem>
-        ) : null} */}
         <MenuItem
           className={bem('Alerts')}
           data-testid={bem('Alerts')}

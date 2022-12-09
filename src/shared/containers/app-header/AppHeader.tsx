@@ -7,9 +7,9 @@ import { cn } from '@bem-react/classname'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import { selectUser } from 'user/state/user.selectors'
-import { AppState } from 'app.store'
 import { SWAGGER } from 'app.constants'
 import './AppHeader.scss'
+import { UserNavigate } from 'shared/components/user-navigate/UserNavigate'
 
 const componentId = 'AppHeader'
 const bem = cn(componentId)
@@ -49,7 +49,10 @@ export const AppHeader: React.FC = () => {
             API
           </Link>
         </motion.div>
-      ) : null}
+      ) : (
+        <UserNavigate navigator={navigate} />
+      )}
+
       {user == null ? (
         <div className={bem('Links')} data-testd={bem('Links')}>
           <motion.div
