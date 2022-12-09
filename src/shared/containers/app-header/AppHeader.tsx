@@ -7,6 +7,8 @@ import { cn } from '@bem-react/classname'
 
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import { selectUser } from 'user/state/user.selectors'
+import { AppState } from 'app.store'
+import { SWAGGER } from 'app.constants'
 import './AppHeader.scss'
 
 const componentId = 'AppHeader'
@@ -35,9 +37,10 @@ export const AppHeader: React.FC = () => {
           underline="none"
           className={bem('Link')}
           data-testd={bem('Community')}
-          onClick={() => navigate('/cabinet')}
+          href={SWAGGER}
+          target="_blank"
         >
-          Community
+          API
         </Link>
       </div>
       {user == null ? (
