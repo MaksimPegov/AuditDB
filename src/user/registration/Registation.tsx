@@ -268,7 +268,6 @@ export const Registation: React.FC = () => {
           data-testid={bem('UserName')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <Person sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
           <TextField
             label="Your user name"
             error={state.userNameError}
@@ -283,7 +282,6 @@ export const Registation: React.FC = () => {
           data-testid={bem('Email')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <MailOutline sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
           <TextField
             id="standard-basic"
             label="Your e-mail"
@@ -299,7 +297,6 @@ export const Registation: React.FC = () => {
           data-testid={bem('Password')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <VpnKey sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
           <FormControl sx={{ width: '100%' }} variant="standard">
             <InputLabel
               htmlFor="standard-adornment-password"
@@ -332,7 +329,6 @@ export const Registation: React.FC = () => {
           data-testid={bem('password2')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <VpnKey sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
           <FormControl sx={{ width: '100%' }} variant="standard">
             <InputLabel
               htmlFor="standard-adornment-password"

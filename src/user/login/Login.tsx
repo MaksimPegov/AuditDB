@@ -98,7 +98,7 @@ export const Login: React.FC = () => {
   const hadnleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUserData((prevState) => ({
       ...prevState,
-      email: event.target.value.trim(),
+      email: event.target.value.trim().toLocaleLowerCase(),
     }))
     setState((prevState) => ({
       ...prevState,
@@ -162,7 +162,6 @@ export const Login: React.FC = () => {
           data-testid={bem('Email')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <MailOutline sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
           <TextField
             id="standard-basic"
             type="email"
@@ -178,8 +177,6 @@ export const Login: React.FC = () => {
           className={bem('Password')}
           sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
         >
-          <VpnKey sx={{ color: 'action.active', mr: 1.5, my: 0.5 }} />
-
           <FormControl sx={{ width: '100%' }} variant="standard">
             <InputLabel htmlFor="standard-adornment-password" error={state.passwordError}>
               Password

@@ -2,15 +2,19 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 import { cn } from '@bem-react/classname'
-import './MainPage.scss'
+import './MainTitle.scss'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-const componentId = 'MainPage'
+const componentId = 'MainTitle'
 const bem = cn(componentId)
 
-export const MainPage: React.FC = () => {
+export const MainTitle: React.FC = () => {
   const navigate = useNavigate()
+
+  const auditorHandleClick = () => {
+    navigate('/sign-up')
+  }
   return (
     <motion.div
       className={bem()}
