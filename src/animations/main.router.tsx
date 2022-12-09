@@ -3,7 +3,8 @@ import { Login } from 'user/login/Login'
 import { Registation } from 'user/registration/Registation'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { MainTitle } from 'shared/components/main-title/MainTitle'
+import { Welcome } from 'shared/components/welcome/Welcome'
+import { MainPage } from 'shared/containers/main/MainPage'
 
 export const componentId = 'MainRouter'
 
@@ -15,7 +16,7 @@ export const MainRouter = () => {
     <AnimatePresence>
       <div className={bem()} data-testid={bem()}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/main" element={<MainTitle />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<Registation />} />
           <Route path="/*" element={<Navigate to="/main" />} />

@@ -20,6 +20,7 @@ import {
 } from 'user/api/user.api'
 import { User } from 'shared/models/User'
 import { userActions, UserState } from 'user/state/user.reducer'
+import { sharedActions } from 'shared/state/shared.reducer'
 
 type Actions = Observable<PayloadAction>
 type States = Observable<UserState>
@@ -82,10 +83,17 @@ export const deleteCurrentUser: Epic = (action$: Actions, state$: States) =>
     ),
   )
 
+export const setAccountTypePreferences: Epic = (action$: Actions, state$: States) =>
+  action$.pipe(
+    filter(sharedActions.setUserPreferences.match),
+    map(({ payload }) => userActions.setAccountTypePreferences(payload)),
+  )
+
 export const userEpics = combineEpics(
   registerUser,
   loginUser,
   changeUserName,
   changeUserPassword,
   deleteCurrentUser,
+  setAccountTypePreferences,
 )

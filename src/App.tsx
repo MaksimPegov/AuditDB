@@ -8,8 +8,7 @@ import { Cabinet } from 'user/cabinet/Cabinet'
 import { Registation } from 'user/registration/Registation'
 import { userActions } from 'user/state/user.reducer'
 import { AuthGuard, UnAuthGuard } from 'shared/guards'
-import { MainTitle } from 'shared/components/main-title/MainTitle'
-import { MainPage } from 'shared/containers/main-page/MainPage'
+import { MainPage } from 'shared/containers/main/MainPage'
 
 function App() {
   const location = useLocation()

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from '../models/User'
+import { AccountType, User } from '../models/User'
 
 export type SharedState = {
   user: User | null
@@ -15,6 +15,8 @@ export const sharedSlice = createSlice({
   initialState: initialSharedState,
   reducers: {
     resetState: (state, action: PayloadAction<string>) => initialSharedState,
+
+    setUserPreferences: (state, action: PayloadAction<AccountType>) => {},
   },
 })
 

@@ -2,7 +2,7 @@ import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RegistrationData } from 'user/helpers/RegistrationDataCheck'
 import { LoginData } from 'user/helpers/LoginDataCheck'
-import { User } from 'shared/models/User'
+import { AccountType, User } from 'shared/models/User'
 
 export type UserState = {
   user: User | null
@@ -17,6 +17,7 @@ export type UserState = {
   registrationError: string | null
   registrationSuccess: boolean
   registrationSuccessMessage: string | null
+  accountTypePreferences: AccountType
 }
 
 export const initialUserState: UserState = {
@@ -32,6 +33,7 @@ export const initialUserState: UserState = {
   registrationError: null,
   registrationSuccess: false,
   registrationSuccessMessage: null,
+  accountTypePreferences: 'client',
 }
 
 export const userSlice = createSlice({
@@ -126,6 +128,10 @@ export const userSlice = createSlice({
 
     userDeleteError: (state, action: PayloadAction<string>) => {
       state.progress.userDelete = false
+    },
+
+    setAccountTypePreferences: (state, action: PayloadAction<AccountType>) => {
+      state.accountTypePreferences = action.payload
     },
   },
 })

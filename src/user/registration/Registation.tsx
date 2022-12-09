@@ -30,6 +30,7 @@ import { AccountType, UserRole } from 'shared/models/User'
 import { userActions } from 'user/state/user.reducer'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import {
+  selectAccountTypePreferences,
   selectRegistration,
   selectRegistrationError,
   selectRegistrationSuccess,
@@ -44,7 +45,8 @@ export const Registation: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const registrating = useSelector(selectRegistration)
-  const [alignment, setAlignment] = React.useState<AccountType>('client')
+  const selectedAccountType = useSelector(selectAccountTypePreferences)
+  const [alignment, setAlignment] = React.useState<AccountType>(selectedAccountType)
 
   const registerError = useSelector(selectRegistrationError)
   useEffect(() => {

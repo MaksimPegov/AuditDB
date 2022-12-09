@@ -33,4 +33,9 @@ export const selectSuccessMessage = createSelector(
   (state) => state.registrationSuccessMessage,
 )
 
+export const selectAccountTypePreferences = createSelector(
+  selectUserSlice,
+  (state) => state.accountTypePreferences,
+)
+
 export const selectUser = createSelector(selectUserSlice, (state) => state.user)
