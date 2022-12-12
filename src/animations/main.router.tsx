@@ -3,7 +3,6 @@ import { Login } from 'user/login/Login'
 import { Registation } from 'user/registration/Registation'
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import { Welcome } from 'shared/components/welcome/Welcome'
 import { MainPage } from 'shared/containers/main/MainPage'
 
 export const componentId = 'MainRouter'
