@@ -3,7 +3,7 @@ import axios, { Axios, AxiosError, AxiosResponse } from 'axios'
 import { SERVER, PORT_USERS, MOCK_API } from 'app.constants'
 import { RegistrationData } from 'user/helpers/RegistrationDataCheck'
 import { LoginData } from 'user/helpers/LoginDataCheck'
-import { User } from 'shared/models/User'
+import { mockedUser, User } from 'shared/models/User'
 import { ServerUser, userAdaptor } from './adaptors/userAdaptor'
 
 export const axiosNoAuth = axios.create({
@@ -15,7 +15,7 @@ export const axiosForUsers = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,
+  // withCredentials: true,
 })
 
 axiosForUsers.interceptors.request.use(
@@ -29,17 +29,16 @@ axiosForUsers.interceptors.request.use(
   (error: any) => Promise.reject(error),
 )
 
-export const registration = async (user: RegistrationData): Promise<User> => {
+export const create = async (user: RegistrationData): Promise<User> => {
   if (MOCK_API) {
     return new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         resolve({
+          ...mockedUser,
           name: user.name,
           role: user.role,
           email: user.email,
           accountType: user.requestedAccountType,
-          created: '2021-01-01',
-          updated: '2021-01-01',
         })
       }, 1000)
     })
@@ -57,11 +56,8 @@ export const login = async (data: LoginData): Promise<User> => {
     return new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         resolve({
+          ...mockedUser,
           name: data.email,
-          email: 'maksim.peg@gmail.com',
-          accountType: 'auditor',
-          created: '2021-01-01',
-          updated: '2021-01-01',
         })
       }, 1000)
     })
@@ -79,16 +75,13 @@ export const login = async (data: LoginData): Promise<User> => {
   }
 }
 
-export const changeName = async (name: string, email: string): Promise<any> => {
+export const changeName = async (name: string): Promise<any> => {
   if (MOCK_API) {
     return new Promise<User>((resolve, reject) => {
       setTimeout(() => {
         resolve({
-          name: name,
-          email: 'test@gmail.com',
-          accountType: 'auditor',
-          created: '2021-01-01',
-          updated: '2021-01-01',
+          ...mockedUser,
+          name,
         })
       }, 1000)
     })
@@ -118,18 +111,12 @@ export const changePassword = (password: string, email: string): Promise<User> =
   MOCK_API
     ? new Promise<User>((resolve, reject) => {
         setTimeout(() => {
-          resolve({
-            name: 'test',
-            email: 'test@gmail.com',
-            accountType: 'auditor',
-            created: '2021-01-01',
-            updated: '2021-01-01',
-          })
+          resolve(mockedUser)
         }, 1000)
       })
     : axiosForUsers.put('/users/password', { password }).then((response) => response.data)
 
-export const userDelete = async (): Promise<any> => {
+export const remove = async (): Promise<any> => {
   if (MOCK_API) {
     new Promise<null>((resolve, reject) => {
       setTimeout(() => {
@@ -148,5 +135,29 @@ export const userDelete = async (): Promise<any> => {
     })
   } catch (e: any) {
     throw new Error(e.response?.data?.message || `Can't delete user`)
+  }
+}
+
+export const restore = async (): Promise<User> => {
+  if (MOCK_API) {
+    return new Promise<User>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(mockedUser)
+      }, 1000)
+    })
+  }
+
+  try {
+    const token = localStorage.getItem('token')
+
+    if (!token) throw new Error('No token in the storage')
+
+    return await axiosForUsers.post('/auth/restore').then((response) => {
+      localStorage.setItem('token', response.data.token)
+
+      return response.data.user
+    })
+  } catch (e: any) {
+    throw new Error(e.response?.data?.message || `Can't restore user`)
   }
 }

@@ -2,7 +2,7 @@ import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RegistrationData } from 'user/helpers/RegistrationDataCheck'
 import { LoginData } from 'user/helpers/LoginDataCheck'
-import { AccountType, mockUser, User } from 'shared/models/User'
+import { AccountType, mockedUser, User } from 'shared/models/User'
 
 export type UserState = {
   user: User | null
@@ -21,7 +21,7 @@ export type UserState = {
 }
 
 export const initialUserState: UserState = {
-  user: null, //mockUser
+  user: null, //mockedUser
   progress: {
     login: false,
     registration: false,
@@ -89,7 +89,13 @@ export const userSlice = createSlice({
       state.registrationError = action.payload
     },
 
-    fetchUserInfo: (state, action: Action) => {},
+    restoreUserInfo: (state, action: Action) => {},
+    restoreUserInfoSuccess: (state, action: PayloadAction<User>) => {
+      state.user = action.payload
+    },
+    restoreUserInfoError: (state, action: PayloadAction<string>) => {
+      state.user = null
+    },
 
     setUserName: (state, action: PayloadAction<string>) => {
       state.progress.changName = true
