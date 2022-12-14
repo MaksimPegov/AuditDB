@@ -24,8 +24,12 @@ function App() {
       <Routes location={location} key={location.pathname}>
         <Route path="/main" element={<MainPage />} />
         <Route
-          path="/my-audit"
-          element={<AuthGuard comp={<div>Here will be your audit</div>} />}
+          path="/my-auditor"
+          element={<AuthGuard comp={<div>Here will be your auditor profile</div>} />}
+        />
+        <Route
+          path="/my-customer"
+          element={<AuthGuard comp={<div>Here will be your customer profile</div>} />}
         />
         <Route path="/sign-in" element={<UnAuthGuard comp={<Login />} />} />
         <Route path="/sign-up" element={<UnAuthGuard comp={<Registation />} />} />

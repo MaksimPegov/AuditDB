@@ -29,7 +29,7 @@ export const Cabinet: React.FC = () => {
 
   return (
     <div>
-      <h1>{user.accountType} cabinet</h1>
+      <h1>User Profile</h1>
       <p>
         Your name:{' '}
         {!changName ? (

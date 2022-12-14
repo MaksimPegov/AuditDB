@@ -22,21 +22,22 @@ import {
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
 
 import './Registration.scss'
-import { AccountType, UserRole } from 'shared/models/User'
+
+import { RegistrationData, userDataValidation } from 'user/helpers/RegistrationDataCheck'
 import { userActions } from 'user/state/user.reducer'
+import { AccountType } from 'shared/models/User'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import {
   selectAccountTypePreferences,
-  selectRegistration,
-  selectRegistrationError,
   selectRegistrationSuccess,
+  selectRegistrationError,
+  selectRegistration,
 } from 'user/state/user.selectors'
-import { RegistrationData, userDataValidation } from 'user/helpers/RegistrationDataCheck'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 const componentId = 'Registration'
 const bem = cn(componentId)

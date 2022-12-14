@@ -63,12 +63,13 @@ export const UserNavigate: React.FC<{ navigator: (location: string) => void }> =
       >
         <MenuItem
           onClick={() => {
-            navigator('/my-audit')
+            navigator('/my-auditor')
             setAnchorAuEl(null)
           }}
         >
-          My audit
+          Profile
         </MenuItem>
+
         <MenuItem>View audits</MenuItem>
       </Menu>
 
@@ -101,7 +102,15 @@ export const UserNavigate: React.FC<{ navigator: (location: string) => void }> =
           horizontal: 'left',
         }}
       >
-        <MenuItem>My prject</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigator('/my-customer')
+            setAnchorAuEl(null)
+          }}
+        >
+          Profile
+        </MenuItem>
+
         <MenuItem>View projects</MenuItem>
       </Menu>
     </motion.div>

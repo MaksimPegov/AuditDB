@@ -21,7 +21,7 @@ export type UserState = {
 }
 
 export const initialUserState: UserState = {
-  user: mockUser, //mockUser
+  user: null, //mockUser
   progress: {
     login: false,
     registration: false,
