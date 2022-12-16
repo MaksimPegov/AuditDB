@@ -1,44 +1,30 @@
-import { motion } from 'framer-motion'
-import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import {
-  TextField,
-  Box,
   Button,
   InputAdornment,
   IconButton,
-  Input,
-  FormControl,
   InputLabel,
   Alert,
+  Typography,
+  InputBase,
 } from '@mui/material'
-import {
-  MailOutline,
-  VpnKey,
-  VisibilityOff,
-  Visibility,
-  Login as LoginIcon,
-} from '@mui/icons-material'
+import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import './Login.scss'
+import { VisibilityOff, Visibility } from '@mui/icons-material'
 
-import { onlySpaces } from 'shared/helpers/dataValodation'
-import { userActions } from 'user/state/user.reducer'
+import { selectLoginError, selectSuccessMessage } from 'user/state/user.selectors'
 import { loginDataValidation } from 'user/helpers/LoginDataCheck'
-import {
-  selectLogin,
-  selectLoginError,
-  selectRegistrationSuccess,
-  selectSuccessMessage,
-} from 'user/state/user.selectors'
+import { userActions } from 'user/state/user.reducer'
+import { onlySpaces } from 'shared/helpers/dataValodation'
+import './Login.scss'
 
 const componentId = 'Login'
 const bem = cn(componentId)
 
 export const Login: React.FC = () => {
-  const loging = useSelector(selectLogin)
   const loginError = useSelector(selectLoginError)
-  const registrationSuccess = useSelector(selectRegistrationSuccess)
   const successMessage = useSelector(selectSuccessMessage)
   const dispatch = useDispatch()
 
@@ -145,92 +131,88 @@ export const Login: React.FC = () => {
 
   return (
     <motion.div
-      className={bem()}
-      data-testid={bem()}
+      className="motion-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className={bem('Header')}>
-        <LoginIcon sx={{ m: 'auto', pr: 1, fontSize: 30 }} />{' '}
-        <div className={bem('HeadeText')}>Autorization</div>
-      </div>
-
-      <form autoComplete="off" onSubmit={submitForm}>
-        <Box
-          className={bem('Email')}
-          data-testid={bem('Email')}
-          sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
-        >
-          <TextField
-            id="standard-basic"
-            type="email"
-            label="E-mail"
-            error={state.emailError}
-            variant="standard"
-            sx={{ width: '100%' }}
-            onChange={hadnleEmailChange}
-          />
-        </Box>
-
-        <Box
-          className={bem('Password')}
-          sx={{ display: 'flex', alignItems: 'flex-end', mt: 1 }}
-        >
-          <FormControl sx={{ width: '100%' }} variant="standard">
-            <InputLabel htmlFor="standard-adornment-password" error={state.passwordError}>
-              Password
-            </InputLabel>
-
-            <Input
-              id="standard-adornment-password"
-              type={state.showPassword ? 'text' : 'password'}
-              error={state.passwordError}
-              onChange={hadnlePasswordChange}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    tabIndex={-1}
-                    aria-label="toggle password visibility"
-                    onClick={hidePassword}
-                  >
-                    {state.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </Box>
-
-        <Button
-          className={bem('Button')}
-          data-testid={bem('Button')}
-          type="submit"
-          variant="contained"
-          color={'warning'}
-          disabled={!state.canLog || loging}
-          sx={{ mt: 4 }}
-          onClick={handleLogin}
-        >
+      <Grid container spacing={2} className={bem()}>
+        <Typography variant="h5" className={bem('Title')}>
           Sign in
-        </Button>
-      </form>
+        </Typography>
 
-      {state.emailError || state.passwordError || state.loginError ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <Alert className={bem('Alert', { error: true })} severity="error">
-            {state.errorMessage}
-          </Alert>
-        </motion.div>
-      ) : null}
+        <form autoComplete="off" onSubmit={submitForm}>
+          <Grid container spacing={3}>
+            <Grid xs={12} className="Email">
+              <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
+                E-mail
+              </InputLabel>
 
-      {successMessage !== null ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <Alert className={bem('Alert', { success: true })} severity="success">
-            {successMessage}
-          </Alert>
-        </motion.div>
-      ) : null}
+              <InputBase
+                id="email-input"
+                className={bem('Input', { error: state.emailError })}
+                type="email"
+                error={state.emailError}
+                onChange={hadnleEmailChange}
+              />
+            </Grid>
+
+            <Grid xs={12} className={bem('Password')}>
+              <InputLabel htmlFor="password-input" className={bem('InputLabel')}>
+                Password
+              </InputLabel>
+
+              <InputBase
+                id="password-input"
+                className={bem('Input', { error: state.passwordError })}
+                onChange={hadnlePasswordChange}
+                type={state.showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      tabIndex={-1}
+                      aria-label="toggle password visibility"
+                      onClick={hidePassword}
+                    >
+                      {state.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </Grid>
+
+            <Grid xs={12} display={'flex'}>
+              <Button
+                className={bem('Button')}
+                data-testid={bem('Button')}
+                type="submit"
+                variant="contained"
+                // disabled={!state.canLog || loging}
+                sx={{ mt: 4 }}
+                onClick={handleLogin}
+              >
+                Sign in
+              </Button>
+            </Grid>
+          </Grid>
+
+          {state.emailError || state.passwordError || state.loginError ? (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <Alert className={bem('Alert', { error: true })} severity="error">
+                {state.errorMessage}
+              </Alert>
+            </motion.div>
+          ) : null}
+
+          {successMessage !== null ? (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <Alert className={bem('Alert', { success: true })} severity="success">
+                {successMessage}
+              </Alert>
+            </motion.div>
+          ) : null}
+        </form>
+      </Grid>
     </motion.div>
   )
 }
