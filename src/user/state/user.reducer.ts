@@ -33,7 +33,7 @@ export const initialUserState: UserState = {
   registrationError: null,
   registrationSuccess: false,
   registrationSuccessMessage: null,
-  accountTypePreferences: 'client',
+  accountTypePreferences: 'customer',
 }
 
 export const userSlice = createSlice({
@@ -79,7 +79,7 @@ export const userSlice = createSlice({
     },
     setSuccessMessage: (state, action: Action) => {
       state.registrationSuccessMessage =
-        'Congrats, you have successfully registered! Now log in to your account.'
+        'Congrats, you have successfully registered! Now please log in to your account.'
     },
     resetSuccessMessage: (state, action: Action) => {
       state.registrationSuccessMessage = null

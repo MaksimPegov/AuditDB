@@ -17,13 +17,11 @@
 
   &-Button {
     @include page-button;
-    background-color: $secondary !important;
-    margin: 0 auto !important;
   }
 
   &-Switch {
     width: 250px !important;
-    margin: auto !important;
+    margin: 0 auto $margin-normal !important;
   }
 
   &-Switches {
@@ -40,14 +38,14 @@
       background-color: $secondary !important;
     }
     &_disable {
-      background-color: #d9d9d9 !important;
+      background-color: $disabled-bg-color !important;
       color: $text-color !important;
     }
   }
 
   &-Error {
-    margin: $margin-top-normal 0 0 !important;
-    background-color: #fcdfdf !important;
+    margin: $margin-normal 0 0 !important;
+    background-color: $error-bg-color !important;
     padding-top: 2px !important;
     padding-bottom: 2px !important;
   }
