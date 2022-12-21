@@ -1,6 +1,6 @@
 @import 'styles/styles.scss';
 
-.ProjectCard {
+.AuditorCard {
   background-color: $super-light-gray !important;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
   }
 
   &-Button {
-    @include page-button($primary);
+    @include page-button();
     margin: auto !important;
     min-width: 80px !important;
   }

@@ -1,7 +1,7 @@
 import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Project } from '@customer/models/project'
-import { Customer } from '@customer/models/customer'
+import { Project } from 'shared/models/project'
+import { Customer } from 'shared/models/customer'
 
 export type CustomerState = {
   customerPage: {

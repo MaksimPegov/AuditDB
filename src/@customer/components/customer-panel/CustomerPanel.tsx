@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
 
 import './CustomerPanel.scss'
-import { Customer } from '@customer/models/customer'
+import { Customer } from 'shared/models/customer'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 
 const componentId = 'CustomerPanel'

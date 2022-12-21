@@ -19,7 +19,7 @@ import './Registration.scss'
 
 import { RegistrationData, userDataValidation } from 'user/helpers/RegistrationDataCheck'
 import { userActions } from 'user/state/user.reducer'
-import { AccountType } from 'shared/models/User'
+import { AccountType } from 'shared/models/user'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import {
   selectAccountTypePreferences,

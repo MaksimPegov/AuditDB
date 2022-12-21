@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
 
 import './AuditorPanel.scss'
-import { Auditor } from '@auditor/models/auditor'
+import { Auditor } from 'shared/models/auditor'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 
 const componentId = 'AuditorPanel'

@@ -24,7 +24,7 @@ import {
   selectProjectErrorMessage,
   selectProjectSuccessMessage,
 } from '@customer/state/customer.selectors'
-import { Project } from '@customer/models/project'
+import { Project } from 'shared/models/project'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { customerActions } from '@customer/state/customer.reducer'
 

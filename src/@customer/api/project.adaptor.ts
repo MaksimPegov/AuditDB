@@ -1,4 +1,4 @@
-import { Project, ProjectStatus } from '@customer/models/project'
+import { Project, ProjectStatus } from 'shared/models/project'
 
 export type ServerProject = {
   _id?: string

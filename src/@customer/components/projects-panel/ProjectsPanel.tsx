@@ -2,7 +2,7 @@ import { Button, Grid } from '@mui/material'
 import { cn } from '@bem-react/classname'
 
 import './ProjectsPanel.scss'
-import { Project } from '@customer/models/project'
+import { Project } from 'shared/models/project'
 import { ProjectCard } from '@customer/components/project-card/ProjectCard'
 
 const componentId = 'ProjectsPanel'

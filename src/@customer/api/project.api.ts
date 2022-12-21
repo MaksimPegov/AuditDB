@@ -1,8 +1,9 @@
 import { AxiosInstance } from 'axios'
 
 import { MOCK_API, PORT_FOR_CUSTOMERS } from 'app.constants'
-import { Project, mockedProject } from '@customer/models/project'
+import { Project, mockedProject } from 'shared/models/project'
 import api from 'app.api'
+import { projectAdaptorIn, ServerProject } from './project.adaptor'
 
 let http: AxiosInstance
 const buildApi = () => (http = api(PORT_FOR_CUSTOMERS))
@@ -70,6 +71,30 @@ export const getMy = async (customerId: string): Promise<Project[]> => {
     const response = await http.get(`/projects/customer?customerId=${customerId}`)
 
     return response.data
+  } catch (e: any) {
+    if (e.response.status === 404) {
+      return []
+    }
+
+    throw new Error(e.response.data.message)
+  }
+}
+
+export const getAll = async (): Promise<Project[]> => {
+  const httpNoAuth = api(PORT_FOR_CUSTOMERS, false)
+
+  if (MOCK_API) {
+    return new Promise<Project[]>((resolve, reject) => {
+      setTimeout(() => {
+        resolve([mockedProject, mockedProject, mockedProject])
+      }, 1000)
+    })
+  }
+
+  try {
+    const response = await httpNoAuth.get<ServerProject[]>(`/projects/all`)
+
+    return response.data.map((p) => projectAdaptorIn(p))
   } catch (e: any) {
     if (e.response.status === 404) {
       return []

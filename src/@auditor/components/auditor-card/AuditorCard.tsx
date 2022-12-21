@@ -9,23 +9,17 @@ import {
 import { useState } from 'react'
 import { cn } from '@bem-react/classname'
 
-import './ProjectCard.scss'
-import { Project } from 'shared/models/project'
+import './AuditorCard.scss'
+import { Auditor } from 'shared/models/auditor'
 
-export type ProjectCardProps = {
-  project: Project
-  onDelete?: (id: string) => void
-  onEdit?: (project: Project) => void
+export type AuditorCardProps = {
+  auditor: Auditor
 }
 
-export const componentId = 'ProjectCard'
+export const componentId = 'AuditorCard'
 const bem = cn(componentId)
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  onEdit,
-  onDelete,
-}) => {
+export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
   const [state, setState] = useState({
     isHovered: false,
   })
@@ -46,36 +40,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <CardContent>
         <Typography className={bem('Name')} gutterBottom variant="h6" component="div">
-          {project.name}
+          {auditor.fname} {auditor.lname}
         </Typography>
 
         <Typography className={bem('Tags')} variant="body2" color="text.secondary">
-          {project.tags}
+          {auditor.tags}
         </Typography>
       </CardContent>
 
       <CardActions>
-        {onEdit ? (
-          <Button
-            component="span"
-            variant="contained"
-            color="primary"
-            className={bem('Button')}
-            onClick={() => onEdit(project)}
-          >
-            Edit
-          </Button>
-        ) : (
-          <Button
-            component="span"
-            variant="contained"
-            color="primary"
-            className={bem('Button')}
-            onClick={() => {}}
-          >
-            More Info
-          </Button>
-        )}
+        <Button
+          component="span"
+          variant="contained"
+          color="primary"
+          className={bem('Button')}
+          onClick={() => {}}
+        >
+          More Info
+        </Button>
       </CardActions>
     </Card>
   )

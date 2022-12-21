@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
-import { User } from 'shared/models/User'
+import { User } from 'shared/models/user'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
