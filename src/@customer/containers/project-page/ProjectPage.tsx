@@ -155,7 +155,7 @@ export const ProjectPage: React.FC = () => {
         {loading ? (
           'Loading...'
         ) : (
-          <form className={bem('Form')} autoComplete="off" onSubmit={submitForm}>
+          <form className={bem('Form')} autoComplete="off">
             <Grid container spacing={2.5}>
               <Grid item xs={12}>
                 <InputLabel htmlFor="name-input" className={bem('InputLabel')}>
