@@ -1,15 +1,16 @@
-import React from 'react'
+import Grid from '@mui/material/Unstable_Grid2'
+import React, { useEffect, useRef } from 'react'
+import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
+import { Box, Button } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Button, Link } from '@mui/material'
-import { cn } from '@bem-react/classname'
 
-import { UserControl } from 'shared/components/user-contol/UserControl'
 import { selectUser } from 'user/state/user.selectors'
-import { SWAGGER } from 'app.constants'
-import './AppHeader.scss'
+import { UserControl } from 'shared/components/user-contol/UserControl'
+import { HeaderLinks } from 'shared/components/header-links/HeaderLinks'
 import { UserNavigate } from 'shared/components/user-navigate/UserNavigate'
+import './AppHeader.scss'
 
 const componentId = 'AppHeader'
 const bem = cn(componentId)
@@ -19,44 +20,21 @@ export const AppHeader: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <div className={bem()} data-testid={bem()}>
-      <div className={bem('Logo')} onClick={() => navigate('/main')}>
-        <h1 className={bem('Audit')}>Audit</h1>
-        <h1 className={bem('DB')}>DB</h1>
-      </div>
-      {user === null ? (
-        <motion.div
-          className={bem('Panel')}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <Link underline="none" className={bem('Link')} data-testd={bem('Product')}>
-            Product
-          </Link>
+    <Grid container spacing={2} className={bem()} data-testid={bem()}>
+      <Grid xs={3} display="flex">
+        <Box className={bem('Logo')} onClick={() => navigate('/main')}>
+          <form className={bem('Audit')}>Audit</form>
+          <form className={bem('DB')}>DB</form>
+        </Box>
+      </Grid>
+      <Grid xs={0} md={4.5} display="flex">
+        {user === null ? <HeaderLinks navigator={navigate} /> : null}
+      </Grid>
 
-          <Link underline="none" className={bem('Link')} data-testd={bem('AboutUs')}>
-            About Us
-          </Link>
-
-          <Link
-            underline="none"
-            className={bem('Link')}
-            data-testd={bem('Community')}
-            href={SWAGGER}
-            target="_blank"
-          >
-            API
-          </Link>
-        </motion.div>
-      ) : (
-        <UserNavigate navigator={navigate} />
-      )}
-
-      {user == null ? (
-        <div className={bem('Links')} data-testd={bem('Links')}>
+      <Grid xs={8.5} md={4.5} display="flex">
+        {user === null ? (
           <motion.div
-            className="motion-container"
+            className={bem('Buttons')}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -80,10 +58,18 @@ export const AppHeader: React.FC = () => {
               Sign Up
             </Button>
           </motion.div>
-        </div>
-      ) : (
-        <UserControl user={user} />
-      )}
-    </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={bem('UserPanel')}
+          >
+            <UserNavigate navigator={navigate} />
+            <UserControl user={user} />
+          </motion.div>
+        )}
+      </Grid>
+    </Grid>
   )
 }

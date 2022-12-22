@@ -17,8 +17,6 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const navigate = useNavigate()
 
-  // const open = Boolean(anchorEl)
-
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -53,9 +51,6 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
           data-testid={bem('IconButton')}
           onClick={handleIconClick}
           size="small"
-          // aria-controls={open ? 'account-menu' : undefined}
-          // aria-haspopup="true"
-          // aria-expanded={open ? 'true' : undefined}
         >
           <Avatar>{user.name.substring(0, 1)}</Avatar>
         </IconButton>
@@ -104,8 +99,8 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
         }}
       >
         <MenuItem
-          className={bem('Messages')}
-          data-testid={bem('Messages')}
+          className={bem('Auditor')}
+          data-testid={bem('Auditor')}
           onClick={() => {
             navigate('/auditor-page')
             handleClose()
@@ -115,8 +110,8 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
         </MenuItem>
 
         <MenuItem
-          className={bem('Alerts')}
-          data-testid={bem('Alerts')}
+          className={bem('Customer')}
+          data-testid={bem('Customer')}
           onClick={() => {
             navigate('/customer-page')
             handleClose()

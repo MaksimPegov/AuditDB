@@ -63,19 +63,17 @@ export const UserNavigate: React.FC<{ navigator: (location: string) => void }> =
           horizontal: 'right',
         }}
       >
-        {/* <MenuItem
+        <MenuItem
           onClick={() => {
-            navigator('/my-auditor')
+            navigator('/auditor-page')
             setAnchorAuEl(null)
           }}
         >
-          Profile
-        </MenuItem> */}
-
-        <MenuItem>View audits</MenuItem>
+          Auditor page
+        </MenuItem>
       </Menu>
 
-      {/* <div
+      <div
         className={bem('Links', { projects: true })}
         aria-controls={openPr ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -84,7 +82,7 @@ export const UserNavigate: React.FC<{ navigator: (location: string) => void }> =
       >
         <Link className={bem('Link')}>Projects</Link>
         <ArrowDropDown className={bem('Icon')} />
-      </div> */}
+      </div>
 
       <Menu
         className={bem('ProjectsMenu')}
@@ -107,14 +105,12 @@ export const UserNavigate: React.FC<{ navigator: (location: string) => void }> =
       >
         <MenuItem
           onClick={() => {
-            navigator('/my-customer')
+            navigator('/customer-page')
             setAnchorAuEl(null)
           }}
         >
-          Profile
+          Customer page
         </MenuItem>
-
-        <MenuItem>View projects</MenuItem>
       </Menu>
     </motion.div>
   )
