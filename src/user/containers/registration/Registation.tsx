@@ -219,10 +219,6 @@ export const Registation: React.FC = () => {
     }
   }
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -235,7 +231,7 @@ export const Registation: React.FC = () => {
           Sign in
         </Typography>
 
-        <form className={bem('Form')} autoComplete="off" onSubmit={submitForm}>
+        <form className={bem('Form')} autoComplete="off">
           <Grid xs={12}>
             <Grid container spacing={2.5}>
               <Grid xs={12}>

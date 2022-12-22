@@ -51,7 +51,6 @@ export const ProjectPage: React.FC = () => {
   const project = useSelector(selectProject)
   const loadind = useSelector(selectLoadingProject)
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => event.preventDefault()
   const [projectData, setProjectData] = useState<Project>(initialProjectData)
 
   const [errors, setErrors] = useState({
@@ -147,7 +146,7 @@ export const ProjectPage: React.FC = () => {
           Project
         </Typography>
 
-        <form className={bem('Form')} autoComplete="off" onSubmit={submitForm}>
+        <form className={bem('Form')} autoComplete="off">
           <Grid container spacing={2.5}>
             <Grid item xs={12}>
               <InputLabel htmlFor="name-input" className={bem('InputLabel')}>
