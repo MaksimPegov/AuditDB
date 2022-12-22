@@ -53,6 +53,7 @@ export const Registation: React.FC = () => {
         setSwitchSelection({ auditor: false, customer: true })
         break
     }
+    setUserData((state) => ({ ...state, requestedAccountType: currentAccountType }))
   }, [currentAccountType])
 
   const registerError = useSelector(selectRegistrationError)
@@ -88,7 +89,7 @@ export const Registation: React.FC = () => {
   })
 
   const [userData, setUserData] = React.useState<RegistrationData>({
-    requestedAccountType: currentAccountType,
+    requestedAccountType: 'customer',
     name: '',
     email: '',
     password: '',
@@ -220,7 +221,6 @@ export const Registation: React.FC = () => {
 
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log('submit')
   }
 
   return (
