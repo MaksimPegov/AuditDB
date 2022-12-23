@@ -49,9 +49,9 @@ export const UserTypeSwitch: React.FC<{
       data-testid={bem()}
     >
       <div className={bem('Button')} onClick={openDropdown}>
-        <form className={bem('Type')}>
+        <span className={bem('Type')}>
           {userType === 'auditor' ? 'Auditor' : 'Customer'}
-        </form>
+        </span>
         <KeyboardArrowDown className={bem('Icon')} />
       </div>
 

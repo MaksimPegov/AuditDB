@@ -12,8 +12,12 @@
   }
 
   &-Button {
-    @include page-button;
+    @include page-button($primary);
     margin-bottom: $margin-normal !important;
+
+    &_secondary {
+      background-color: $secondary !important;
+    }
   }
 
   &-Alert {

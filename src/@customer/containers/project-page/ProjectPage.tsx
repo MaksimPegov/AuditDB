@@ -168,8 +168,10 @@ export const ProjectPage: React.FC = () => {
             <Grid container spacing={2.5}>
               <Grid item xs={12} className={bem('Header')}>
                 <Button
+                  disabled={true}
+                  title="Will be implemented in the phase 2"
                   className={bem('HeaderButton', {
-                    disabled: !errors.noErrors || processing,
+                    disabled: true, //!errors.noErrors || processing || !projectData._id,
                   })}
                   data-testid={bem('Button')}
                 >
@@ -179,12 +181,14 @@ export const ProjectPage: React.FC = () => {
                 <Button
                   className={bem('HeaderButton', {
                     disabled: !errors.noErrors || processing,
-                    secondary: project?.status === 'shown',
+                    secondary: projectData?.status === 'shown',
                   })}
                   data-testid={bem('Button')}
                   onClick={handlePublishClick}
                 >
-                  {project?.status === 'hidden' ? 'Publish project' : 'Unpublish project'}
+                  {projectData?.status === 'hidden'
+                    ? 'Publish project'
+                    : 'Unpublish project'}
                 </Button>
 
                 <MenuIcon className={bem('HeaderMenuIcon')} />

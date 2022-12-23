@@ -17,6 +17,10 @@
     cursor: pointer;
   }
 
+  &-Type {
+    margin-bottom: 5px;
+  }
+
   &_auditor {
     background-color: $primary;
   }

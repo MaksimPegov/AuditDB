@@ -258,7 +258,10 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
 
             <Grid item xs={12} display="flex">
               <Button
-                className={bem('Button', { disabled: !errors.noErrors || processing })}
+                className={bem('Button', {
+                  disabled: !errors.noErrors || processing,
+                  secondary: !auditorData._id,
+                })}
                 data-testid={bem('Button')}
                 type="submit"
                 variant="contained"
@@ -266,7 +269,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
                 sx={{ mt: 4 }}
                 onClick={() => submit(auditorData)}
               >
-                {auditorData._id ? 'Save' : 'Create'}
+                {auditorData._id ? 'Save changes' : 'Create'}
               </Button>
             </Grid>
           </Grid>

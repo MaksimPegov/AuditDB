@@ -40,6 +40,11 @@
     &_secondary {
       background-color: $secondary !important;
     }
+
+    &_disabled {
+      background-color: $super-light-gray !important;
+      color: $light-gray !important;
+    }
   }
 
   &-HeaderMenuIcon {
