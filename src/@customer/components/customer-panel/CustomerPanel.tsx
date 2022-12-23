@@ -260,7 +260,10 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
 
             <Grid item xs={12} display="flex">
               <Button
-                className={bem('Button', { disabled: !errors.noErrors || processing })}
+                className={bem('Button', {
+                  disabled: !errors.noErrors || processing,
+                  secondary: !customerData._id,
+                })}
                 data-testid={bem('Button')}
                 type="submit"
                 variant="contained"
@@ -268,7 +271,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
                 sx={{ mt: 4 }}
                 onClick={() => submit(customerData)}
               >
-                {customerData._id ? 'Save' : 'Create'}
+                {customerData._id ? 'Save changes' : 'Create'}
               </Button>
             </Grid>
           </Grid>

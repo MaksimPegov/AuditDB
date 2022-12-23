@@ -25,6 +25,7 @@ export type CustomerState = {
   projectPage: {
     isNewProject: boolean
     customerIdForProject: string
+    projectIdForProject: string
     project: Project | null
     loader: boolean
     processing: {
@@ -54,6 +55,7 @@ const initialCustomerState: CustomerState = {
   projectPage: {
     isNewProject: false,
     customerIdForProject: '',
+    projectIdForProject: '',
     project: null,
     loader: false,
     processing: {
@@ -132,6 +134,7 @@ const customerSlice = createSlice({
 
     loadCustomerProjects(state, action: PayloadAction<string>) {
       state.customerPage.loaders.projects = true
+      state.projectPage = initialCustomerState.projectPage
     },
     loadCustomerProjectsSuccess(state, action: PayloadAction<Project[]>) {
       state.customerPage.projects = action.payload
@@ -209,9 +212,10 @@ const customerSlice = createSlice({
       state.projectPage.processing.projectSuccess = ''
     },
 
-    setCustomerIdForProject(state, action: PayloadAction<[string, boolean]>) {
+    setCustomerDataForProject(state, action: PayloadAction<[string, string]>) {
       state.projectPage.customerIdForProject = action.payload[0]
-      state.projectPage.isNewProject = action.payload[1]
+      state.projectPage.projectIdForProject = action.payload[1]
+      state.projectPage.isNewProject = !action.payload[1]
     },
     // #endregion
   },

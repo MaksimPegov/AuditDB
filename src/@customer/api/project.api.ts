@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios'
 import { MOCK_API, PORT_FOR_CUSTOMERS } from 'app.constants'
 import { Project, mockedProject } from 'shared/models/project'
 import api from 'app.api'
-import { projectAdaptorIn, ServerProject } from './project.adaptor'
+import { projectAdaptorIn, projectAdaptorOut, ServerProject } from './project.adaptor'
 
 let http: AxiosInstance
 const buildApi = () => (http = api(PORT_FOR_CUSTOMERS))
@@ -26,9 +26,9 @@ export const create = async (project: Project): Promise<Project> => {
   }
 
   try {
-    const response = await http.post('/projects', project)
+    const response = await http.post('/projects', projectAdaptorOut(project))
 
-    return response.data
+    return projectAdaptorIn(response.data)
   } catch (e: any) {
     throw new Error(e.response.data.message)
   }
@@ -47,7 +47,7 @@ export const get = async (projectId: string): Promise<Project | null> => {
   try {
     const response = await http.get(`/projects/project?projectId=${projectId}`)
 
-    return response.data
+    return projectAdaptorIn(response.data)
   } catch (e: any) {
     if (e.response.status === 404) {
       return null
@@ -68,9 +68,11 @@ export const getMy = async (customerId: string): Promise<Project[]> => {
   }
 
   try {
-    const response = await http.get(`/projects/customer?customerId=${customerId}`)
+    const response = await http.get<ServerProject[]>(
+      `/projects/customer?customerId=${customerId}`,
+    )
 
-    return response.data
+    return response.data.map((p) => projectAdaptorIn(p))
   } catch (e: any) {
     if (e.response.status === 404) {
       return []
@@ -80,7 +82,7 @@ export const getMy = async (customerId: string): Promise<Project[]> => {
   }
 }
 
-export const getAll = async (): Promise<Project[]> => {
+export const getAll = async (query: string): Promise<Project[]> => {
   const httpNoAuth = api(PORT_FOR_CUSTOMERS, false)
 
   if (MOCK_API) {
@@ -92,7 +94,11 @@ export const getAll = async (): Promise<Project[]> => {
   }
 
   try {
-    const response = await httpNoAuth.get<ServerProject[]>(`/projects/all`)
+    const response = await httpNoAuth.get<ServerProject[]>(`/projects/all`, {
+      params: {
+        tags: query,
+      },
+    })
 
     return response.data.map((p) => projectAdaptorIn(p))
   } catch (e: any) {
@@ -122,9 +128,13 @@ export const update = async (project: Project): Promise<Project> => {
   }
 
   try {
-    const response = await http.patch('/projects', project)
+    const response = await http.patch('/projects', projectAdaptorOut(project), {
+      params: {
+        projectId: project._id,
+      },
+    })
 
-    return response.data
+    return projectAdaptorIn(response.data)
   } catch (e: any) {
     throw new Error(e.response.data.message)
   }

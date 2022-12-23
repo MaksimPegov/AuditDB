@@ -32,7 +32,7 @@ export const sharedSlice = createSlice({
   reducers: {
     resetState: (state, action: PayloadAction<string>) => initialSharedState,
     setUserPreferences: (state, action: PayloadAction<AccountType>) => {},
-    loadAuditors: (state, action: Action) => {
+    loadAuditors: (state, action: PayloadAction<string>) => {
       state.auditorsLoading = true
       state.auditorsError = null
     },
@@ -45,7 +45,7 @@ export const sharedSlice = createSlice({
       state.auditorsError = action.payload
     },
 
-    loadProjects: (state, action: Action) => {
+    loadProjects: (state, action: PayloadAction<string>) => {
       state.projectsLoading = true
       state.projectsError = null
     },

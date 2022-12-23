@@ -75,6 +75,11 @@ export const selectCustomerIdForProject = createSelector(
   (state) => state.customerIdForProject,
 )
 
+export const selectProjectIdForProject = createSelector(
+  selectProjectPage,
+  (state) => state.projectIdForProject,
+)
+
 export const selectIsNewProject = createSelector(
   selectProjectPage,
   (state) => state.isNewProject,

@@ -61,7 +61,7 @@ export const get = async (): Promise<Auditor | null> => {
   }
 }
 
-export const getAll = async (): Promise<Auditor[]> => {
+export const getAll = async (query: string): Promise<Auditor[]> => {
   const httpNoAuth = api(PORT_FOR_AUDITORS, false)
 
   if (MOCK_API) {
@@ -73,7 +73,9 @@ export const getAll = async (): Promise<Auditor[]> => {
   }
 
   try {
-    const response = await httpNoAuth.get<ServerAuditor[]>('/auditors/all')
+    const response = await httpNoAuth.get<ServerAuditor[]>('/auditors/all', {
+      params: { tags: query },
+    })
 
     return response.data.map((auditor) => auditorAdaptorIn(auditor))
   } catch (e: any) {

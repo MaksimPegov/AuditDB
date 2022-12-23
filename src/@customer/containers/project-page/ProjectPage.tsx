@@ -1,3 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import MenuIcon from '@mui/icons-material/Menu'
+import { cn } from '@bem-react/classname'
 import {
   Typography,
   Grid,
@@ -10,12 +16,6 @@ import {
   useMediaQuery,
   IconButton,
 } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import MenuIcon from '@mui/icons-material/Menu'
-import { cn } from '@bem-react/classname'
 
 import './ProjectPage.scss'
 import {
@@ -25,6 +25,7 @@ import {
   selectProcessingProject,
   selectProject,
   selectProjectErrorMessage,
+  selectProjectIdForProject,
   selectProjectSuccessMessage,
 } from '@customer/state/customer.selectors'
 import { Project } from 'shared/models/project'
@@ -48,6 +49,7 @@ export const ProjectPage: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const customerIdForProject = useSelector(selectCustomerIdForProject)
+  const projectIdForProject = useSelector(selectProjectIdForProject)
   const successMessage = useSelector(selectProjectSuccessMessage)
   const isNewProject = useSelector(selectIsNewProject)
   const errorMessage = useSelector(selectProjectErrorMessage)
@@ -105,7 +107,7 @@ export const ProjectPage: React.FC = () => {
     if (isNewProject) {
       initialProjectData.customerId = customerIdForProject
     } else {
-      dispatch(customerActions.loadProject(customerIdForProject))
+      dispatch(customerActions.loadProject(projectIdForProject))
     }
   }, [isNewProject, customerIdForProject])
 

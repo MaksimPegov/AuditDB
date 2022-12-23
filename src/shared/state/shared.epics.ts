@@ -13,8 +13,8 @@ type States = Observable<SharedState>
 const loadAuditors: Epic = (action$: Actions, state$: States) =>
   action$.pipe(
     filter(sharedActions.loadAuditors.match),
-    switchMap(() =>
-      from(auditorsApi.getAll()).pipe(
+    switchMap(({ payload }) =>
+      from(auditorsApi.getAll(payload)).pipe(
         map((auditors) => sharedActions.loadAuditorsSuccess(auditors)),
         catchError((error) => of(sharedActions.loadAuditorsError(error.message))),
       ),
@@ -24,8 +24,8 @@ const loadAuditors: Epic = (action$: Actions, state$: States) =>
 const loadProjects: Epic = (action$: Actions, state$: States) =>
   action$.pipe(
     filter(sharedActions.loadProjects.match),
-    switchMap(() =>
-      from(projectsApi.getAll()).pipe(
+    switchMap(({ payload }) =>
+      from(projectsApi.getAll(payload)).pipe(
         map((projects) => sharedActions.loadProjectsSuccess(projects)),
         catchError((error) => of(sharedActions.loadProjectsError(error.message))),
       ),

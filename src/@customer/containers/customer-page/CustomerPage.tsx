@@ -22,6 +22,7 @@ import {
 import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
 import { customerActions } from '@customer/state/customer.reducer'
 import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
+import { Project } from 'shared/models/project'
 
 const componentId = 'CustomerPage'
 const bem = cn(componentId)
@@ -48,8 +49,10 @@ export const CustomerPage: React.FC = () => {
     setValue(newValue)
   }
 
-  const editProject = (isNew: boolean) => {
-    dispatch(customerActions.setCustomerIdForProject([customer!._id!, isNew]))
+  const editProject = (project?: Project) => {
+    dispatch(
+      customerActions.setCustomerDataForProject([customer!._id!, project?._id || '']),
+    )
     navigate('/project-page')
   }
 
@@ -101,8 +104,8 @@ export const CustomerPage: React.FC = () => {
             <ProjectsPanel
               projects={projects}
               loading={loadingProjects}
-              addProject={() => editProject(true)}
-              editProject={() => editProject(false)}
+              addProject={editProject}
+              editProject={editProject}
               deleteProject={(id) => dispatch(customerActions.deleteProject(id))}
             />
           </TabPanel>
