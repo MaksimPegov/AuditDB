@@ -1,7 +1,8 @@
 @import 'styles/styles.scss';
 
 .AuditorInfo {
-  width: $page-width-sm;
+  max-width: $page-width-sm;
+  width: -webkit-fill-available !important;
 
   &-Avatar {
     @include avatar(150px);
