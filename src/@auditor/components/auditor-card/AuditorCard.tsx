@@ -6,12 +6,15 @@ import {
   Typography,
   CardActions,
   Avatar,
+  Dialog,
+  DialogContent,
 } from '@mui/material'
 import { useState } from 'react'
 import { cn } from '@bem-react/classname'
 
 import './AuditorCard.scss'
 import { Auditor } from 'shared/models/auditor'
+import { AuditorInfo } from '@auditor/containers/auditor-info/AuditorInfo'
 
 export type AuditorCardProps = {
   auditor: Auditor
@@ -21,6 +24,7 @@ export const componentId = 'AuditorCard'
 const bem = cn(componentId)
 
 export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
+  const [infoDialog, setInfoDialog] = useState(false)
   const [state, setState] = useState({
     isHovered: false,
   })
@@ -35,6 +39,10 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
 
   const handleMouseLeave = () => {
     setState((old) => ({ ...old, isHovered: false }))
+  }
+
+  const closeInfoDialog = () => {
+    setInfoDialog(false)
   }
 
   return (
@@ -61,11 +69,19 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
           variant="contained"
           color="primary"
           className={bem('Button')}
-          onClick={() => {}}
+          onClick={() => {
+            setInfoDialog(true)
+          }}
         >
           More Info
         </Button>
       </CardActions>
+
+      <Dialog open={infoDialog} onClose={closeInfoDialog}>
+        <DialogContent>
+          <AuditorInfo auditor={auditor} avatarUrl={avatar} close={closeInfoDialog} />
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }
