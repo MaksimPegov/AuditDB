@@ -7,12 +7,15 @@ import {
   CardActions,
   IconButton,
   Avatar,
+  Dialog,
+  DialogContent,
 } from '@mui/material'
 import { useState } from 'react'
 import { cn } from '@bem-react/classname'
 
 import './ProjectCard.scss'
 import { Project } from 'shared/models/project'
+import { ProjectInfo } from '../customer-info/ProjectInfo'
 
 export type ProjectCardProps = {
   project: Project
@@ -28,6 +31,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const [infoDialog, setInfoDialog] = useState(false)
   const [state, setState] = useState({
     isHovered: false,
   })
@@ -42,6 +46,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const handleMouseLeave = () => {
     setState((old) => ({ ...old, isHovered: false }))
+  }
+
+  const closeInfoDialog = () => {
+    setInfoDialog(false)
   }
 
   return (
@@ -90,12 +98,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             variant="contained"
             color="primary"
             className={bem('Button')}
-            onClick={() => {}}
+            onClick={() => {
+              setInfoDialog(true)
+            }}
           >
             More Info
           </Button>
         )}
       </CardActions>
+
+      <Dialog open={infoDialog} onClose={closeInfoDialog}>
+        <DialogContent>
+          <ProjectInfo project={project} avatarUrl={avatar} close={closeInfoDialog} />
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }

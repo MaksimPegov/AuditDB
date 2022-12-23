@@ -1,0 +1,30 @@
+@import 'styles/styles.scss';
+
+.ProjectInfo {
+  width: $page-width-sm;
+
+  &-Avatar {
+    @include avatar(150px);
+    margin: $margin-normal auto 0 auto;
+  }
+
+  &-Name {
+    margin: auto;
+    color: $text-color;
+    font-size: $l-font-size * 2;
+  }
+
+  &-Lable {
+    margin: auto;
+    color: $light-gray;
+  }
+
+  &-Data {
+    color: $text-color;
+  }
+
+  &-Close {
+    @include page-button($primary);
+    margin: $margin-normal auto !important;
+  }
+}

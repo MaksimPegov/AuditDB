@@ -20,8 +20,8 @@ export const mockedProject: Project = {
   status: 'shown',
   gitUrl: 'https://mygit.com/project1.git',
   gitFolders: {
-    src: 'src',
-    public: 'public',
+    'src/crypto': 'crypto data for project 1',
+    'src/public': 'public data for project 1',
   },
   tags: 'tag1,tag2',
   customerId: '1',
