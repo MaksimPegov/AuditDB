@@ -88,12 +88,12 @@ export const MainPage = () => {
   const onAuditorsSearchChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     doAfterDelay(() => {
       dispatch(sharedActions.loadAuditors(event.target.value))
-    }, 1000)
+    }, 100)
 
   const onProjectsSearchChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     doAfterDelay(() => {
       dispatch(sharedActions.loadProjects(event.target.value))
-    }, 1000)
+    }, 100)
 
   useEffect(() => {
     dispatch(sharedActions.loadAuditors(''))

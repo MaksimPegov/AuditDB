@@ -14,7 +14,7 @@ import { cn } from '@bem-react/classname'
 
 import './AuditorCard.scss'
 import { Auditor } from 'shared/models/auditor'
-import { AuditorInfo } from '@auditor/containers/auditor-info/AuditorInfo'
+import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 
 export type AuditorCardProps = {
   auditor: Auditor
