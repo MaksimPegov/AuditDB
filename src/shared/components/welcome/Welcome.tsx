@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import React from 'react'
+import Grid from '@mui/material/Unstable_Grid2'
 
 import { cn } from '@bem-react/classname'
 import './Welcome.scss'
@@ -21,27 +22,33 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSelect }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <h1 className={bem('Header')}>
-        Start your project right now <br /> or audit like expert
-      </h1>
+      <Grid container spacing={3}>
+        <Grid xs={12}>
+          <h1 className={bem('Header')}>
+            Start your project right now <br /> or audit like an expert
+          </h1>
+        </Grid>
 
-      <div className={bem('Buttons')}>
-        <Button
-          variant="contained"
-          className={bem('Button', { auditor: true })}
-          onClick={() => onSelect('auditor')}
-        >
-          Become auditor
-        </Button>
+        <Grid xs={12} sm={6} display="flex">
+          <Button
+            variant="contained"
+            className={bem('Button', { auditor: true })}
+            onClick={() => onSelect('auditor')}
+          >
+            Become auditor
+          </Button>
+        </Grid>
 
-        <Button
-          variant="contained"
-          className={bem('Button', { customer: true })}
-          onClick={() => onSelect('customer')}
-        >
-          Show your project
-        </Button>
-      </div>
+        <Grid xs={12} sm={6} display="flex">
+          <Button
+            variant="contained"
+            className={bem('Button', { customer: true })}
+            onClick={() => onSelect('customer')}
+          >
+            Show your project
+          </Button>
+        </Grid>
+      </Grid>
     </motion.div>
   )
 }

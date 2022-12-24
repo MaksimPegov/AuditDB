@@ -24,6 +24,11 @@
     color: $text-color;
   }
 
+  &-Tags {
+    display: flex;
+    justify-content: center;
+  }
+
   &-Close {
     @include page-button($primary);
     margin: $margin-normal auto !important;

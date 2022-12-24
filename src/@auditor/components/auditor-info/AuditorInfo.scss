@@ -18,9 +18,13 @@
     color: $text-color;
   }
 
+  &-Tags {
+    display: flex;
+    justify-content: center;
+  }
+
   &-Close {
     @include page-button();
     margin: $margin-normal auto !important;
-    // width: 100%;
   }
 }

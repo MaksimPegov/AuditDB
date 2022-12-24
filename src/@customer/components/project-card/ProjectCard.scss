@@ -15,6 +15,12 @@
     white-space: nowrap;
   }
 
+  &-Tags {
+    color: $gray !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   &-Button {
     @include page-button($primary);
     margin: auto !important;

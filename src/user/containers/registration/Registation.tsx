@@ -362,7 +362,9 @@ export const Registation: React.FC = () => {
 
               <Grid xs={12} display={'flex'}>
                 <Button
-                  className={bem('Button', { disabled: !state.noErrors || registering })}
+                  className={bem('Button', {
+                    disabled: !state.noErrors || registering,
+                  })}
                   data-testid={bem('Button')}
                   type="submit"
                   variant="contained"

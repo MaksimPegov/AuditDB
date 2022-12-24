@@ -2,7 +2,7 @@
 
 .Welcome {
   margin: auto;
-  margin-top: 5%;
+  margin-top: $margin-normal;
   display: flex;
   flex-direction: column;
   width: fit-content;
@@ -14,20 +14,22 @@
     color: #53176d;
   }
 
-  &-Buttons {
-    display: flex;
-  }
-
   &-Button {
-    margin: 0 30px !important;
     min-width: fit-content !important;
+    @include page-button;
 
     &_auditor {
-      background-color: #53176d !important;
+      background-color: $secondary !important;
+      margin: 0 0 0 auto !important;
     }
 
     &_customer {
-      background-color: #ff9902 !important;
+      background-color: $primary !important;
+      margin: 0 auto 0 0 !important;
+    }
+
+    @media screen and (max-width: $screen-xs-width) {
+      margin: auto !important;
     }
   }
 }

@@ -32,10 +32,10 @@
     cursor: pointer;
 
     &_auditor {
-      background-color: $primary !important;
+      background-color: $secondary !important;
     }
     &_customer {
-      background-color: $secondary !important;
+      background-color: $primary !important;
     }
     &_disable {
       background-color: $disabled-bg-color !important;
