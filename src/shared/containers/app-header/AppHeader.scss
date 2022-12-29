@@ -5,32 +5,29 @@
   flex-direction: row;
 
   &-Logo {
-    color: white;
-    cursor: pointer;
     margin: 0 10px;
-    display: inline-flex;
     margin: auto 0;
     padding: $padding-normal/2 $padding-normal;
-    font-size: $page-title-font-size * 1.5;
-    font-weight: bold !important;
-    @media screen and (max-width: $screen-xs-width) {
-      //sisez will be fix in future ( font need to me implemented)
-      font-size: $page-title-font-size * 1.2;
-    }
   }
 
-  &-Audit {
-    color: $secondary;
-  }
-  &-DB {
-    color: $primary;
+  &-Img {
+    cursor: pointer;
+    width: $l-font-size * 10;
+
+    @media screen and (max-width: $screen-xs-width) {
+      width: $sm-font-size * 10;
+      margin-left: -17px;
+    }
   }
 
   &-Buttons {
     margin: auto;
     display: flex !important;
     flex-direction: row;
-    margin: auto -10px auto auto;
+    margin: auto -5px auto auto;
+    @media screen and (max-width: $screen-xs-width) {
+      margin: auto -30px auto auto;
+    }
   }
 
   &-Sign {
@@ -52,6 +49,6 @@
   &-UserPanel {
     display: flex;
     flex-direction: row;
-    margin: auto 0 auto auto;
+    margin: auto -15px auto auto;
   }
 }

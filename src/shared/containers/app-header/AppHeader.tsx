@@ -27,8 +27,7 @@ export const AppHeader: React.FC = () => {
     <Grid container spacing={2} className={bem()} data-testid={bem()}>
       <Grid xs={3} display="flex">
         <Box className={bem('Logo')} onClick={() => navigate('/main')}>
-          <form className={bem('Audit')}>Audit</form>
-          <form className={bem('DB')}>DB</form>
+          <img src="images/AuditDB_logo.png" className={bem('Img')} />
         </Box>
       </Grid>
       <Grid xs={0} md={4.5} display="flex">
