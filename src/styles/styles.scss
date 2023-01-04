@@ -1,3 +1,8 @@
 @import './colors';
 @import './sizes';
 @import './mixins';
+@import '@fontsource/montserrat';
+
+html body {
+  font-family: 'Montserrat';
+}
