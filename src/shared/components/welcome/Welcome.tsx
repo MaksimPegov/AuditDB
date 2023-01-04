@@ -2,9 +2,11 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 
-import { cn } from '@bem-react/classname'
 import './Welcome.scss'
+import { cn } from '@bem-react/classname'
 import { Button } from '@mui/material'
+import { LeftGirl } from 'assets/background-girl/LeftGirl'
+import { RightGirl } from 'assets/background-girl/RightGirl'
 import { AccountType } from 'shared/models/user'
 
 const componentId = 'Welcome'
@@ -22,11 +24,20 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSelect }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Grid container spacing={3}>
-        <Grid xs={12}>
-          <h1 className={bem('Header')}>
+      <LeftGirl />
+      <Grid container spacing={3} className={bem('Grid')}>
+        <Grid xs={12} display="flex">
+          <span className={bem('Header')}>
             Start your project right now <br /> or audit like an expert
-          </h1>
+          </span>
+        </Grid>
+
+        <Grid xs={12} display="flex">
+          <span className={bem('Text')}>
+            AuditDb is a blockchain-based jobs platform that helps clients and freelancers
+            connect. We provide efficient transactions with cryptocurrency, and robust
+            protection through smart contracts - wherever you're based!
+          </span>
         </Grid>
 
         <Grid xs={12} sm={6} display="flex">
@@ -49,6 +60,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSelect }) => {
           </Button>
         </Grid>
       </Grid>
+      <RightGirl />
     </motion.div>
   )
 }

@@ -1,0 +1,12 @@
+.Girl {
+  padding: 0 5px;
+
+  @media screen and (max-width: 1100px) {
+    display: none;
+  }
+
+  &-Img {
+    max-width: -webkit-fill-available;
+    width: 100%;
+  }
+}

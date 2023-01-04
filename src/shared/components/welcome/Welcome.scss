@@ -4,14 +4,28 @@
   margin: auto;
   margin-top: $margin-normal;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: fit-content;
   align-items: center;
   margin-bottom: calc($margin-normal * 2);
 
+  &-Grid {
+    width: 65% !important;
+    margin: auto !important;
+  }
+
   &-Header {
     text-align: center;
     color: #53176d;
+    font-size: $l-font-size * 2;
+    font-weight: bold;
+    margin: auto;
+  }
+
+  &-Text {
+    text-align: center;
+    color: $text-color;
+    font-size: $l-font-size;
   }
 
   &-Button {
