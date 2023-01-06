@@ -60,14 +60,26 @@ export const AuditorPage: React.FC = () => {
         <span className={bem('Title')}>Auditor</span>
 
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="Auditor Page">
-              <Tab label="Audits" value="1" />
-              <Tab label="Auditor" value="2" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">Audits</TabPanel>
-          <TabPanel value="2">
+          <TabList
+            onChange={handleChange}
+            aria-label="Auditor Page"
+            className={bem('Tabs')}
+          >
+            <Tab
+              label="Audits"
+              value="1"
+              className={bem('Tab', { active: value === '1' })}
+            />
+            <Tab
+              label="Auditor"
+              value="2"
+              className={bem('Tab', { active: value === '2' })}
+            />
+          </TabList>
+          <TabPanel value="1" className={bem('TabPanel')}>
+            Audits
+          </TabPanel>
+          <TabPanel value="2" className={bem('TabPanel')}>
             <AuditorPanel
               auditor={auditor}
               errorMessage={auditorErrorMessage}

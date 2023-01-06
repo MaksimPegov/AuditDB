@@ -1,13 +1,48 @@
 @import '../../../styles/styles.scss';
 
+.MuiTabs-indicator {
+  display: none;
+}
+
 .CustomerPage {
   @include page-panel;
 
   max-width: 600px !important;
   padding-top: $padding-normal !important;
   padding-bottom: $padding-normal !important;
+  border: 3px solid $primary !important;
+  padding: 0 !important;
+  margin-top: 151px !important;
 
   &-Title {
     @include page-title;
+    top: -116px;
+  }
+
+  &-Tabs {
+    position: absolute;
+    top: -51px;
+    width: -webkit-fill-available;
+    left: -3px;
+    right: -3px;
+  }
+
+  &-Tab {
+    width: 33.4% !important;
+    color: $text-color !important;
+    margin: 5px 0 -5px 0 !important;
+    border-radius: 10px !important;
+    border: 1px solid $light-gray !important;
+    background-color: $super-light-gray !important;
+
+    &_active {
+      background-color: $primary !important;
+      color: $white !important;
+      border: none !important;
+    }
+  }
+
+  &-TabPanel {
+    padding: 50px 80px !important;
   }
 }

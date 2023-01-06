@@ -90,15 +90,33 @@ export const CustomerPage: React.FC = () => {
         <span className={bem('Title')}>Customer</span>
 
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="Customer Page">
-              <Tab label="Audits" value="1" disabled={!customer} />
-              <Tab label="Projects" value="2" disabled={!customer} />
-              <Tab label="Customer" value="3" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">Audits</TabPanel>
-          <TabPanel value="2">
+          <TabList
+            onChange={handleChange}
+            aria-label="Customer Page"
+            className={bem('Tabs')}
+          >
+            <Tab
+              label="Audits"
+              value="1"
+              disabled={!customer}
+              className={bem('Tab', { audits: true, active: value === '1' })}
+            />
+            <Tab
+              label="Projects"
+              value="2"
+              disabled={!customer}
+              className={bem('Tab', { projects: true, active: value === '2' })}
+            />
+            <Tab
+              label="Customer"
+              value="3"
+              className={bem('Tab', { customer: true, active: value === '3' })}
+            />
+          </TabList>
+          <TabPanel value="1" className={bem('TabPanel')}>
+            Audits
+          </TabPanel>
+          <TabPanel value="2" className={bem('TabPanel')}>
             <ProjectsPanel
               projects={projects}
               loading={loadingProjects}
@@ -107,7 +125,7 @@ export const CustomerPage: React.FC = () => {
               deleteProject={(id) => dispatch(customerActions.deleteProject(id))}
             />
           </TabPanel>
-          <TabPanel value="3">
+          <TabPanel value="3" className={bem('TabPanel')}>
             <CustomerPanel
               customer={customer}
               errorMessage={customerErrorMessage}
