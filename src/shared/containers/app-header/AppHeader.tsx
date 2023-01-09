@@ -1,16 +1,16 @@
 import Grid from '@mui/material/Unstable_Grid2'
-import React, { useEffect, useRef } from 'react'
 import { cn } from '@bem-react/classname'
 import { motion } from 'framer-motion'
 import { Box, Button } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import './AppHeader.scss'
 
 import { selectUser } from 'user/state/user.selectors'
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import { HeaderLinks } from 'shared/components/header-links/HeaderLinks'
 import { UserNavigate } from 'shared/components/user-navigate/UserNavigate'
-import './AppHeader.scss'
 import { UserTypeSwitch } from 'shared/components/user-type-switch/UserTypeSwitch'
 import { selectUserType } from 'shared/state/shared.selectors'
 

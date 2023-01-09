@@ -13,7 +13,6 @@ import {
   Button,
   TextField,
   useMediaQuery,
-  IconButton,
 } from '@mui/material'
 
 import './ProjectPage.scss'

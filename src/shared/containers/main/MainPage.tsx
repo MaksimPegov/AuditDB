@@ -1,4 +1,4 @@
-import { alpha, Box, Grid, InputBase, styled } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -40,8 +40,6 @@ export const MainPage = () => {
   const projects = useSelector(selectProjects)
   const loadingProjects = useSelector(selectProjectsLoading)
   const loadingProjectsError = useSelector(selectProjectsError)
-  const doNothing = () => {}
-  let delayTimer: any
 
   const selectAccountTypeHandler = (type: AccountType) => {
     dispatch(sharedActions.setUserPreferences(type))

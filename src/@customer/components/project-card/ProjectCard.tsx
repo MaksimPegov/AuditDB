@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { cn } from '@bem-react/classname'
 import {
   Card,
   Button,
@@ -7,14 +9,12 @@ import {
   Dialog,
   DialogContent,
 } from '@mui/material'
-import { useRef, useState } from 'react'
-import { cn } from '@bem-react/classname'
 
 import './ProjectCard.scss'
 import { Project } from 'shared/models/project'
-import { ProjectInfo } from '../customer-info/ProjectInfo'
 import { StatusBar } from 'shared/components/status-bar/StatusBar'
 import { useLocation } from 'react-router-dom'
+import { ProjectInfo } from '@customer/components/customer-info/ProjectInfo'
 
 export type ProjectCardProps = {
   project: Project

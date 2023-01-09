@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TabContext from '@mui/lab/TabContext'
 import { motion } from 'framer-motion'
 import TabPanel from '@mui/lab/TabPanel'
+import { Box } from '@mui/material'
 import TabList from '@mui/lab/TabList'
 import { cn } from '@bem-react/classname'
 import Tab from '@mui/material/Tab'
@@ -19,10 +19,10 @@ import {
   selectLoadingCustomer,
   selectProcessingCustomer,
 } from '@customer/state/customer.selectors'
-import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
-import { customerActions } from '@customer/state/customer.reducer'
-import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
 import { Project } from 'shared/models/project'
+import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
+import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
+import { customerActions } from '@customer/state/customer.reducer'
 
 const componentId = 'CustomerPage'
 const bem = cn(componentId)

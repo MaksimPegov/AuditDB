@@ -1,15 +1,14 @@
+import { useState } from 'react'
+import { cn } from '@bem-react/classname'
 import {
   Card,
   Button,
-  CardActionArea,
   CardContent,
   CardActions,
   Avatar,
   Dialog,
   DialogContent,
 } from '@mui/material'
-import { useState } from 'react'
-import { cn } from '@bem-react/classname'
 
 import './AuditorCard.scss'
 import { Auditor } from 'shared/models/auditor'
