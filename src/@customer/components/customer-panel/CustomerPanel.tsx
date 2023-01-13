@@ -1,11 +1,13 @@
-import { Alert, Button, Grid, InputBase, InputLabel } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { Alert, Avatar, Button, Grid, InputBase, InputLabel } from '@mui/material'
 
-import './CustomerPanel.scss'
-import { Customer } from 'shared/models/customer'
+import { useSnackbar } from 'notistack'
 import { onlySpaces } from 'shared/helpers/dataValodation'
+import { Customer } from 'shared/models/customer'
+import { Edit } from '@mui/icons-material'
+import './CustomerPanel.scss'
 
 const componentId = 'CustomerPanel'
 const bem = cn(componentId)
@@ -30,6 +32,8 @@ type CustomerPanelProps = {
   processing: boolean
   submit: (c: Customer) => void
   successMessage: string
+  cancel: () => void
+  cleanSuccessMessage: () => void
 }
 
 export const CustomerPanel: React.FC<CustomerPanelProps> = ({
@@ -40,8 +44,11 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
   processing,
   successMessage,
   submit,
+  cancel,
+  cleanSuccessMessage,
 }) => {
   const [customerData, setCustomerData] = useState<Customer>(initialCustomerData)
+  const showSnack = useSnackbar()
 
   const [errors, setErrors] = useState({
     fname: false,
@@ -138,6 +145,15 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
     }
   }, [errorMessage])
 
+  // Close panel on success
+  useEffect(() => {
+    if (successMessage) {
+      showSnack.enqueueSnackbar(successMessage, { variant: 'success' })
+      cancel()
+    }
+    return cleanSuccessMessage()
+  }, [successMessage])
+
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       {loading ? (
@@ -145,59 +161,70 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
       ) : (
         <form autoComplete="off">
           <Grid container spacing={2} className={bem()}>
-            <Grid item xs={12}>
-              <InputLabel htmlFor="fname-input" className={bem('InputLabel')}>
-                First Name
-              </InputLabel>
+            <Grid item xs={12} md={12} lg={4} display="flex">
+              <Grid container justifyContent="center" alignItems="center">
+                <Grid item xs={12} className={bem('AvatarBox')}>
+                  <Avatar className={bem('Avatar')}>
+                    {customer!.fname
+                      ? customer!.fname.substring(0, 1).toUpperCase()
+                      : null}
+                  </Avatar>
+                </Grid>
 
-              <InputBase
-                id="fname-input"
-                className={bem('Input', { error: errors.fname })}
-                type="text"
-                value={customerData.fname}
-                error={errors.fname}
-                onChange={(e) =>
-                  handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'fname')
-                }
-              />
+                <Grid item xs={12} display="flex">
+                  <div className={bem('EditAvatar')} data-testid={bem('EditAvatar')}>
+                    <Edit className={bem('Pencil')} />
+                    <span
+                      className={bem('EditAvatarText')}
+                      onClick={() => {
+                        console.log('avatar change')
+                      }}
+                    >
+                      Edit photo
+                    </span>
+                  </div>
+                </Grid>
+              </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel htmlFor="lname-input" className={bem('InputLabel')}>
-                Last Name
-              </InputLabel>
+            <Grid item xs={12} md={12} lg={8}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <InputLabel htmlFor="fname-input" className={bem('InputLabel')}>
+                    First Name
+                  </InputLabel>
 
-              <InputBase
-                id="lname-input"
-                className={bem('Input', { error: errors.lname })}
-                type="text"
-                value={customerData.lname}
-                error={errors.fname}
-                onChange={(e) =>
-                  handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'lname')
-                }
-              />
-            </Grid>
+                  <InputBase
+                    id="fname-input"
+                    data-testid={bem('fname-input')}
+                    className={bem('Input', { error: errors.fname })}
+                    type="text"
+                    value={customerData.fname}
+                    error={errors.fname}
+                    onChange={(e) =>
+                      handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'fname')
+                    }
+                  />
+                </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel htmlFor="about-input" className={bem('InputLabel')}>
-                About
-              </InputLabel>
+                <Grid item xs={12}>
+                  <InputLabel htmlFor="lname-input" className={bem('InputLabel')}>
+                    Last Name
+                  </InputLabel>
 
-              <InputBase
-                id="about-input"
-                className={bem('Input', { error: errors.about })}
-                type="text"
-                value={customerData.about}
-                error={errors.fname}
-                onChange={(e) =>
-                  handleFieldChange(
-                    e as React.ChangeEvent<HTMLInputElement>,
-                    'about',
-                    false,
-                  )
-                }
-              />
+                  <InputBase
+                    id="lname-input"
+                    data-testid={bem('lname-input')}
+                    className={bem('Input', { error: errors.lname })}
+                    type="text"
+                    value={customerData.lname}
+                    error={errors.fname}
+                    onChange={(e) =>
+                      handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'lname')
+                    }
+                  />
+                </Grid>
+              </Grid>
             </Grid>
 
             <Grid item xs={12}>
@@ -207,6 +234,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
 
               <InputBase
                 id="company-input"
+                data-testid={bem('company-input')}
                 className={bem('Input', { error: errors.company })}
                 type="text"
                 value={customerData.company}
@@ -222,12 +250,37 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel htmlFor="about-input" className={bem('InputLabel')}>
+                About
+              </InputLabel>
+
+              <InputBase
+                multiline
+                id="about-input"
+                data-testid={bem('about-input')}
+                className={bem('Input', { error: errors.about })}
+                type="text"
+                value={customerData.about}
+                rows={5}
+                error={errors.fname}
+                onChange={(e) =>
+                  handleFieldChange(
+                    e as React.ChangeEvent<HTMLInputElement>,
+                    'about',
+                    false,
+                  )
+                }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
               <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
                 Email
               </InputLabel>
 
               <InputBase
                 id="email-input"
+                data-testid={bem('email-input')}
                 className={bem('Input', { error: errors.contacts.email })}
                 type="text"
                 value={customerData.contacts.email}
@@ -245,6 +298,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
 
               <InputBase
                 id="telegram-input"
+                data-testid={bem('telegram-input')}
                 className={bem('Input', { error: errors.contacts.telegram })}
                 type="text"
                 value={customerData.contacts.telegram}
@@ -258,21 +312,37 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12} display="flex">
-              <Button
-                className={bem('Button', {
-                  disabled: !errors.noErrors || processing,
-                  secondary: !customerData._id,
-                })}
-                data-testid={bem('Button')}
-                type="submit"
-                variant="contained"
-                disabled={!errors.noErrors || processing}
-                sx={{ mt: 4 }}
-                onClick={() => submit(customerData)}
-              >
-                {customerData._id ? 'Save changes' : 'Create'}
-              </Button>
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={12} sm={6} display="flex">
+                  <Button
+                    className={bem('Button', {
+                      disabled: !errors.noErrors || processing,
+                      secondary: !customerData._id,
+                    })}
+                    data-testid={bem('Button')}
+                    type="submit"
+                    variant="contained"
+                    disabled={!errors.noErrors || processing}
+                    sx={{ mt: 4 }}
+                    onClick={() => submit(customerData)}
+                  >
+                    {customerData._id ? 'Save changes' : 'Create'}
+                  </Button>
+                </Grid>
+
+                <Grid item xs={12} sm={6} display="flex">
+                  <Button
+                    variant="contained"
+                    color="info"
+                    className={bem('Button', { second: true })}
+                    data-testid={bem('Cancel')}
+                    onClick={cancel}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
 
@@ -280,14 +350,6 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Alert className={bem('Alert', { error: true })} severity="error">
                 {errors.errorMessage}
-              </Alert>
-            </motion.div>
-          ) : null}
-
-          {successMessage ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <Alert className={bem('Alert', { success: true })} severity="success">
-                {successMessage}
               </Alert>
             </motion.div>
           ) : null}

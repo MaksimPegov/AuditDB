@@ -1,10 +1,10 @@
+import { Box, Button, Dialog, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TabContext from '@mui/lab/TabContext'
 import { motion } from 'framer-motion'
 import TabPanel from '@mui/lab/TabPanel'
-import { Box } from '@mui/material'
 import TabList from '@mui/lab/TabList'
 import { cn } from '@bem-react/classname'
 import Tab from '@mui/material/Tab'
@@ -20,8 +20,9 @@ import {
   selectProcessingCustomer,
 } from '@customer/state/customer.selectors'
 import { Project } from 'shared/models/project'
-import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
+import { CustomerInfo } from '@customer/components/customer-info/CustomerInfo'
 import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
+import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
 import { customerActions } from '@customer/state/customer.reducer'
 
 const componentId = 'CustomerPage'
@@ -32,6 +33,9 @@ export const CustomerPage: React.FC = () => {
   const dispatch = useDispatch()
   const [value, setValue] = useState('3')
   const location = useLocation()
+  const [editDialog, setEditDialog] = useState(false)
+
+  const handleEditDialog = () => setEditDialog(!editDialog)
 
   const customer = useSelector(selectCustomer)
   const customerErrorMessage = useSelector(selectCustomerErrorMessage)
@@ -78,6 +82,10 @@ export const CustomerPage: React.FC = () => {
     if (value === '1' && customer?._id)
       dispatch(customerActions.loadCustomerAudits(customer._id))
   }, [value])
+
+  const cleanSuccessMessage = () => {
+    dispatch(customerActions.cleanSuccessMessage())
+  }
 
   return (
     <motion.div
@@ -126,15 +134,32 @@ export const CustomerPage: React.FC = () => {
             />
           </TabPanel>
           <TabPanel value="3" className={bem('TabPanel')}>
-            <CustomerPanel
-              customer={customer}
-              errorMessage={customerErrorMessage}
-              loading={loadingCustomer}
-              processing={processingCustomer}
-              successMessage={customerSuccessMessage}
-              remove={deleteCustomer}
-              submit={submitCustomer}
-            />
+            {!customer ? (
+              <Button onClick={() => handleEditDialog()}>Create Customer</Button>
+            ) : (
+              <CustomerInfo
+                customer={customer}
+                avatarUrl={'1.jpg'}
+                submit={handleEditDialog}
+                submitLable={'Edit'}
+              />
+            )}
+
+            <Dialog open={editDialog} onClose={handleEditDialog}>
+              <DialogContent>
+                <CustomerPanel
+                  customer={customer}
+                  errorMessage={customerErrorMessage}
+                  loading={loadingCustomer}
+                  processing={processingCustomer}
+                  successMessage={customerSuccessMessage}
+                  remove={deleteCustomer}
+                  submit={submitCustomer}
+                  cleanSuccessMessage={cleanSuccessMessage}
+                  cancel={handleEditDialog}
+                />
+              </DialogContent>
+            </Dialog>
           </TabPanel>
         </TabContext>
       </Box>

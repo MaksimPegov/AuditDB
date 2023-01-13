@@ -95,6 +95,10 @@ export const auditorSlice = createSlice({
       state.auditorPage.auditor = null
       state.auditorPage.processing.auditorSuccess = 'Auditor deleted successfully'
     },
+    cleanSuccessMessage(state, action: Action) {
+      state.auditorPage.processing.auditorSuccess = ''
+    },
+
     deleteAuditorFail(state, action: PayloadAction<string>) {
       state.auditorPage.processing.auditor = false
       state.auditorPage.processing.auditorError = action.payload

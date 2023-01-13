@@ -75,7 +75,12 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
 
       <Dialog open={infoDialog} onClose={closeInfoDialog}>
         <DialogContent>
-          <AuditorInfo auditor={auditor} avatarUrl={avatar} close={closeInfoDialog} />
+          <AuditorInfo
+            auditor={auditor}
+            avatarUrl={avatar}
+            submit={closeInfoDialog}
+            submitLable={'Close'}
+          />
         </DialogContent>
       </Dialog>
     </Card>

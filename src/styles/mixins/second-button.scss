@@ -1,0 +1,5 @@
+@mixin second-button {
+  @media screen and (max-width: $screen-xs-width) {
+    margin-top: 0 !important;
+  }
+}

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
-import { Box } from '@mui/material'
+import { Box, Button, Dialog, DialogContent } from '@mui/material'
 import { motion } from 'framer-motion'
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
@@ -18,11 +18,14 @@ import {
 } from '@auditor/state/auditor.selectors'
 import { AuditorPanel } from '@auditor/components/auditor-panel/AuditorPanel'
 import { auditorActions } from '@auditor/state/auditor.reducer'
+import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 
 const componentId = 'AuditorPage'
 const bem = cn(componentId)
 
 export const AuditorPage: React.FC = () => {
+  const [editDialog, setEditDialog] = React.useState(false)
+
   const dispatch = useDispatch()
 
   const auditor = useSelector(selectAuditor)
@@ -49,6 +52,14 @@ export const AuditorPage: React.FC = () => {
     if (value === '2') dispatch(auditorActions.loadAuditorData())
   }, [value, dispatch])
 
+  const handleEditDialog = () => {
+    setEditDialog((state) => !state)
+  }
+
+  const cleanSuccessMessage = () => {
+    dispatch(auditorActions.cleanSuccessMessage())
+  }
+
   return (
     <motion.div
       className="motion-container"
@@ -70,25 +81,46 @@ export const AuditorPage: React.FC = () => {
               value="1"
               className={bem('Tab', { active: value === '1' })}
             />
+
             <Tab
               label="Auditor"
               value="2"
               className={bem('Tab', { active: value === '2' })}
             />
           </TabList>
+
           <TabPanel value="1" className={bem('TabPanel')}>
             Audits
           </TabPanel>
+
           <TabPanel value="2" className={bem('TabPanel')}>
-            <AuditorPanel
-              auditor={auditor}
-              errorMessage={auditorErrorMessage}
-              loading={loadingAuditor}
-              processing={processingAuditor}
-              successMessage={auditorSuccessMessage}
-              remove={deleteAuditor}
-              submit={submitAuditor}
-            />
+            {auditor === null ? (
+              <Button onClick={handleEditDialog} color="secondary">
+                Create Auditor
+              </Button>
+            ) : (
+              <AuditorInfo
+                auditor={auditor!}
+                avatarUrl={'1'}
+                submit={handleEditDialog}
+                submitLable={'Edit'}
+              />
+            )}
+            <Dialog open={editDialog} onClose={handleEditDialog}>
+              <DialogContent>
+                <AuditorPanel
+                  auditor={auditor}
+                  errorMessage={auditorErrorMessage}
+                  loading={loadingAuditor}
+                  processing={processingAuditor}
+                  successMessage={auditorSuccessMessage}
+                  remove={deleteAuditor}
+                  submit={submitAuditor}
+                  cancel={handleEditDialog}
+                  cleanSuccessMessage={cleanSuccessMessage}
+                />
+              </DialogContent>
+            </Dialog>
           </TabPanel>
         </TabContext>
       </Box>

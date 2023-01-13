@@ -18,8 +18,8 @@ root.render(
     <Provider store={store}>
       <SnackbarProvider
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         TransitionComponent={Slide}
         maxSnack={3}

@@ -14,7 +14,7 @@ import './ProjectCard.scss'
 import { Project } from 'shared/models/project'
 import { StatusBar } from 'shared/components/status-bar/StatusBar'
 import { useLocation } from 'react-router-dom'
-import { ProjectInfo } from '@customer/components/customer-info/ProjectInfo'
+import { ProjectInfo } from '@customer/components/project-info/ProjectInfo'
 
 export type ProjectCardProps = {
   project: Project

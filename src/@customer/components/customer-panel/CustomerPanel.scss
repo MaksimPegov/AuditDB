@@ -2,9 +2,40 @@
 
 .CustomerPanel {
   display: flex;
+  padding: $padding-normal * 2 !important;
+  padding-bottom: 0 !important;
+
+  @media screen and (max-width: $screen-xs-width) {
+    padding: 0 !important;
+  }
+  &-AvatarBox {
+    display: flex;
+
+    @media screen and (min-width: $screen-lg-width) {
+      margin-left: -10px !important;
+    }
+  }
+
+  &-Avatar {
+    @include avatar(110px);
+  }
+
+  &-EditAvatar {
+    margin: 5px auto;
+    font-size: $sm-font-size !important;
+    cursor: pointer;
+    color: $primary;
+  }
+
+  &-Pencil {
+    font-size: $sm-font-size !important;
+    padding-right: 5px;
+    margin-left: -15px;
+  }
 
   &-Input {
     @include page-input;
+    padding: 5px 10px !important;
   }
 
   &-InputLabel {
@@ -13,9 +44,10 @@
 
   &-Button {
     margin-bottom: $margin-normal !important;
+    margin-top: $margin-normal !important;
 
-    &_secondary {
-      background-color: $secondary !important;
+    &_second {
+      @include second-button;
     }
   }
 

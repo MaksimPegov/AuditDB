@@ -59,7 +59,9 @@ export const Profile: React.FC = () => {
         <span className={bem('Title')}>User profile</span>
 
         <Grid xs={12} md={12} lg={3} display="flex">
-          <Avatar className={bem('Avatar')}>{user.name.substring(0, 1)}</Avatar>
+          <Avatar className={bem('Avatar')}>
+            {user.name.substring(0, 1).toUpperCase()}
+          </Avatar>
           {/* <span
               className={bem('EditAvatar')}
               variant="caption"

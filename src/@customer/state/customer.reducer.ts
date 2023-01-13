@@ -127,6 +127,9 @@ const customerSlice = createSlice({
       state.customerPage.processing.customer = false
       state.customerPage.processing.customerSuccess = 'Customer deleted successfully'
     },
+    cleanSuccessMessage(state, action: Action) {
+      state.customerPage.processing.customerSuccess = ''
+    },
     deleteCustomerFail(state, action: PayloadAction<string>) {
       state.customerPage.processing.customer = false
       state.customerPage.processing.customerError = action.payload

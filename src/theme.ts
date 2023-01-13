@@ -20,6 +20,9 @@ export const theme = createTheme({
     error: {
       main: COLORS.red,
     },
+    info: {
+      main: COLORS.dark_gray,
+    },
   },
   components: {
     MuiButton: {
@@ -37,6 +40,10 @@ export const theme = createTheme({
           '&:hover': {
             boxShadow: '0 0',
           },
+          disabled: {
+            background: COLORS.disabled_bg_color,
+            color: COLORS.disabled_text_color,
+          },
         },
         containedPrimary: {
           color: COLORS.white,
@@ -48,6 +55,12 @@ export const theme = createTheme({
           color: COLORS.white,
           '&:hover': {
             background: COLORS.secondary_hover,
+          },
+        },
+        containedInfo: {
+          color: COLORS.white,
+          '&:hover': {
+            background: COLORS.dark_gray,
           },
         },
         outlinedPrimary: {
@@ -73,10 +86,6 @@ export const theme = createTheme({
         },
         sizeLarge: {
           height: '60px',
-        },
-        disabled: {
-          background: COLORS.$disabled_bg_color,
-          color: COLORS.$disabled_text_color,
         },
       },
     },

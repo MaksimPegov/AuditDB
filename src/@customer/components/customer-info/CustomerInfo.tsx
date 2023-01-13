@@ -3,84 +3,73 @@ import { cn } from '@bem-react/classname'
 import { Avatar, Button } from '@mui/material'
 import React, { useState } from 'react'
 
-import { Auditor } from 'shared/models/auditor'
-import { Tags } from 'shared/components/tags/Tags'
-import './AuditorInfo.scss'
+import { Customer } from 'shared/models/customer'
+import './CustomerInfo.scss'
 
-const componentId = 'AuditorInfo'
+const componentId = 'CustomerInfo'
 const bem = cn(componentId)
 
-export const AuditorInfo: React.FC<{
-  auditor: Auditor
+export const CustomerInfo: React.FC<{
+  customer: Customer
   avatarUrl: string
   submit: () => void
   submitLable: string
-}> = ({ auditor, avatarUrl, submit, submitLable }) => {
+}> = ({ customer, avatarUrl, submit, submitLable }) => {
   return (
     <Grid container spacing={3} className={bem()}>
       <Grid xs={12}>
-        <Avatar className={bem('Avatar')} alt={auditor.fname} src={avatarUrl} />
+        <Avatar className={bem('Avatar')} alt={customer.fname} src={avatarUrl} />
       </Grid>
 
       <Grid xs={12} md={4} sm={12} display="flex">
         <span className={bem('Lable', { name: true })}>First name</span>
       </Grid>
       <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { fname: true })}>{auditor.fname}</span>
+        <span className={bem('Data', { fname: true })}>{customer.fname}</span>
       </Grid>
 
       <Grid xs={12} md={4} sm={12} display="flex">
         <span className={bem('Lable', { lname: true })}>Last name</span>
       </Grid>
-      <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { lname: true })}>{auditor.lname}</span>
+      <Grid md={8} xs={23} display="flex">
+        <span className={bem('Data', { lname: true })}>{customer.lname}</span>
       </Grid>
 
       <Grid xs={12} md={4} sm={12} display="flex">
         <span className={bem('Lable', { company: true })}>Company</span>
       </Grid>
       <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { company: true })}> - </span>
+        <span className={bem('Data', { company: true })}>
+          {customer.company ? customer.company : '-'}
+        </span>
       </Grid>
 
       <Grid xs={12} md={4} sm={12} display="flex">
         <span className={bem('Lable', { about: true })}>About</span>
       </Grid>
       <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { about: true })}>{auditor.about}</span>
+        <span className={bem('Data', { about: true })}>{customer.about}</span>
       </Grid>
 
       <Grid xs={12} md={4} sm={12} display="flex">
         <span className={bem('Lable', { email: true })}>E-mail</span>
       </Grid>
       <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { email: true })}>{auditor.contacts.email}</span>
+        <span className={bem('Data', { email: true })}>{customer.contacts.email}</span>
       </Grid>
 
-      {auditor.contacts.telegram ? (
+      {customer.contacts.telegram ? (
         <React.Fragment>
           <Grid xs={12} md={4} sm={12} display="flex">
             <span className={bem('Lable', { phone: true })}>Telegram</span>
           </Grid>
           <Grid md={8} xs={12} display="flex">
             <span className={bem('Data', { phone: true })}>
-              {auditor.contacts.telegram}
+              {customer.contacts.telegram}
             </span>
           </Grid>
         </React.Fragment>
       ) : null}
-
-      <Grid xs={12} md={4} sm={12} display="flex">
-        <span className={bem('Lable', { texrate: true })}>Tax rate</span>
-      </Grid>
-
-      <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { texrate: true })}> - </span>
-      </Grid>
-
-      <Grid xs={12} className={bem('Tags')}>
-        <Tags tags={auditor.tags} />
-      </Grid>
 
       <Grid xs={12} display="flex">
         <Button
@@ -89,7 +78,6 @@ export const AuditorInfo: React.FC<{
             submit()
           }}
           variant="contained"
-          color="secondary"
         >
           {submitLable}
         </Button>
