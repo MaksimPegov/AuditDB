@@ -10,7 +10,9 @@ export const Tags: React.FC<{ tags: string }> = ({ tags }) => {
   return (
     <div className={bem()}>
       {tagsArray.map((tag) => (
-        <div className={bem('Tag')}>{tag}</div>
+        <div key={tagsArray.indexOf(tag)} className={bem('Tag')}>
+          {tag}
+        </div>
       ))}
     </div>
   )
