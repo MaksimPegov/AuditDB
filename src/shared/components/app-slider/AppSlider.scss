@@ -1,0 +1,11 @@
+@import 'styles/styles.scss';
+
+.AppSlider {
+  &-Slider {
+    margin: auto !important;
+  }
+
+  &-Input {
+    @include page-input;
+  }
+}

@@ -6,6 +6,7 @@ export type ServerAuditor = {
   contacts: AuditorContacts
   fname: string
   lname: string
+  price: number
 }
 
 export const auditorAdaptorIn = (auditor: ServerAuditor): Auditor => ({

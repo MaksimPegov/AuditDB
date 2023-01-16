@@ -71,11 +71,13 @@ export const AuditorInfo: React.FC<{
       ) : null}
 
       <Grid xs={12} md={4} sm={12} display="flex">
-        <span className={bem('Lable', { texrate: true })}>Tax rate</span>
+        <span className={bem('Lable', { texrate: true })}>Price per line</span>
       </Grid>
 
       <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { texrate: true })}> - </span>
+        <span className={bem('Data', { texrate: true })}>
+          {auditor.price ? auditor.price + ' $' : '-'}
+        </span>
       </Grid>
 
       <Grid xs={12} className={bem('Tags')}>

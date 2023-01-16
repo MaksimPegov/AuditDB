@@ -32,7 +32,7 @@ export const create = async (auditor: Auditor): Promise<Auditor> => {
   try {
     const response = await http.post('/auditors', auditorAdaptorOut(auditor))
 
-    return auditorAdaptorIn(response.data)
+    return auditorAdaptorIn({ ...response.data, price: auditor.price }) // mock price
   } catch (e: any) {
     throw new Error(e.response.data.message)
   }
@@ -107,7 +107,7 @@ export const update = async (auditor: Auditor): Promise<Auditor> => {
   try {
     const response = await http.patch('/auditors', auditorAdaptorOut(auditor))
 
-    return auditorAdaptorIn(response.data)
+    return auditorAdaptorIn({ ...response.data, price: auditor.price }) // mock price
   } catch (e: any) {
     throw new Error(e.response.data.message)
   }

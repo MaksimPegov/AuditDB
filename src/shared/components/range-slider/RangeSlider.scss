@@ -1,0 +1,21 @@
+@import 'styles/styles.scss';
+
+.RangeSlider {
+  &-Slider {
+    margin: auto !important;
+  }
+
+  &-InputBox {
+    display: flex !important;
+    flex-direction: row;
+    // height: 35px;
+  }
+
+  &-Input {
+    @include page-input;
+  }
+
+  &-Spacing {
+    margin: auto 5px;
+  }
+}

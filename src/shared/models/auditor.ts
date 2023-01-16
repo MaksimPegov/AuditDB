@@ -10,6 +10,7 @@ export type Auditor = {
   contacts: AuditorContacts
   fname: string
   lname: string
+  price: number
   createdAt?: string
   updatedAt?: string
 }
@@ -20,6 +21,7 @@ export const mockedAuditor: Auditor = {
   tags: 'bitcoin,crypto,audit',
   fname: 'Jon',
   lname: 'Doe',
+  price: 70,
   contacts: {
     email: 'auditor@dot.com',
     telegram: '@jon_doe_auditor',

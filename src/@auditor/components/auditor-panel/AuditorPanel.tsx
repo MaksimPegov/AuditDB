@@ -1,13 +1,15 @@
 import { Alert, Avatar, Button, Grid, InputBase, InputLabel } from '@mui/material'
-import { cn } from '@bem-react/classname'
-import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { cn } from '@bem-react/classname'
 
 import './AuditorPanel.scss'
 import { Edit } from '@mui/icons-material'
 import { Auditor } from 'shared/models/auditor'
+import { AppSlider } from 'shared/components/app-slider/AppSlider'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { useSnackbar } from 'notistack'
+import { RangeSlider } from 'shared/components/range-slider/RangeSlider'
 
 const componentId = 'AuditorPanel'
 const bem = cn(componentId)
@@ -17,6 +19,7 @@ const initialAuditorData: Auditor = {
   lname: '',
   about: '',
   tags: '',
+  price: 0,
   contacts: {
     email: '',
     telegram: '',
@@ -96,6 +99,13 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
         ...prevState.contacts,
         [contact]: false,
       },
+    }))
+  }
+
+  const handleSliderChange = (value: number): void => {
+    setAuditorData((prevState) => ({
+      ...prevState,
+      price: value,
     }))
   }
 
@@ -284,6 +294,20 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
                     'telegram',
                   )
                 }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel htmlFor="phone-input" className={bem('InputLabel')}>
+                Price per line
+              </InputLabel>
+              <AppSlider
+                value={auditor ? auditor.price : 0}
+                setValue={handleSliderChange}
+                min={0}
+                max={100}
+                step={1}
+                color={'secondary'}
               />
             </Grid>
 

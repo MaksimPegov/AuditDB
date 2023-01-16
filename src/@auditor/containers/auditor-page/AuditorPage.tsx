@@ -95,7 +95,7 @@ export const AuditorPage: React.FC = () => {
 
           <TabPanel value="2" className={bem('TabPanel')}>
             {auditor === null ? (
-              <Button onClick={handleEditDialog} color="secondary">
+              <Button variant="contained" color="secondary" onClick={handleEditDialog}>
                 Create Auditor
               </Button>
             ) : (
