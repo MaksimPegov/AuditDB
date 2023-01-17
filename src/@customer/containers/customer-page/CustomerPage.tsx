@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogContent } from '@mui/material'
+import { Box, Grid, Button, Dialog, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -20,6 +20,7 @@ import {
   selectProcessingCustomer,
 } from '@customer/state/customer.selectors'
 import { Project } from 'shared/models/project'
+import { AuditCard } from 'shared/components/audit-card/AuditCard'
 import { CustomerInfo } from '@customer/components/customer-info/CustomerInfo'
 import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
 import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
@@ -77,10 +78,8 @@ export const CustomerPage: React.FC = () => {
   // Load customer projects and audits on tab change
   useEffect(() => {
     if (value === '3') dispatch(customerActions.loadCustomerData())
-    if (value === '2' && customer?._id)
-      dispatch(customerActions.loadCustomerProjects(customer._id))
-    if (value === '1' && customer?._id)
-      dispatch(customerActions.loadCustomerAudits(customer._id))
+    if (value === '2') dispatch(customerActions.loadCustomerProjects())
+    if (value === '1') dispatch(customerActions.loadAuditsForCustomer())
   }, [value])
 
   const cleanSuccessMessage = () => {
@@ -109,21 +108,33 @@ export const CustomerPage: React.FC = () => {
               disabled={!customer}
               className={bem('Tab', { audits: true, active: value === '1' })}
             />
+
             <Tab
               label="Projects"
               value="2"
               disabled={!customer}
               className={bem('Tab', { projects: true, active: value === '2' })}
             />
+
             <Tab
               label="Customer"
               value="3"
               className={bem('Tab', { customer: true, active: value === '3' })}
             />
           </TabList>
+
           <TabPanel value="1" className={bem('TabPanel')}>
-            Audits
+            <Grid container spacing={2}>
+              {audits
+                ? audits.map((audit) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
+                      <AuditCard audit={audit} />
+                    </Grid>
+                  ))
+                : null}
+            </Grid>
           </TabPanel>
+
           <TabPanel value="2" className={bem('TabPanel')}>
             <ProjectsPanel
               projects={projects}
@@ -133,6 +144,7 @@ export const CustomerPage: React.FC = () => {
               deleteProject={(id) => dispatch(customerActions.deleteProject(id))}
             />
           </TabPanel>
+
           <TabPanel value="3" className={bem('TabPanel')}>
             {!customer ? (
               <Button onClick={() => handleEditDialog()}>Create Customer</Button>

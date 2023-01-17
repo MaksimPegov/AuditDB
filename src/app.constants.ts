@@ -5,3 +5,4 @@ export const SWAGGER = `${SERVER}:8080`
 export const PORT_FOR_USERS = '3001'
 export const PORT_FOR_AUDITORS = '3002'
 export const PORT_FOR_CUSTOMERS = '3003'
+export const PORT_FOR_AUDITS = '3004'

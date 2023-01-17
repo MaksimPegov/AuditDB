@@ -1,7 +1,8 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import { configureStore, PayloadAction } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
-import { configureStore } from '@reduxjs/toolkit'
+import { Observable } from 'rxjs'
 
 import { userEpics } from 'user/state/user.epic'
 import { sharedEpics } from 'shared/state/shared.epics'
@@ -18,6 +19,9 @@ export type AppState = {
   customer: CustomerState
   auditor: AuditorState
 }
+
+export type Action$ = Observable<PayloadAction>
+export type State$ = Observable<AppState>
 
 const epicMiddleware = createEpicMiddleware()
 const epics = combineEpics(userEpics, sharedEpics, customerEpics, auditorEpics)

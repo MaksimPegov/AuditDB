@@ -28,12 +28,13 @@
   }
 
   &-Tab {
-    width: 33.4% !important;
+    width: 33.3% !important;
     color: $text-color !important;
     margin: 5px 0 -5px 0 !important;
     border-radius: 10px !important;
     border: 1px solid $light-gray !important;
     background-color: $super-light-gray !important;
+    text-transform: none !important;
 
     &_active {
       background-color: $primary !important;

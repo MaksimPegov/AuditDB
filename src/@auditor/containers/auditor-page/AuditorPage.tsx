@@ -1,6 +1,6 @@
+import { Box, Grid, Button, Dialog, DialogContent } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
-import { Box, Button, Dialog, DialogContent } from '@mui/material'
 import { motion } from 'framer-motion'
 import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
@@ -13,12 +13,14 @@ import {
   selectAuditor,
   selectAuditorErrorMessage,
   selectAuditorSuccessMessage,
+  selectAudits,
   selectLoadingAuditor,
   selectProcessingAuditor,
 } from '@auditor/state/auditor.selectors'
+import { AuditCard } from 'shared/components/audit-card/AuditCard'
+import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 import { AuditorPanel } from '@auditor/components/auditor-panel/AuditorPanel'
 import { auditorActions } from '@auditor/state/auditor.reducer'
-import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 
 const componentId = 'AuditorPage'
 const bem = cn(componentId)
@@ -34,7 +36,9 @@ export const AuditorPage: React.FC = () => {
   const loadingAuditor = useSelector(selectLoadingAuditor)
   const processingAuditor = useSelector(selectProcessingAuditor)
 
-  const [value, setValue] = React.useState('2')
+  const audits = useSelector(selectAudits)
+
+  const [value, setValue] = React.useState('3')
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
@@ -47,9 +51,10 @@ export const AuditorPage: React.FC = () => {
 
   const deleteAuditor = (id: string) => dispatch(auditorActions.deleteAuditor(id))
 
-  // Load auditor data
   useEffect(() => {
-    if (value === '2') dispatch(auditorActions.loadAuditorData())
+    if (value === '1') dispatch(auditorActions.loadAuditsForAuditor())
+    if (value === '2') dispatch(auditorActions.loadAuditsForAuditor())
+    if (value === '3') dispatch(auditorActions.loadAuditorData())
   }, [value, dispatch])
 
   const handleEditDialog = () => {
@@ -83,17 +88,47 @@ export const AuditorPage: React.FC = () => {
             />
 
             <Tab
-              label="Auditor"
+              label="Audit Requests"
               value="2"
               className={bem('Tab', { active: value === '2' })}
+            />
+
+            <Tab
+              label="Auditor"
+              value="3"
+              className={bem('Tab', { active: value === '3' })}
             />
           </TabList>
 
           <TabPanel value="1" className={bem('TabPanel')}>
-            Audits
+            <Grid container spacing={2}>
+              {audits
+                ? audits
+                    .filter((audit) => audit.status !== 'pending')
+                    .map((audit) => (
+                      <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
+                        <AuditCard audit={audit} />
+                      </Grid>
+                    ))
+                : null}
+            </Grid>
           </TabPanel>
 
           <TabPanel value="2" className={bem('TabPanel')}>
+            <Grid container spacing={2}>
+              {audits
+                ? audits
+                    .filter((audit) => audit.status === 'pending')
+                    .map((audit) => (
+                      <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
+                        <AuditCard audit={audit} />
+                      </Grid>
+                    ))
+                : null}
+            </Grid>
+          </TabPanel>
+
+          <TabPanel value="3" className={bem('TabPanel')}>
             {auditor === null ? (
               <Button variant="contained" color="secondary" onClick={handleEditDialog}>
                 Create Auditor

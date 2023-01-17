@@ -1,44 +1,59 @@
-import { catchError, filter, from, map, of, switchMap, tap } from 'rxjs'
+import { catchError, filter, from, map, of, switchMap, tap, withLatestFrom } from 'rxjs'
 import { combineEpics, Epic } from 'redux-observable'
 
-import * as api from '@auditor/api/auditor.api'
-import { auditorActions } from '@auditor/state/auditor.reducer'
+import * as auditApi from 'shared/api/audit.api'
+import * as auditorApi from '@auditor/api/auditor.api'
 import { userActions } from 'user/state/user.reducer'
+import { selectAuditor } from './auditor.selectors'
+import { auditorActions } from '@auditor/state/auditor.reducer'
+import { Action$, State$ } from 'app.store'
 
-const loadAuditor: Epic = (action$, state$) =>
+const loadAuditor: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(auditorActions.loadAuditorData.match),
     switchMap(() =>
-      from(api.get()).pipe(
+      from(auditorApi.get()).pipe(
         map((auditor) => auditorActions.loadAuditorDataSuccess(auditor)),
         catchError((error) => of(auditorActions.loadAuditorDataFail(error.message))),
       ),
     ),
   )
 
-const createAuditor: Epic = (action$, state$) =>
+const createAuditor: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(auditorActions.createAuditor.match),
     switchMap(({ payload }) =>
-      from(api.create(payload)).pipe(
+      from(auditorApi.create(payload)).pipe(
         map((auditor) => auditorActions.createAuditorSuccess(auditor)),
         catchError((error) => of(auditorActions.createAuditorFail(error.message))),
       ),
     ),
   )
 
-const updateAuditor: Epic = (action$, state$) =>
+const updateAuditor: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(auditorActions.updateAuditor.match),
     switchMap(({ payload }) =>
-      from(api.update(payload)).pipe(
+      from(auditorApi.update(payload)).pipe(
         map((auditor) => auditorActions.updateAuditorSuccess(auditor)),
         catchError((error) => of(auditorActions.updateAuditorFail(error.message))),
       ),
     ),
   )
 
-const resetAuditorState: Epic = (action$, state$) =>
+const loadAuditsForAuditor: Epic = (action$: Action$, state$: State$) =>
+  action$.pipe(
+    filter(auditorActions.loadAuditsForAuditor.match),
+    withLatestFrom(state$.pipe(map(selectAuditor))),
+    switchMap(([, auditor]) =>
+      from(auditApi.getMyAudits('auditor', auditor!._id!)).pipe(
+        map((audits) => auditorActions.loadAuditsForAuditorSuccess(audits)),
+        catchError((error) => of(auditorActions.loadAuditsForAuditorFail(error.message))),
+      ),
+    ),
+  )
+
+const resetAuditorState: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(userActions.logout.match),
     tap(() => console.log('resetAuditorState')),
@@ -50,4 +65,5 @@ export const auditorEpics = combineEpics(
   updateAuditor,
   createAuditor,
   resetAuditorState,
+  loadAuditsForAuditor,
 )

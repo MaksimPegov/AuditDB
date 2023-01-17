@@ -8,6 +8,8 @@ export const selectAuditorPage = createSelector(
   (state) => state.auditorPage,
 )
 
+export const selectAudits = createSelector(selectAuditorPage, (state) => state.audits)
+
 export const selectLoadingAuditor = createSelector(
   selectAuditorPage,
   (state) => state.loaders.auditor,

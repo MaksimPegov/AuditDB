@@ -1,12 +1,15 @@
-import { catchError, filter, from, map, of, switchMap } from 'rxjs'
 import { combineEpics, Epic } from 'redux-observable'
+import { catchError, filter, from, map, of, switchMap, withLatestFrom } from 'rxjs'
 
-import * as customerApi from '@customer/api/customer.api'
+import * as auditApi from 'shared/api/audit.api'
 import * as projectApi from '@customer/api/project.api'
-import { customerActions } from '@customer/state/customer.reducer'
 import { userActions } from 'user/state/user.reducer'
+import * as customerApi from '@customer/api/customer.api'
+import { selectCustomer } from '@customer/state/customer.selectors'
+import { Action$, State$ } from 'app.store'
+import { customerActions } from '@customer/state/customer.reducer'
 
-const loadCustomer: Epic = (action$, state$) =>
+const loadCustomer: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.loadCustomerData.match),
     switchMap(() =>
@@ -17,7 +20,7 @@ const loadCustomer: Epic = (action$, state$) =>
     ),
   )
 
-const createCustomer: Epic = (action$, state$) =>
+const createCustomer: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.createCustomer.match),
     switchMap(({ payload }) =>
@@ -28,7 +31,7 @@ const createCustomer: Epic = (action$, state$) =>
     ),
   )
 
-const updateCustomer: Epic = (action$, state$) =>
+const updateCustomer: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.updateCustomer.match),
     switchMap(({ payload }) =>
@@ -39,7 +42,7 @@ const updateCustomer: Epic = (action$, state$) =>
     ),
   )
 
-const loadProject: Epic = (action$, state$) =>
+const loadProject: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.loadProject.match),
     switchMap(({ payload }) =>
@@ -50,11 +53,14 @@ const loadProject: Epic = (action$, state$) =>
     ),
   )
 
-const loadCustomerProjects: Epic = (action$, state$) =>
+const loadCustomerProjects: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.loadCustomerProjects.match),
-    switchMap(({ payload }) =>
-      from(projectApi.getMy(payload)).pipe(
+    withLatestFrom(
+      state$.pipe(map((state) => state.customer?.customerPage?.customer?._id)),
+    ),
+    switchMap(([, customerId]) =>
+      from(projectApi.getMy(customerId!)).pipe(
         map((projects) => customerActions.loadCustomerProjectsSuccess(projects)),
         catchError((error) =>
           of(customerActions.loadCustomerProjectsFail(error.message)),
@@ -63,7 +69,7 @@ const loadCustomerProjects: Epic = (action$, state$) =>
     ),
   )
 
-const createProject: Epic = (action$, state$) =>
+const createProject: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.createProject.match),
     switchMap(({ payload }) =>
@@ -74,7 +80,7 @@ const createProject: Epic = (action$, state$) =>
     ),
   )
 
-const updateProject: Epic = (action$, state$) =>
+const updateProject: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.updateProject.match),
     switchMap(({ payload }) =>
@@ -85,7 +91,21 @@ const updateProject: Epic = (action$, state$) =>
     ),
   )
 
-const resetCustomerState: Epic = (action$, state$) =>
+const loadAuditsForCustomer: Epic = (action$: Action$, state$: State$) =>
+  action$.pipe(
+    filter(customerActions.loadAuditsForCustomer.match),
+    withLatestFrom(state$.pipe(map(selectCustomer))),
+    switchMap(([, customer]) =>
+      from(auditApi.getMyAudits('customer', customer!._id!)).pipe(
+        map((audits) => customerActions.loadAuditsForCustomerSuccess(audits)),
+        catchError((error) =>
+          of(customerActions.loadAuditsForCustomerFail(error.message)),
+        ),
+      ),
+    ),
+  )
+
+const resetCustomerState: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(userActions.logout.match),
     map(() => customerActions.resetCustomerState()),
@@ -100,4 +120,5 @@ export const customerEpics = combineEpics(
   updateProject,
   loadCustomerProjects,
   resetCustomerState,
+  loadAuditsForCustomer,
 )

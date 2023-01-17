@@ -1,10 +1,11 @@
 import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { Audit } from 'shared/models/audit'
 import { Auditor } from 'shared/models/auditor'
 
 export type AuditorState = {
   auditorPage: {
-    audits: []
+    audits: Audit[]
     auditor: Auditor | null
     loaders: {
       audits: boolean
@@ -53,6 +54,17 @@ export const auditorSlice = createSlice({
     loadAuditorDataFail(state, action: PayloadAction<string>) {
       state.auditorPage.loaders.auditor = false
       state.auditorPage.processing.auditorError = action.payload
+    },
+
+    loadAuditsForAuditor(state, action: PayloadAction) {
+      state.auditorPage.loaders.audits = true
+    },
+    loadAuditsForAuditorSuccess(state, action: PayloadAction<Audit[]>) {
+      state.auditorPage.loaders.audits = false
+      state.auditorPage.audits = action.payload
+    },
+    loadAuditsForAuditorFail(state, action: PayloadAction<string>) {
+      state.auditorPage.loaders.audits = false
     },
 
     createAuditor(state, action: PayloadAction<Auditor>) {

@@ -1,11 +1,12 @@
 import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { Project } from 'shared/models/project'
 import { Customer } from 'shared/models/customer'
+import { Project } from 'shared/models/project'
+import { Audit } from 'shared/models/audit'
 
 export type CustomerState = {
   customerPage: {
-    audits: any[]
+    audits: Audit[]
     projects: Project[]
     customer: Customer | null
 
@@ -135,7 +136,7 @@ const customerSlice = createSlice({
       state.customerPage.processing.customerError = action.payload
     },
 
-    loadCustomerProjects(state, action: PayloadAction<string>) {
+    loadCustomerProjects(state, action: PayloadAction) {
       state.customerPage.loaders.projects = true
       state.projectPage = initialCustomerState.projectPage
     },
@@ -147,14 +148,14 @@ const customerSlice = createSlice({
       state.customerPage.loaders.projects = false
     },
 
-    loadCustomerAudits(state, action: PayloadAction<string>) {
+    loadAuditsForCustomer(state, action: Action) {
       state.customerPage.loaders.audits = true
     },
-    loadCustomerAuditsSuccess(state, action: PayloadAction<any[]>) {
+    loadAuditsForCustomerSuccess(state, action: PayloadAction<Audit[]>) {
       state.customerPage.audits = action.payload
       state.customerPage.loaders.audits = false
     },
-    loadCustomerAuditsFail(state, action: PayloadAction<string>) {
+    loadAuditsForCustomerFail(state, action: PayloadAction<string>) {
       state.customerPage.loaders.audits = false
     },
 
