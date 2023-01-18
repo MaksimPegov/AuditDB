@@ -1,4 +1,4 @@
-@import '../../../styles/styles.scss';
+@import 'styles/styles.scss';
 
 .MuiTabs-indicator {
   display: none;
@@ -22,7 +22,7 @@
   &-Tabs {
     position: absolute;
     top: -51px;
-    width: -webkit-fill-available;
+    width: 100%;
     left: -3px;
     right: -3px;
   }
@@ -45,5 +45,17 @@
 
   &-TabPanel {
     padding: 50px 80px !important;
+
+    @media screen and (max-width: $screen-sm-width) {
+      padding: 0 !important;
+    }
+
+    &_audits {
+      padding: $padding-normal/2 !important;
+    }
+
+    &_projects {
+      padding: $padding-normal !important;
+    }
   }
 }

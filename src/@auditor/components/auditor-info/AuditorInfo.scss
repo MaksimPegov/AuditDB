@@ -2,7 +2,7 @@
 
 .AuditorInfo {
   max-width: $page-width-sm;
-  width: -webkit-fill-available !important;
+  width: 100% !important;
 
   &-Avatar {
     @include avatar(150px);

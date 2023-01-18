@@ -59,24 +59,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <CardContent>
-        <Avatar className={bem('Avatar')} alt={project.name} src={avatar} />
+      <Avatar className={bem('Avatar')} alt={project.name} src={avatar} />
 
-        <span className={bem('Name')} title={project.name}>
-          {project.name}
-        </span>
+      <span className={bem('Name')} title={project.name}>
+        {project.name}
+      </span>
 
-        <span className={bem('Tags')} title={project.tags} color="text.secondary">
-          {project.tags}
-        </span>
+      <span className={bem('Tags')} title={project.tags} color="text.secondary">
+        {project.tags}
+      </span>
 
-        {showStatus ? (
-          <StatusBar
-            color={project.status === 'shown' ? 'green' : 'secondary'}
-            desc={project.status === 'shown' ? 'Published' : 'Unpublished'}
-          />
-        ) : null}
-      </CardContent>
+      {showStatus ? (
+        <StatusBar
+          color={project.status === 'shown' ? 'green' : 'secondary'}
+          desc={project.status === 'shown' ? 'Published' : 'Unpublished'}
+        />
+      ) : null}
 
       <CardActions>
         {onEdit ? (

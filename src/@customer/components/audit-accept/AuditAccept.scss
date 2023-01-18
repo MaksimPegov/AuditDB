@@ -1,0 +1,63 @@
+@import 'styles/styles.scss';
+
+.AuditAccept {
+  max-width: $page-width-md;
+  width: 100% !important;
+  margin: 0 !important;
+
+  &-Message {
+    font-size: $sm-font-size;
+    margin: 0 auto $margin-normal auto;
+    text-align: center;
+    color: $text-color;
+  }
+
+  &-MessageProject {
+    color: blue;
+  }
+
+  &-Avatar {
+    @include avatar(100px);
+    margin: 0 20px !important;
+  }
+
+  &-AuditorInfo {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &-AuditorData {
+    font-size: $xl-font-size;
+    color: $text-color;
+    padding: $padding-normal/10 0;
+  }
+
+  &-Lable {
+    margin: auto;
+    color: $litle-light-gray;
+  }
+
+  &-Value {
+    color: $text-color;
+    @media screen and (max-width: $screen-sm-width) {
+      margin: -20px auto -10px auto !important;
+    }
+  }
+
+  &-Date {
+    display: flex;
+    padding: 0 !important;
+    margin-top: -5px;
+  }
+
+  &-Tags {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  &-Button {
+    margin: 0 auto !important;
+    min-width: 100% !important;
+  }
+}

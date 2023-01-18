@@ -1,3 +1,40 @@
+@import 'styles/styles.scss';
+
 .AuditCard {
   display: flex;
+  padding: $padding-normal !important;
+  width: fit-content !important;
+  margin: $margin-normal !important;
+  border: 0.95728px solid rgba(67, 66, 66, 0.1);
+  box-shadow: 0px 64.1377px 76.5824px rgba(0, 0, 0, 0.07),
+    0px 14.326px 17.1057px rgba(0, 0, 0, 0.0417275),
+    0px 8.03104px 9.5893px rgba(0, 0, 0, 0.035),
+    0px 4.26523px 5.09281px rgba(0, 0, 0, 0.0282725),
+    0px 1.77486px 2.11923px rgba(0, 0, 0, 0.0196802);
+  border-radius: 25.8466px;
+
+  &-ProjectName {
+    font-size: $l-font-size * 1.5 !important;
+    margin: 0 auto 5px auto !important;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  &-AuditorName {
+    font-size: $l-font-size !important;
+    margin: 0 auto 5px auto !important;
+    font-weight: 300;
+    color: blue;
+    text-align: center;
+  }
+
+  &-Button {
+    width: 80% !important;
+    min-width: 0 !important;
+    margin: $margin-normal/2 auto !important;
+
+    &_view {
+      margin: 0px auto !important;
+    }
+  }
 }

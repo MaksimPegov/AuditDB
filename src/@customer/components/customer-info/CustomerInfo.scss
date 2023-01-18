@@ -2,7 +2,8 @@
 
 .CustomerInfo {
   max-width: $page-width-sm;
-  width: -webkit-fill-available !important;
+  width: 100% !important;
+  margin: 0 !important;
 
   &-Avatar {
     @include avatar(150px);
@@ -18,7 +19,8 @@
     color: $text-color;
 
     @media screen and (max-width: $screen-sm-width) {
-      margin: auto !important;
+      margin: -20px auto -10px auto !important;
+
       text-align: center;
     }
   }

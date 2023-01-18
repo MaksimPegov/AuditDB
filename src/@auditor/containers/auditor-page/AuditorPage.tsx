@@ -116,7 +116,7 @@ export const AuditorPage: React.FC = () => {
 
           <TabPanel value="2" className={bem('TabPanel')}>
             <Grid container spacing={2}>
-              {audits
+              {/* {audits
                 ? audits
                     .filter((audit) => audit.status === 'pending')
                     .map((audit) => (
@@ -124,7 +124,8 @@ export const AuditorPage: React.FC = () => {
                         <AuditCard audit={audit} />
                       </Grid>
                     ))
-                : null}
+                : null} */}
+              Nothing now
             </Grid>
           </TabPanel>
 

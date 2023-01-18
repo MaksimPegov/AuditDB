@@ -1,0 +1,32 @@
+@import 'styles/styles.scss';
+
+.DateRange {
+  display: flex;
+  flex-direction: row;
+  margin: 5px auto;
+
+  &-Separator {
+    margin: auto;
+    padding: 0 10px;
+  }
+
+  &-Picker {
+    width: 50% !important;
+  }
+
+  &-Input {
+    padding: 0 !important;
+
+    .MuiOutlinedInput-notchedOutline {
+      display: none !important;
+    }
+
+    input {
+      border: 1px solid;
+      padding: 5px 0 !important;
+      text-align: center;
+      -webkit-text-fill-color: black !important;
+      font-size: $sm-font-size;
+    }
+  }
+}

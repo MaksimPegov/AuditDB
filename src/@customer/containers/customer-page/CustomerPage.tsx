@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Dialog, DialogContent } from '@mui/material'
+import { Box, Button, Dialog, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { cn } from '@bem-react/classname'
+import Grid from '@mui/material/Unstable_Grid2'
 import Tab from '@mui/material/Tab'
 
 import './CustomerPage.scss'
@@ -17,6 +18,7 @@ import {
   selectCustomerProjects,
   selectCustomerSuccessMessage,
   selectLoadingCustomer,
+  selectLoadingCustomerAudits,
   selectProcessingCustomer,
 } from '@customer/state/customer.selectors'
 import { Project } from 'shared/models/project'
@@ -48,7 +50,7 @@ export const CustomerPage: React.FC = () => {
   const loadingProjects = useSelector(selectLoadingCustomer)
 
   const audits = useSelector(selectCustomerAudits)
-  const loadingAudits = useSelector(selectLoadingCustomer)
+  const loadingAudits = useSelector(selectLoadingCustomerAudits)
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
@@ -123,19 +125,23 @@ export const CustomerPage: React.FC = () => {
             />
           </TabList>
 
-          <TabPanel value="1" className={bem('TabPanel')}>
-            <Grid container spacing={2}>
-              {audits
-                ? audits.map((audit) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
-                      <AuditCard audit={audit} />
-                    </Grid>
-                  ))
-                : null}
+          <TabPanel value="1" className={bem('TabPanel', { audits: true })}>
+            <Grid container>
+              {loadingAudits || !audits ? (
+                <Grid xs={12}>Loading...</Grid>
+              ) : audits.length < 1 ? (
+                <Grid xs={12}>No audits</Grid>
+              ) : (
+                audits.map((audit) => (
+                  <Grid xs={12} sm={12} md={6} key={audit._id}>
+                    <AuditCard audit={audit} />
+                  </Grid>
+                ))
+              )}
             </Grid>
           </TabPanel>
 
-          <TabPanel value="2" className={bem('TabPanel')}>
+          <TabPanel value="2" className={bem('TabPanel', { projects: true })}>
             <ProjectsPanel
               projects={projects}
               loading={loadingProjects}

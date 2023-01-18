@@ -15,6 +15,9 @@ export type Audit = {
   dateEnd: string
   dateStart: string
 
+  auditorCompany: string
+  auditorEmail: string
+  auditorTelegram: string
   rate: string
   status: AuditStatus
   tags: string
@@ -28,9 +31,12 @@ export const mockAudit = (): Audit => ({
   customerName: faker.random.words(2),
   projectId: faker.random.alphaNumeric(10),
   projectName: faker.random.words(1),
-  dateEnd: faker.date.future().toISOString(),
+  dateEnd: faker.date.future().toDateString(),
   dateStart: faker.date.past().toISOString(),
+  auditorCompany: faker.company.name(),
+  auditorEmail: faker.internet.email(),
+  auditorTelegram: faker.internet.email(),
   rate: faker.random.numeric(2),
   status: 'pending',
-  tags: faker.random.words(3),
+  tags: faker.random.words(1) + ',' + faker.random.words(1),
 })
