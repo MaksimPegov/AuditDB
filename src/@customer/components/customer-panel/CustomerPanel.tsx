@@ -339,7 +339,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
                     data-testid={bem('Cancel')}
                     onClick={cancel}
                   >
-                    Cancel
+                    Back
                   </Button>
                 </Grid>
               </Grid>

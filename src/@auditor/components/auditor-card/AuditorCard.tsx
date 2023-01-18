@@ -80,6 +80,7 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
             avatarUrl={avatar}
             submit={closeInfoDialog}
             submitLable={'Close'}
+            submitColor={'primary'}
           />
         </DialogContent>
       </Dialog>

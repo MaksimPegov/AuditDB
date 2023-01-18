@@ -70,7 +70,12 @@ export const ProjectInfo: React.FC<{
       </Grid>
 
       <Grid xs={12} display="flex">
-        <Button className={bem('Close')} onClick={close}>
+        <Button
+          className={bem('Close')}
+          color="primary"
+          onClick={close}
+          variant="contained"
+        >
           Close
         </Button>
       </Grid>

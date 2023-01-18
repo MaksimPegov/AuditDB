@@ -1,4 +1,12 @@
-import { Alert, Avatar, Button, Grid, InputBase, InputLabel } from '@mui/material'
+import {
+  Alert,
+  Avatar,
+  Button,
+  Checkbox,
+  Grid,
+  InputBase,
+  InputLabel,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
@@ -9,15 +17,16 @@ import { Auditor } from 'shared/models/auditor'
 import { AppSlider } from 'shared/components/app-slider/AppSlider'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { useSnackbar } from 'notistack'
-import { RangeSlider } from 'shared/components/range-slider/RangeSlider'
 
 const componentId = 'AuditorPanel'
 const bem = cn(componentId)
 const initialAuditorData: Auditor = {
   _id: undefined,
+  about: '',
+  available: true,
+  company: '',
   fname: '',
   lname: '',
-  about: '',
   tags: '',
   price: 0,
   contacts: {
@@ -106,6 +115,13 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
     setAuditorData((prevState) => ({
       ...prevState,
       price: value,
+    }))
+  }
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setAuditorData((prevState) => ({
+      ...prevState,
+      available: event.target.checked,
     }))
   }
 
@@ -203,7 +219,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
 
                   <InputBase
                     id="fname-input"
-                    data-testid={bem('fname-input')}
+                    data-testid={bem('FnameInput')}
                     className={bem('Input', { error: errors.fname })}
                     type="text"
                     value={auditorData.fname}
@@ -221,7 +237,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
 
                   <InputBase
                     id="lname-input"
-                    data-testid={bem('lname-input')}
+                    data-testid={bem('LnameInput')}
                     className={bem('Input', { error: errors.lname })}
                     type="text"
                     value={auditorData.lname}
@@ -243,7 +259,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
                 multiline
                 rows={5}
                 id="about-input"
-                data-testid={bem('about-input')}
+                data-testid={bem('AboutInput')}
                 className={bem('Input', { error: errors.about })}
                 type="text"
                 value={auditorData.about}
@@ -259,13 +275,30 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel htmlFor="company-input" className={bem('InputLabel')}>
+                Company
+              </InputLabel>
+
+              <InputBase
+                id="company-input"
+                data-testid={bem('CompanyInput')}
+                className={bem('Input')}
+                type="text"
+                value={auditorData.company}
+                onChange={(e) =>
+                  handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'company')
+                }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
               <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
                 Email
               </InputLabel>
 
               <InputBase
                 id="email-input"
-                data-testid={bem('email-input')}
+                data-testid={bem('EmailInput')}
                 className={bem('Input', { error: errors.contacts.email })}
                 type="text"
                 value={auditorData.contacts.email}
@@ -298,16 +331,33 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel htmlFor="phone-input" className={bem('InputLabel')}>
+              <InputLabel htmlFor="price-input" className={bem('InputLabel')}>
                 Price per line
               </InputLabel>
+
               <AppSlider
-                value={auditor ? auditor.price : 0}
+                value={auditorData.price}
                 setValue={handleSliderChange}
                 min={0}
                 max={100}
                 step={1}
                 color={'secondary'}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel
+                htmlFor="available"
+                className={bem('InputLabel', { Inline: true })}
+              >
+                Available
+              </InputLabel>
+
+              <Checkbox
+                checked={auditorData.available}
+                onChange={handleCheckboxChange}
+                name="available"
+                color="secondary"
               />
             </Grid>
 
@@ -351,13 +401,13 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
 
                 <Grid item xs={12} sm={6} display="flex">
                   <Button
-                    variant="contained"
-                    color="info"
+                    variant="outlined"
+                    color="secondary"
                     className={bem('Button', { second: true })}
                     data-testid={bem('Cancel')}
                     onClick={cancel}
                   >
-                    Cancel
+                    Back
                   </Button>
                 </Grid>
               </Grid>

@@ -166,10 +166,14 @@ export const ProjectPage: React.FC = () => {
             <Grid container spacing={2.5}>
               <Grid item xs={12} className={bem('Header')}>
                 <Button
-                  disabled={true}
+                  disabled={
+                    !projectData || !errors.noErrors || processing || !projectData._id
+                  }
+                  size="small"
+                  variant="contained"
                   title="Will be implemented in the phase 2"
                   className={bem('HeaderButton', {
-                    disabled: true, //!errors.noErrors || processing || !projectData._id,
+                    disabled: !errors.noErrors || processing || !projectData._id,
                   })}
                   data-testid={bem('Button')}
                 >
@@ -177,9 +181,14 @@ export const ProjectPage: React.FC = () => {
                 </Button>
 
                 <Button
+                  color="secondary"
+                  disabled={
+                    !projectData || !errors.noErrors || processing || !projectData._id
+                  }
+                  variant={projectData?.status === 'hidden' ? 'contained' : 'outlined'}
+                  size="small"
                   className={bem('HeaderButton', {
                     disabled: !errors.noErrors || processing,
-                    secondary: projectData?.status === 'shown',
                   })}
                   data-testid={bem('Button')}
                   onClick={handlePublishClick}
@@ -274,13 +283,23 @@ export const ProjectPage: React.FC = () => {
               <Grid item xs={12} display="flex">
                 <Button
                   className={bem('Button', { disabled: !errors.noErrors || processing })}
-                  data-testid={bem('Button')}
+                  data-testid={bem('SubmitButton')}
                   type="submit"
                   variant="contained"
                   disabled={!errors.noErrors || processing}
                   onClick={() => submit(projectData)}
                 >
                   {projectData._id ? 'Save changes' : 'Create'}
+                </Button>
+
+                <Button
+                  className={bem('Button', { disabled: !projectData._id })}
+                  data-testid={bem('CancelButton')}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => navigate('/customer-page', { state: { tab: '2' } })}
+                >
+                  Back
                 </Button>
               </Grid>
             </Grid>

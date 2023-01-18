@@ -35,7 +35,7 @@ export const theme = createTheme({
           height: '45px',
           margin: '35px auto 0',
           minWidth: '200px',
-          padding: '0 20px',
+          padding: '1px 20px 0',
           textTransform: 'none',
           '&:hover': {
             boxShadow: '0 0',

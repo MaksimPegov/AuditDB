@@ -1,11 +1,11 @@
-import Grid from '@mui/material/Unstable_Grid2'
-import { cn } from '@bem-react/classname'
 import { Avatar, Button } from '@mui/material'
-import React, { useState } from 'react'
+import { cn } from '@bem-react/classname'
+import React from 'react'
+import Grid from '@mui/material/Unstable_Grid2'
 
-import { Auditor } from 'shared/models/auditor'
-import { Tags } from 'shared/components/tags/Tags'
 import './AuditorInfo.scss'
+import { Tags } from 'shared/components/tags/Tags'
+import { Auditor } from 'shared/models/auditor'
 
 const componentId = 'AuditorInfo'
 const bem = cn(componentId)
@@ -15,7 +15,8 @@ export const AuditorInfo: React.FC<{
   avatarUrl: string
   submit: () => void
   submitLable: string
-}> = ({ auditor, avatarUrl, submit, submitLable }) => {
+  submitColor?: 'primary' | 'secondary'
+}> = ({ auditor, avatarUrl, submit, submitLable, submitColor = 'secondary' }) => {
   return (
     <Grid container spacing={3} className={bem()}>
       <Grid xs={12}>
@@ -71,12 +72,20 @@ export const AuditorInfo: React.FC<{
       ) : null}
 
       <Grid xs={12} md={4} sm={12} display="flex">
-        <span className={bem('Lable', { texrate: true })}>Price per line</span>
+        <span className={bem('Lable', { price: true })}>Price per line</span>
+      </Grid>
+      <Grid md={8} xs={12} display="flex">
+        <span className={bem('Data', { price: true })}>
+          {auditor.price ? auditor.price + ' $' : '-'}
+        </span>
       </Grid>
 
-      <Grid md={8} xs={12} display="flex">
-        <span className={bem('Data', { texrate: true })}>
-          {auditor.price ? auditor.price + ' $' : '-'}
+      <Grid xs={12} md={4} sm={12} display="flex">
+        <span className={bem('Lable', { available: true })}>Available</span>
+      </Grid>
+      <Grid md={4} xs={12} display="flex">
+        <span className={bem('Data', { available: true })}>
+          {auditor.available ? 'yes' : 'no'}
         </span>
       </Grid>
 
@@ -91,7 +100,7 @@ export const AuditorInfo: React.FC<{
             submit()
           }}
           variant="contained"
-          color="secondary"
+          color={submitColor}
         >
           {submitLable}
         </Button>

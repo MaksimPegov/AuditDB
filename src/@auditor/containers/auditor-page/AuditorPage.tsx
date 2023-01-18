@@ -141,6 +141,7 @@ export const AuditorPage: React.FC = () => {
                 submitLable={'Edit'}
               />
             )}
+
             <Dialog open={editDialog} onClose={handleEditDialog}>
               <DialogContent>
                 <AuditorPanel

@@ -115,6 +115,7 @@ export const MainPage = () => {
                   <SearchIconWrapper>
                     <SearchIcon />
                   </SearchIconWrapper>
+
                   <StyledInputBase
                     onChange={onProjectsSearchChange}
                     placeholder="Search by tag…"
