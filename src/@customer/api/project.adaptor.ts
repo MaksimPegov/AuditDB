@@ -9,6 +9,10 @@ export type ServerProject = {
   gitFolders: Record<string, string>
   tags: string[]
   customerId: string
+  priceRangeFrom: number
+  priceRangeTo: number
+  readyToWait: boolean
+
   createdAt?: string
   updatedAt?: string
 }

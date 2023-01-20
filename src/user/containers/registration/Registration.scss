@@ -17,15 +17,21 @@
 
   &-Switch {
     width: 250px !important;
-    margin: 0 auto $margin-normal !important;
+    margin: 0 auto calc($margin-normal/2) !important;
+  }
+
+  &-RolesTitle {
+    margin-bottom: $margin-normal;
   }
 
   &-Switches {
-    padding: 10px !important;
     display: flex !important;
+    font-weight: 600;
     justify-content: center !important;
+    height: 12px;
     color: $white !important;
     cursor: pointer;
+    padding: 8px 0 14px !important;
 
     &_auditor {
       background-color: $secondary !important;
@@ -34,14 +40,14 @@
       background-color: $primary !important;
     }
     &_disable {
-      background-color: $disabled-bg-color !important;
-      color: $text-color !important;
+      background-color: $disabled_bg_color !important;
+      color: $text_color !important;
     }
   }
 
   &-Error {
     margin: $margin-normal 0 0 !important;
-    background-color: $error-bg-color !important;
+    background-color: $error_bg_color !important;
     padding-top: 2px !important;
     padding-bottom: 2px !important;
   }

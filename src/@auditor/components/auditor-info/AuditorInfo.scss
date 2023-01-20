@@ -1,8 +1,10 @@
 @import 'styles/styles.scss';
 
 .AuditorInfo {
-  max-width: $page-width-sm;
-  width: 100% !important;
+  // TODO: No effect, why we need this?
+  // max-width: $page-width-sm;
+  // width: 100% !important;
+  margin: 0 !important;
 
   &-Avatar {
     @include avatar(150px);
@@ -11,11 +13,11 @@
 
   &-Lable {
     margin: auto;
-    color: $light-gray;
+    color: $light_gray;
   }
 
   &-Data {
-    color: $text-color;
+    color: $text_color;
 
     @media screen and (max-width: $screen-sm-width) {
       margin: auto !important;

@@ -1,8 +1,9 @@
 @import 'styles/styles.scss';
 
 .CustomerInfo {
-  max-width: $page-width-sm;
-  width: 100% !important;
+  // TODO: No effect, why we need this?
+  // max-width: $page-width-sm;
+  // width: 100% !important;
   margin: 0 !important;
 
   &-Avatar {
@@ -12,15 +13,14 @@
 
   &-Lable {
     margin: auto;
-    color: $light-gray;
+    color: $light_gray;
   }
 
   &-Data {
-    color: $text-color;
+    color: $text_color;
 
     @media screen and (max-width: $screen-sm-width) {
       margin: -20px auto -10px auto !important;
-
       text-align: center;
     }
   }

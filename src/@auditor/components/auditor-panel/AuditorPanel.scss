@@ -2,8 +2,12 @@
 
 .AuditorPanel {
   display: flex;
-  padding: $padding-normal * 2 !important;
+  padding: calc($padding-normal * 2) !important;
   padding-bottom: 0 !important;
+
+  @media screen and (max-width: $screen-sm-width) {
+    padding: 0 !important;
+  }
 
   &-AvatarBox {
     display: flex;
@@ -37,6 +41,10 @@
 
   &-InputLabel {
     @include page-input-label;
+  }
+
+  &-Checkbox {
+    padding-left: 0 !important;
   }
 
   &-Button {

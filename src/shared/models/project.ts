@@ -9,6 +9,10 @@ export type Project = {
   gitFolders: Record<string, string>
   tags: string
   customerId: string
+  priceRangeFrom: number
+  priceRangeTo: number
+  readyToWait: boolean
+
   createdAt?: string
   updatedAt?: string
 }
@@ -25,6 +29,10 @@ export const mockedProject: Project = {
   },
   tags: 'tag1,tag2',
   customerId: '1',
+  priceRangeFrom: 25,
+  priceRangeTo: 50,
+  readyToWait: true,
+
   createdAt: '2021-01-01',
   updatedAt: '2021-01-01',
 }

@@ -9,7 +9,7 @@
     font-size: $sm-font-size;
     margin: 0 auto $margin-normal auto;
     text-align: center;
-    color: $text-color;
+    color: $text_color;
   }
 
   &-MessageProject {
@@ -29,17 +29,17 @@
 
   &-AuditorData {
     font-size: $xl-font-size;
-    color: $text-color;
+    color: $text_color;
     padding: $padding-normal/10 0;
   }
 
   &-Lable {
     margin: auto;
-    color: $litle-light-gray;
+    color: $litle_light_gray;
   }
 
   &-Value {
-    color: $text-color;
+    color: $text_color;
     @media screen and (max-width: $screen-sm-width) {
       margin: -20px auto -10px auto !important;
     }

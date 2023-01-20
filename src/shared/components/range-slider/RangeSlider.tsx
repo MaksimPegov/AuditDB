@@ -7,60 +7,51 @@ import './RangeSlider.scss'
 const bem = cn('RangeSlider')
 
 export type SliderColor = 'primary' | 'secondary'
+type RangeValue = [number, number]
 
 export const RangeSlider: React.FC<{
-  output: (num: [number, number]) => void
-  min: number
-  max: number
-  step: number
-  color: SliderColor
-}> = ({ output, min, max, step, color }) => {
-  const [localValue, setComponentValue] = React.useState<Array<number | string>>([20, 80])
+  onChange: (value: RangeValue) => void
+  value: RangeValue
+  min?: number
+  max?: number
+  step?: number
+  color?: SliderColor
+}> = ({ onChange, value = [], color = 'primary', min = 20, max = 80, step = 1 }) => {
+  const [localValue, setLocalValue] = React.useState<RangeValue>([
+    value[0] || min,
+    value[1] || max,
+  ])
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setComponentValue(newValue as [number, number])
+  const handleSliderChange = (rangeValue: RangeValue) => {
+    setLocalValue(rangeValue)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
       case 'input-min':
-        if (typeof Number(event.target.value) !== 'number') {
-          return
-        } else if (Number(event.target.value) < min) {
-          setComponentValue((state) => [min, state[1]])
-          return
-        } else if (Number(event.target.value) > max) {
-          setComponentValue((state) => [max, state[1]])
-          return
+        if (+event.target.value < min) {
+          setLocalValue((state) => [min, state[1]])
+        } else if (+event.target.value > max) {
+          setLocalValue((state) => [max, state[1]])
         } else {
-          setComponentValue((state) => [event.target.value, state[1]])
+          setLocalValue((state) => [+event.target.value, state[1]])
         }
         break
-      case 'input-max':
-        if (typeof Number(event.target.value) !== 'number') {
-          return
-        } else if (Number(event.target.value) < min) {
-          setComponentValue((state) => [state[0], min])
-        } else if (Number(event.target.value) > max) {
-          setComponentValue((state) => [state[0], max])
-        } else {
-          setComponentValue((state) => [state[0], event.target.value])
-        }
-        break
-    }
-  }
 
-  const inputValidation = (input: number | string): number => {
-    if (input === '' || typeof Number(input) !== 'number' || input < min) {
-      return min
-    } else if (input > max) {
-      return max
+      case 'input-max':
+        if (+event.target.value < min) {
+          setLocalValue((state) => [state[0], min])
+        } else if (+event.target.value > max) {
+          setLocalValue((state) => [state[0], max])
+        } else {
+          setLocalValue((state) => [state[0], +event.target.value])
+        }
+        break
     }
-    return min
   }
 
   useEffect(() => {
-    output(localValue as [number, number])
+    onChange(localValue)
   }, [localValue])
 
   return (
@@ -72,7 +63,7 @@ export const RangeSlider: React.FC<{
           color={color}
           data-testid={bem('Slider')}
           value={localValue as number[]}
-          onChange={handleSliderChange}
+          onChange={(e, v) => handleSliderChange(v as RangeValue)}
           aria-labelledby="input-slider"
           disableSwap
         />
@@ -94,7 +85,9 @@ export const RangeSlider: React.FC<{
             type: 'number',
           }}
         />
+
         <div className={bem('Spacing')}>-</div>
+
         <InputBase
           id="input-max"
           className={bem('Input', { second: true })}

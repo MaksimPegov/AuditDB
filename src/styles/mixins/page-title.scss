@@ -1,7 +1,7 @@
 @mixin page-title() {
   font-size: 1.4rem !important;
-  color: $text-color !important;
-  left: 0;
+  color: $text_color !important;
+  left: -200px;
   position: absolute;
   top: -65px;
 

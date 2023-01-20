@@ -13,6 +13,12 @@
     text-align: end;
     position: relative;
     right: -33px;
+
+    @media (max-width: $screen-xs-width) {
+      right: 0;
+      zoom: 80%;
+      margin-top: $xs !important;
+    }
   }
 
   &-Input {
@@ -23,8 +29,17 @@
     @include page-input-label;
   }
 
+  &-Checkbox {
+    padding-left: 0 !important;
+  }
+
   &-Button {
     margin-bottom: $margin-normal !important;
+    margin-top: 0 !important;
+
+    &_second {
+      @include second-button;
+    }
   }
 
   &-HeaderButton {
@@ -37,8 +52,8 @@
     }
 
     &_disabled {
-      background-color: $super-light-gray !important;
-      color: $light-gray !important;
+      background-color: $super_light_gray !important;
+      color: $light_gray !important;
     }
   }
 

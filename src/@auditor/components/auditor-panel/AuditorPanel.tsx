@@ -350,15 +350,15 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
                 htmlFor="available"
                 className={bem('InputLabel', { Inline: true })}
               >
+                <Checkbox
+                  className={bem('Checkbox')}
+                  checked={auditorData.available}
+                  onChange={handleCheckboxChange}
+                  name="available"
+                  color="secondary"
+                />
                 Available
               </InputLabel>
-
-              <Checkbox
-                checked={auditorData.available}
-                onChange={handleCheckboxChange}
-                name="available"
-                color="secondary"
-              />
             </Grid>
 
             <Grid item xs={12}>

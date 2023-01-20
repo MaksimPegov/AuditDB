@@ -73,7 +73,7 @@ export const AuditorPage: React.FC = () => {
       exit={{ opacity: 0 }}
     >
       <Box className={bem()}>
-        <span className={bem('Title')}>Auditor</span>
+        <span className={bem('Title')}>Home</span>
 
         <TabContext value={value}>
           <TabList
@@ -94,7 +94,7 @@ export const AuditorPage: React.FC = () => {
             />
 
             <Tab
-              label="Auditor"
+              label="My Info"
               value="3"
               className={bem('Tab', { active: value === '3' })}
             />

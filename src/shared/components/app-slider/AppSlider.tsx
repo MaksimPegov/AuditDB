@@ -15,24 +15,24 @@ export const AppSlider: React.FC<{
   max: number
   step: number
   color: SliderColor
-}> = ({ value, setValue, min, max, step, color }) => {
-  const [localValue, setComponentValue] = React.useState<
+}> = ({ value, setValue, color, min = 1, max = 100, step = 1 }) => {
+  const [localValue, setLocalValue] = React.useState<
     number | string | Array<number | string>
   >(value)
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setComponentValue(newValue)
+    setLocalValue(newValue)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setComponentValue(event.target.value === '' ? '' : Number(event.target.value))
+    setLocalValue(event.target.value === '' ? '' : Number(event.target.value))
   }
 
   const handleBlur = () => {
     if (localValue < 0) {
-      setComponentValue(0)
+      setLocalValue(0)
     } else if (localValue > 100) {
-      setComponentValue(100)
+      setLocalValue(100)
     }
   }
 

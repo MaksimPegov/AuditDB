@@ -11,17 +11,17 @@
 
   &-Name {
     margin: auto;
-    color: $text-color;
-    font-size: $l-font-size * 2;
+    color: $text_color;
+    font-size: $lg-font-size * 2;
   }
 
   &-Lable {
     margin: auto;
-    color: $light-gray;
+    color: $light_gray;
   }
 
   &-Data {
-    color: $text-color;
+    color: $text_color;
   }
 
   &-Tags {

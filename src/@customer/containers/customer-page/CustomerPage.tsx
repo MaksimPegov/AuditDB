@@ -96,7 +96,7 @@ export const CustomerPage: React.FC = () => {
       exit={{ opacity: 0 }}
     >
       <Box className={bem()}>
-        <span className={bem('Title')}>Customer</span>
+        <span className={bem('Title')}>Home</span>
 
         <TabContext value={value}>
           <TabList
@@ -108,20 +108,20 @@ export const CustomerPage: React.FC = () => {
               label="Audits"
               value="1"
               disabled={!customer}
-              className={bem('Tab', { audits: true, active: value === '1' })}
+              className={bem('Tab', { active: value === '1' })}
             />
 
             <Tab
               label="Projects"
               value="2"
               disabled={!customer}
-              className={bem('Tab', { projects: true, active: value === '2' })}
+              className={bem('Tab', { active: value === '2' })}
             />
 
             <Tab
-              label="Customer"
+              label="My Info"
               value="3"
-              className={bem('Tab', { customer: true, active: value === '3' })}
+              className={bem('Tab', { active: value === '3' })}
             />
           </TabList>
 

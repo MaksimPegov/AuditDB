@@ -13,6 +13,7 @@ import {
   Button,
   TextField,
   useMediaQuery,
+  Checkbox,
 } from '@mui/material'
 
 import './ProjectPage.scss'
@@ -29,6 +30,7 @@ import {
 import { Project } from 'shared/models/project'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { customerActions } from '@customer/state/customer.reducer'
+import { RangeSlider } from 'shared/components/range-slider/RangeSlider'
 
 const componentId = 'ProjectPage'
 const bem = cn(componentId)
@@ -41,6 +43,9 @@ const initialProjectData: Project = {
   gitUrl: '',
   gitFolders: {},
   customerId: '',
+  priceRangeFrom: 20,
+  priceRangeTo: 80,
+  readyToWait: false,
 }
 
 export const ProjectPage: React.FC = () => {
@@ -87,6 +92,14 @@ export const ProjectPage: React.FC = () => {
     setErrors((prevState) => ({
       ...prevState,
       [field]: false,
+    }))
+  }
+
+  const handlePriveRangeChange = (value: number[]): void => {
+    setProjectData((state) => ({
+      ...state,
+      priceRangeFrom: value[0],
+      priceRangeTo: value[1],
     }))
   }
 
@@ -280,27 +293,65 @@ export const ProjectPage: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} display="flex">
-                <Button
-                  className={bem('Button', { disabled: !errors.noErrors || processing })}
-                  data-testid={bem('SubmitButton')}
-                  type="submit"
-                  variant="contained"
-                  disabled={!errors.noErrors || processing}
-                  onClick={() => submit(projectData)}
-                >
-                  {projectData._id ? 'Save changes' : 'Create'}
-                </Button>
+              <Grid item xs={12}>
+                <InputLabel className={bem('InputLabel')}>
+                  Expected audit price range (per line)
+                </InputLabel>
 
-                <Button
-                  className={bem('Button', { disabled: !projectData._id })}
-                  data-testid={bem('CancelButton')}
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => navigate('/customer-page', { state: { tab: '2' } })}
-                >
-                  Back
-                </Button>
+                <RangeSlider
+                  value={[projectData.priceRangeFrom, projectData.priceRangeTo]}
+                  data-testid={bem('ProjectPriceRangeFrom')}
+                  onChange={handlePriveRangeChange}
+                ></RangeSlider>
+              </Grid>
+
+              <Grid item xs={12}>
+                <InputLabel className={bem('InputLabel')}>
+                  <Checkbox
+                    className={bem('Checkbox')}
+                    data-testid={bem('ProjectReadyToWait')}
+                    checked={projectData.readyToWait}
+                    onChange={(e) =>
+                      handleFieldChange(
+                        e as React.ChangeEvent<HTMLInputElement>,
+                        'readyToWait',
+                        false,
+                      )
+                    }
+                  />
+                  Ready to wait for auditor availability
+                </InputLabel>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={12} sm={6} display="flex">
+                    <Button
+                      className={bem('Button', {
+                        disabled: !errors.noErrors || processing,
+                      })}
+                      data-testid={bem('SubmitButton')}
+                      type="submit"
+                      variant="contained"
+                      disabled={!errors.noErrors || processing}
+                      onClick={() => submit(projectData)}
+                    >
+                      {projectData._id ? 'Save changes' : 'Create'}
+                    </Button>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} display="flex">
+                    <Button
+                      className={bem('Button', { second: true })}
+                      data-testid={bem('CancelButton')}
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => navigate('/customer-page', { state: { tab: '2' } })}
+                    >
+                      Back
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
 

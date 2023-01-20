@@ -1,3 +1,7 @@
+$xs: 10px;
+$sm: 20px;
+$md: 25px;
+
 // lg > 1200px, md > 992px, sm > 768px, xs > 576px
 $screen-xs-width: 576px;
 $screen-sm-width: 768px;
@@ -17,9 +21,22 @@ $page-title-font-size: 20px;
 
 $xs-font-size: 12px;
 $sm-font-size: 14px;
-$m-font-size: 16px;
-$l-font-size: 18px;
+$md-font-size: 16px;
+$lg-font-size: 18px;
 $xl-font-size: 22px;
 $xxl-font-size: $xl-font-size * 2;
 
 $card-avatar-size: 120px;
+
+:export {
+  xs: $xs;
+  sm: $sm;
+  md: $md;
+
+  xs_font_size: $xs-font-size;
+  sm_font_size: $sm-font-size;
+  m_font_size: $md-font-size;
+  l_font_size: $lg-font-size;
+  xl_font_size: $xl-font-size;
+  xxl_font_size: $xxl-font-size;
+}

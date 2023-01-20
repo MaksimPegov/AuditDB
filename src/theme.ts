@@ -1,5 +1,8 @@
 import { createTheme } from '@mui/material'
 import COLORS from 'styles/_colors.scss'
+import SIZES from 'styles/_sizes.scss'
+
+const baseFontSize = SIZES.sm_font_size
 
 export const theme = createTheme({
   typography: {
@@ -79,7 +82,10 @@ export const theme = createTheme({
           },
         },
         sizeSmall: {
-          height: '30px',
+          borderRadius: '6px',
+          height: '25px',
+          minWidth: '150px',
+          padding: ' 1px 10px 0',
         },
         sizeMedium: {
           height: '45px',
@@ -124,6 +130,22 @@ export const theme = createTheme({
         root: {
           display: 'flex',
           flexDirection: 'column',
+        },
+      },
+    },
+
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          fontSize: baseFontSize,
+        },
+      },
+    },
+
+    MuiGrid2: {
+      styleOverrides: {
+        root: {
+          fontSize: baseFontSize,
         },
       },
     },

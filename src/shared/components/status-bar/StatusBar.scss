@@ -8,7 +8,7 @@
   padding: 5px 0;
 
   &-Indicator {
-    font-size: $m-font-size !important;
+    font-size: $md-font-size !important;
     margin: auto;
     padding: 0 5px 0 5px;
 
@@ -31,7 +31,7 @@
 
   &-Desc {
     margin: auto;
-    color: $text-color;
+    color: $text_color;
     font-size: $sm-font-size;
     padding: 0 5px 0 5px;
   }

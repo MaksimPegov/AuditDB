@@ -333,8 +333,8 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
 
                 <Grid item xs={12} sm={6} display="flex">
                   <Button
-                    variant="contained"
-                    color="info"
+                    variant="outlined"
+                    color="primary"
                     className={bem('Button', { second: true })}
                     data-testid={bem('Cancel')}
                     onClick={cancel}

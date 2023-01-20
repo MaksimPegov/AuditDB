@@ -241,7 +241,9 @@ export const Registation: React.FC = () => {
                     flexDirection={'column'}
                     alignItems={'center'}
                   >
-                    <span className={bem('RolesTitle')}>Choose who you want to be</span>
+                    <InputLabel className={bem('InputLabel', { RolesTitle: true })}>
+                      Choose who you want to be
+                    </InputLabel>
                   </Grid>
 
                   <Grid xs={12}>

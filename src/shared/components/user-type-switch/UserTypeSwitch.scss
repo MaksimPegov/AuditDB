@@ -12,13 +12,13 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    width: 125px;
-    height: 40px;
+    width: 115px;
+    height: $md;
     cursor: pointer;
   }
 
   &-Type {
-    margin-bottom: 5px;
+    font-size: $xs-font-size;
   }
 
   &_auditor {
