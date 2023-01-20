@@ -1,18 +1,11 @@
-import {
-  Alert,
-  Avatar,
-  Button,
-  Checkbox,
-  Grid,
-  InputBase,
-  InputLabel,
-} from '@mui/material'
+import { Alert, Avatar, Button, Checkbox, InputBase, InputLabel } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@bem-react/classname'
+import Grid from '@mui/material/Unstable_Grid2'
 
 import './AuditorPanel.scss'
-import { Edit } from '@mui/icons-material'
+import { Edit, Padding } from '@mui/icons-material'
 import { Auditor } from 'shared/models/auditor'
 import { AppSlider } from 'shared/components/app-slider/AppSlider'
 import { onlySpaces } from 'shared/helpers/dataValodation'
@@ -186,15 +179,15 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
       ) : (
         <form autoComplete="off">
           <Grid container spacing={2} className={bem()}>
-            <Grid item xs={12} md={12} lg={4} display="flex">
+            <Grid xs={12} sm={4} display="block">
               <Grid container justifyContent="center" alignItems="center">
-                <Grid item xs={12} className={bem('AvatarBox')}>
+                <Grid xs={12} className={bem('AvatarBox')}>
                   <Avatar className={bem('Avatar')}>
                     {auditor!.fname ? auditor!.fname.substring(0, 1).toUpperCase() : null}
                   </Avatar>
                 </Grid>
 
-                <Grid item xs={12} display="flex">
+                <Grid xs={12} display="flex">
                   <div className={bem('EditAvatar')} data-testid={bem('EditAvatar')}>
                     <Edit className={bem('Pencil')} />
                     <span
@@ -210,9 +203,9 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md={12} lg={8}>
+            <Grid xs={12} sm={8} sx={{ padding: 0 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <InputLabel htmlFor="fname-input" className={bem('InputLabel')}>
                     First Name
                   </InputLabel>
@@ -230,7 +223,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <InputLabel htmlFor="lname-input" className={bem('InputLabel')}>
                     Last Name
                   </InputLabel>
@@ -250,7 +243,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               </Grid>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="about-input" className={bem('InputLabel')}>
                 About
               </InputLabel>
@@ -274,7 +267,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="company-input" className={bem('InputLabel')}>
                 Company
               </InputLabel>
@@ -291,7 +284,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
                 Email
               </InputLabel>
@@ -309,7 +302,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="telegram-input" className={bem('InputLabel')}>
                 Telegram
               </InputLabel>
@@ -330,13 +323,14 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="price-input" className={bem('InputLabel')}>
                 Price per line
               </InputLabel>
 
               <AppSlider
-                value={auditorData.price}
+                // value={auditorData}
+                value={auditor ? auditor.price : 0}
                 setValue={handleSliderChange}
                 min={0}
                 max={100}
@@ -345,7 +339,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel
                 htmlFor="available"
                 className={bem('InputLabel', { Inline: true })}
@@ -361,7 +355,7 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               </InputLabel>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="tags-input" className={bem('InputLabel')}>
                 Tags
               </InputLabel>
@@ -379,38 +373,34 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item xs={12} sm={6} display="flex">
-                  <Button
-                    className={bem('Button', {
-                      disabled: !errors.noErrors || processing,
-                      secondary: !auditorData._id,
-                    })}
-                    data-testid={bem('Button')}
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    disabled={!errors.noErrors || processing}
-                    sx={{ mt: 4 }}
-                    onClick={() => submit(auditorData)}
-                  >
-                    {auditorData._id ? 'Save changes' : 'Create'}
-                  </Button>
-                </Grid>
+            <Grid xs={12} sm={6} display="flex">
+              <Button
+                className={bem('Button', {
+                  disabled: !errors.noErrors || processing,
+                  secondary: !auditorData._id,
+                })}
+                data-testid={bem('Button')}
+                type="submit"
+                variant="contained"
+                color="secondary"
+                disabled={!errors.noErrors || processing}
+                sx={{ mt: 4 }}
+                onClick={() => submit(auditorData)}
+              >
+                {auditorData._id ? 'Save changes' : 'Create'}
+              </Button>
+            </Grid>
 
-                <Grid item xs={12} sm={6} display="flex">
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    className={bem('Button', { second: true })}
-                    data-testid={bem('Cancel')}
-                    onClick={cancel}
-                  >
-                    Back
-                  </Button>
-                </Grid>
-              </Grid>
+            <Grid xs={12} sm={6} display="flex">
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={bem('Button', { second: true })}
+                data-testid={bem('Cancel')}
+                onClick={cancel}
+              >
+                Back
+              </Button>
             </Grid>
           </Grid>
 

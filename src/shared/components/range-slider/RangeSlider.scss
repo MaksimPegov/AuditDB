@@ -5,17 +5,47 @@
     margin: auto !important;
   }
 
-  &-InputBox {
+  &-InputGrid {
     display: flex !important;
     flex-direction: row;
     // height: 35px;
   }
 
-  &-Input {
+  &-InputBox {
     @include page-input;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    margin-left: auto;
+    padding: 5px;
+    min-width: 0 !important;
+  }
+
+  // &-InputBase {
+  // }
+
+  &-Input {
+    padding: 0 !important;
+    margin: auto !important;
+    text-align: center;
+    width: 30px !important;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
   }
 
   &-Spacing {
-    margin: auto 5px;
+    margin: auto 1px;
+  }
+
+  &-Currency {
+    margin: auto 2px auto 1px;
   }
 }

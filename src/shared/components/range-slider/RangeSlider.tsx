@@ -1,6 +1,7 @@
-import { Grid, InputAdornment, InputBase, Slider } from '@mui/material'
-import React, { useEffect } from 'react'
+import { InputAdornment, InputBase, Slider } from '@mui/material'
+import React, { useDeferredValue, useEffect } from 'react'
 import { cn } from '@bem-react/classname'
+import Grid from '@mui/material/Unstable_Grid2'
 
 import './RangeSlider.scss'
 
@@ -16,37 +17,64 @@ export const RangeSlider: React.FC<{
   max?: number
   step?: number
   color?: SliderColor
-}> = ({ onChange, value = [], color = 'primary', min = 20, max = 80, step = 1 }) => {
+  fractial?: boolean
+}> = ({
+  onChange,
+  value = [],
+  color = 'primary',
+  min = 20,
+  max = 80,
+  step = 1,
+  fractial = true,
+}) => {
   const [localValue, setLocalValue] = React.useState<RangeValue>([
     value[0] || min,
     value[1] || max,
   ])
+  const [inputValue, setInputValue] = React.useState<Array<number | string>>([min, max])
+
+  const marks = [
+    {
+      value: min,
+      label: `${min}$`,
+    },
+    {
+      value: max,
+      label: `${max}$`,
+    },
+  ]
 
   const handleSliderChange = (rangeValue: RangeValue) => {
     setLocalValue(rangeValue)
+    setInputValue(rangeValue)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
       case 'input-min':
-        if (+event.target.value < min) {
-          setLocalValue((state) => [min, state[1]])
-        } else if (+event.target.value > max) {
-          setLocalValue((state) => [max, state[1]])
-        } else {
-          setLocalValue((state) => [+event.target.value, state[1]])
-        }
+        setInputValue([event.target.value, inputValue[1]])
+        setLocalValue([valueCheck(+event.target.value), inputValue[1] as number])
         break
-
       case 'input-max':
-        if (+event.target.value < min) {
-          setLocalValue((state) => [state[0], min])
-        } else if (+event.target.value > max) {
-          setLocalValue((state) => [state[0], max])
-        } else {
-          setLocalValue((state) => [state[0], +event.target.value])
-        }
+        setInputValue([inputValue[0], event.target.value])
+        setLocalValue([inputValue[0] as number, valueCheck(+event.target.value)])
         break
+    }
+  }
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setInputValue(localValue)
+  }
+
+  const valueCheck = (value: number) => {
+    if (value < min) {
+      return min
+    } else if (value > max) {
+      return max
+    } else if (!fractial) {
+      return Math.trunc(value)
+    } else {
+      return value
     }
   }
 
@@ -56,53 +84,63 @@ export const RangeSlider: React.FC<{
 
   return (
     <Grid container spacing={2} className={bem()}>
-      <Grid item xs={6} display="flex">
+      <Grid xs={8} display="flex">
         <Slider
           getAriaLabel={() => 'Minimum distance'}
           className={bem('Slider')}
           color={color}
+          size="small"
           data-testid={bem('Slider')}
           value={localValue as number[]}
           onChange={(e, v) => handleSliderChange(v as RangeValue)}
           aria-labelledby="input-slider"
           disableSwap
+          step={step}
+          min={min}
+          max={max}
+          marks={marks}
         />
       </Grid>
 
-      <Grid item xs={6} className={bem('InputBox')}>
-        <InputBase
-          id="input-min"
-          className={bem('Input', { first: true })}
-          data-testid={bem('Input')}
-          value={localValue[0]}
-          size="small"
-          onChange={handleInputChange}
-          startAdornment={<InputAdornment position="end">$</InputAdornment>}
-          inputProps={{
-            step: step,
-            min: min,
-            max: max,
-            type: 'number',
-          }}
-        />
+      <Grid xs={4} className={bem('InputGrid')}>
+        <div className={bem('InputBox')}>
+          <InputBase
+            id="input-min"
+            className={bem('InputBase', { first: true })}
+            data-testid={bem('InputBaseFrom')}
+            value={inputValue[0]}
+            size="small"
+            onChange={handleInputChange}
+            inputProps={{
+              step: step,
+              min: min,
+              max: max - step,
+              type: 'number',
+              className: bem('Input'),
+            }}
+            onBlur={handleBlur}
+          />
 
-        <div className={bem('Spacing')}>-</div>
+          <div className={bem('Spacing')}>-</div>
 
-        <InputBase
-          id="input-max"
-          className={bem('Input', { second: true })}
-          data-testid={bem('Input')}
-          value={localValue[1]}
-          size="small"
-          onChange={handleInputChange}
-          inputProps={{
-            step: step,
-            min: min,
-            max: max,
-            type: 'number',
-          }}
-          startAdornment={<InputAdornment position="end">$</InputAdornment>}
-        />
+          <InputBase
+            id="input-max"
+            className={bem('InputBase', { second: true })}
+            data-testid={bem('InputBaseTo')}
+            value={inputValue[1]}
+            size="small"
+            onChange={handleInputChange}
+            inputProps={{
+              step: step,
+              min: min + step,
+              max: max,
+              type: 'number',
+              className: bem('Input'),
+            }}
+            onBlur={handleBlur}
+          />
+          <div className={bem('Currency')}>$</div>
+        </div>
       </Grid>
     </Grid>
   )

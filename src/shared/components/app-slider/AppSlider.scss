@@ -5,7 +5,37 @@
     margin: auto !important;
   }
 
-  &-Input {
+  &-InputBox {
     @include page-input;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    margin-left: auto;
+    padding: 5px;
+    min-width: 0 !important;
+  }
+
+  // &-InputBase {
+  // }
+
+  &-Input {
+    padding: 0 !important;
+    margin: auto !important;
+    text-align: center;
+    width: 30px !important;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  &-Currency {
+    margin: auto 2px auto 1px;
   }
 }

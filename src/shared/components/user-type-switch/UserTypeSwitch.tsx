@@ -20,12 +20,10 @@ export const UserTypeSwitch: React.FC<{
 
   const openDropdown = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
-    console.log('open')
   }
 
   const handleClose = (): void => {
     setAnchorEl(null)
-    console.log('close')
   }
 
   const switchToAuditor = (): void => {

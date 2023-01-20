@@ -4,8 +4,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import MenuIcon from '@mui/icons-material/Menu'
 import { cn } from '@bem-react/classname'
+import Grid from '@mui/material/Unstable_Grid2'
 import {
-  Grid,
   InputLabel,
   InputBase,
   Box,
@@ -177,7 +177,7 @@ export const ProjectPage: React.FC = () => {
         ) : (
           <form className={bem('Form')} autoComplete="off">
             <Grid container spacing={2.5}>
-              <Grid item xs={12} className={bem('Header')}>
+              <Grid xs={12} className={bem('Header')}>
                 <Button
                   disabled={
                     !projectData || !errors.noErrors || processing || !projectData._id
@@ -214,7 +214,7 @@ export const ProjectPage: React.FC = () => {
                 <MenuIcon className={bem('HeaderMenuIcon')} />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <InputLabel htmlFor="name-input" className={bem('InputLabel')}>
                   Name
                 </InputLabel>
@@ -235,7 +235,7 @@ export const ProjectPage: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <InputLabel htmlFor="git-url-input" className={bem('InputLabel')}>
                   Project link
                 </InputLabel>
@@ -252,7 +252,7 @@ export const ProjectPage: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <InputLabel htmlFor="description-input" className={bem('InputLabel')}>
                   Description
                 </InputLabel>
@@ -276,7 +276,7 @@ export const ProjectPage: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <InputLabel htmlFor="tags-input" className={bem('InputLabel')}>
                   Tags
                 </InputLabel>
@@ -293,7 +293,7 @@ export const ProjectPage: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12} className={bem('Price')}>
                 <InputLabel className={bem('InputLabel')}>
                   Expected audit price range (per line)
                 </InputLabel>
@@ -305,7 +305,7 @@ export const ProjectPage: React.FC = () => {
                 ></RangeSlider>
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <InputLabel className={bem('InputLabel')}>
                   <Checkbox
                     className={bem('Checkbox')}
@@ -323,35 +323,31 @@ export const ProjectPage: React.FC = () => {
                 </InputLabel>
               </Grid>
 
-              <Grid item xs={12}>
-                <Grid container>
-                  <Grid item xs={12} sm={6} display="flex">
-                    <Button
-                      className={bem('Button', {
-                        disabled: !errors.noErrors || processing,
-                      })}
-                      data-testid={bem('SubmitButton')}
-                      type="submit"
-                      variant="contained"
-                      disabled={!errors.noErrors || processing}
-                      onClick={() => submit(projectData)}
-                    >
-                      {projectData._id ? 'Save changes' : 'Create'}
-                    </Button>
-                  </Grid>
+              <Grid xs={12} sm={12} md={6} display="flex">
+                <Button
+                  className={bem('Button', {
+                    disabled: !errors.noErrors || processing,
+                  })}
+                  data-testid={bem('SubmitButton')}
+                  type="submit"
+                  variant="contained"
+                  disabled={!errors.noErrors || processing}
+                  onClick={() => submit(projectData)}
+                >
+                  {projectData._id ? 'Save changes' : 'Create'}
+                </Button>
+              </Grid>
 
-                  <Grid item xs={12} sm={6} display="flex">
-                    <Button
-                      className={bem('Button', { second: true })}
-                      data-testid={bem('CancelButton')}
-                      variant="outlined"
-                      color="primary"
-                      onClick={() => navigate('/customer-page', { state: { tab: '2' } })}
-                    >
-                      Back
-                    </Button>
-                  </Grid>
-                </Grid>
+              <Grid xs={12} sm={12} md={6} display="flex">
+                <Button
+                  className={bem('Button', { second: true })}
+                  data-testid={bem('CancelButton')}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => navigate('/customer-page', { state: { tab: '2' } })}
+                >
+                  Back
+                </Button>
               </Grid>
             </Grid>
 

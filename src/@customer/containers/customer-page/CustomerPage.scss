@@ -45,6 +45,14 @@
   &-TabPanel {
     padding: 50px 80px !important;
 
+    &_projects {
+      padding: $padding-normal !important;
+    }
+
+    &_audits {
+      padding: calc($padding-normal/5) !important;
+    }
+
     @media screen and (max-width: $screen-sm-width) {
       padding: 0 !important;
     }

@@ -1,7 +1,8 @@
+import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { Alert, Avatar, Button, Grid, InputBase, InputLabel } from '@mui/material'
+import { Alert, Avatar, Button, InputBase, InputLabel } from '@mui/material'
 
 import { useSnackbar } from 'notistack'
 import { onlySpaces } from 'shared/helpers/dataValodation'
@@ -161,9 +162,9 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
       ) : (
         <form autoComplete="off">
           <Grid container spacing={2} className={bem()}>
-            <Grid item xs={12} md={12} lg={4} display="flex">
+            <Grid xs={12} sm={4} display="block">
               <Grid container justifyContent="center" alignItems="center">
-                <Grid item xs={12} className={bem('AvatarBox')}>
+                <Grid xs={12} className={bem('AvatarBox')}>
                   <Avatar className={bem('Avatar')}>
                     {customer!.fname
                       ? customer!.fname.substring(0, 1).toUpperCase()
@@ -171,7 +172,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
                   </Avatar>
                 </Grid>
 
-                <Grid item xs={12} display="flex">
+                <Grid xs={12} display="flex">
                   <div className={bem('EditAvatar')} data-testid={bem('EditAvatar')}>
                     <Edit className={bem('Pencil')} />
                     <span
@@ -187,9 +188,9 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md={12} lg={8}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
+            <Grid xs={12} sm={8}>
+              <Grid container spacing={2} sx={{ padding: 0 }}>
+                <Grid xs={12}>
                   <InputLabel htmlFor="fname-input" className={bem('InputLabel')}>
                     First Name
                   </InputLabel>
@@ -207,7 +208,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid xs={12}>
                   <InputLabel htmlFor="lname-input" className={bem('InputLabel')}>
                     Last Name
                   </InputLabel>
@@ -227,7 +228,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               </Grid>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="company-input" className={bem('InputLabel')}>
                 Company
               </InputLabel>
@@ -249,7 +250,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="about-input" className={bem('InputLabel')}>
                 About
               </InputLabel>
@@ -273,7 +274,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
                 Email
               </InputLabel>
@@ -291,7 +292,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <InputLabel htmlFor="telegram-input" className={bem('InputLabel')}>
                 Telegram
               </InputLabel>
@@ -312,9 +313,9 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Grid container>
-                <Grid item xs={12} sm={6} display="flex">
+                <Grid xs={12} sm={6} display="flex">
                   <Button
                     className={bem('Button', {
                       disabled: !errors.noErrors || processing,
@@ -331,7 +332,7 @@ export const CustomerPanel: React.FC<CustomerPanelProps> = ({
                   </Button>
                 </Grid>
 
-                <Grid item xs={12} sm={6} display="flex">
+                <Grid xs={12} sm={6} display="flex">
                   <Button
                     variant="outlined"
                     color="primary"
