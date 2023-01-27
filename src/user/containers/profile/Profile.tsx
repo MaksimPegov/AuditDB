@@ -40,9 +40,7 @@ export const Profile: React.FC = () => {
     dispatch(userActions.userDelete())
   }
 
-  const handleChangePassword = (): void => {
-    console.log('TODO: change password')
-  }
+  const handleChangePassword = (): void => {}
 
   const nameEditHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value)

@@ -1,4 +1,4 @@
-import { inputValidator, validateEmail } from '../../shared/helpers/dataValodation'
+import { inputValidator, validateEmail } from 'shared/helpers/dataValodation'
 
 export type LoginData = {
   email: string

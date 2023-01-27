@@ -11,6 +11,9 @@ export type Audit = {
   customerName: string
   projectId: string
   projectName: string
+  discription: string
+  githubLinks: string[]
+  price: string
 
   dateEnd: string
   dateStart: string
@@ -37,6 +40,30 @@ export const mockAudit = (): Audit => ({
   auditorEmail: faker.internet.email(),
   auditorTelegram: faker.internet.email(),
   rate: faker.random.numeric(2),
-  status: 'pending',
-  tags: faker.random.words(1) + ',' + faker.random.words(1),
+  discription: faker.lorem.paragraph(5),
+  githubLinks: generateGitHubLinks(),
+  price: faker.random.numeric(2),
+  status: faker.helpers.arrayElement([
+    'pending',
+    'in_progress',
+    'finalized',
+    'archived',
+    'error',
+  ]),
+  tags:
+    faker.random.words(1) +
+    ', ' +
+    faker.random.words(1) +
+    ', ' +
+    faker.random.words(1) +
+    ', ' +
+    faker.random.words(1),
 })
+
+const generateGitHubLinks = () => {
+  const links = []
+  for (let i = 0; i < +faker.random.numeric(); i++) {
+    links.push(faker.internet.url())
+  }
+  return links
+}

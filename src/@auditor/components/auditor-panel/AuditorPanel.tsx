@@ -329,7 +329,6 @@ export const AuditorPanel: React.FC<AuditorPanelProps> = ({
               </InputLabel>
 
               <AppSlider
-                // value={auditorData}
                 value={auditor ? auditor.price : 0}
                 setValue={handleSliderChange}
                 min={0}

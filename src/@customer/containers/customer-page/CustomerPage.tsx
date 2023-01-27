@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogContent } from '@mui/material'
+import { Box, Button, CircularProgress, Dialog, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -22,7 +22,7 @@ import {
   selectProcessingCustomer,
 } from '@customer/state/customer.selectors'
 import { Project } from 'shared/models/project'
-import { AuditCard } from 'shared/components/audit-card/AuditCard'
+import { CustomerAuditCard } from '@customer/components/audit-card/CustomerAuditCard'
 import { CustomerInfo } from '@customer/components/customer-info/CustomerInfo'
 import { ProjectsPanel } from '@customer/components/projects-panel/ProjectsPanel'
 import { CustomerPanel } from '@customer/components/customer-panel/CustomerPanel'
@@ -128,13 +128,17 @@ export const CustomerPage: React.FC = () => {
           <TabPanel value="1" className={bem('TabPanel', { audits: true })}>
             <Grid container>
               {loadingAudits || !audits ? (
-                <Grid xs={12}>Loading...</Grid>
+                <Grid xs={12} display="flex">
+                  <CircularProgress className={bem('Loading')} />
+                </Grid>
               ) : audits.length < 1 ? (
-                <Grid xs={12}>No audits</Grid>
+                <Grid xs={12} className={bem('Empty')}>
+                  {'Nothing now :('}
+                </Grid>
               ) : (
                 audits.map((audit) => (
                   <Grid xs={12} sm={12} md={6} key={audit._id}>
-                    <AuditCard audit={audit} />
+                    <CustomerAuditCard audit={audit} />
                   </Grid>
                 ))
               )}

@@ -1,0 +1,29 @@
+@import 'styles/styles.scss';
+
+.Bages {
+  margin: auto;
+
+  &-Text {
+    font-size: $xl-font-size !important;
+    color: $text-color;
+    text-align: center;
+  }
+
+  &-Lable {
+    font-size: $md-font-size !important;
+    color: $text-color;
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  &-Price {
+    align-items: center;
+    display: flex;
+  }
+
+  &-Icon {
+    font-size: calc($xl-font-size * 1.5) !important;
+    color: $primary;
+    padding: 5px;
+  }
+}

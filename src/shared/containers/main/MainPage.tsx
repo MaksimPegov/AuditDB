@@ -125,7 +125,6 @@ export const MainPage = () => {
               </Box>
 
               <Grid container spacing={2}>
-                {/* {loadingProjects ? 'Loading...' : null} */}
                 {loadingProjectsError ? loadingProjectsError : null}
                 {projects.map((project) => (
                   <Grid item xs={12} sm={6} key={project._id}>

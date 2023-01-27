@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Dialog, DialogContent } from '@mui/material'
+import { Box, Button, CircularProgress, Dialog, DialogContent } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
@@ -6,6 +6,7 @@ import TabContext from '@mui/lab/TabContext'
 import TabPanel from '@mui/lab/TabPanel'
 import TabList from '@mui/lab/TabList'
 import { cn } from '@bem-react/classname'
+import Grid from '@mui/material/Unstable_Grid2'
 import Tab from '@mui/material/Tab'
 
 import './AuditorPage.scss'
@@ -15,12 +16,13 @@ import {
   selectAuditorSuccessMessage,
   selectAudits,
   selectLoadingAuditor,
+  selectLoadingAudits,
   selectProcessingAuditor,
 } from '@auditor/state/auditor.selectors'
-import { AuditCard } from 'shared/components/audit-card/AuditCard'
 import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 import { AuditorPanel } from '@auditor/components/auditor-panel/AuditorPanel'
 import { auditorActions } from '@auditor/state/auditor.reducer'
+import { AuditorAuditCard } from '@auditor/components/audit-card/AuditorAuditCard'
 
 const componentId = 'AuditorPage'
 const bem = cn(componentId)
@@ -35,6 +37,7 @@ export const AuditorPage: React.FC = () => {
   const auditorSuccessMessage = useSelector(selectAuditorSuccessMessage)
   const loadingAuditor = useSelector(selectLoadingAuditor)
   const processingAuditor = useSelector(selectProcessingAuditor)
+  const loadingAudits = useSelector(selectLoadingAudits)
 
   const audits = useSelector(selectAudits)
 
@@ -100,32 +103,57 @@ export const AuditorPage: React.FC = () => {
             />
           </TabList>
 
-          <TabPanel value="1" className={bem('TabPanel')}>
-            <Grid container spacing={2}>
-              {audits
-                ? audits
-                    .filter((audit) => audit.status !== 'pending')
-                    .map((audit) => (
-                      <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
-                        <AuditCard audit={audit} />
-                      </Grid>
-                    ))
-                : null}
+          <TabPanel value="1" className={bem('TabPanel', { audits: true })}>
+            <Grid container>
+              <Grid sm={12} display="flex">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  data-testid={bem('Button', { create: true })}
+                  className={bem('Button', { create: true })}
+                >
+                  + New Audit
+                </Button>
+              </Grid>
+              {loadingAudits ? (
+                <Grid xs={12} display="flex">
+                  <CircularProgress className={bem('Loading')} />
+                </Grid>
+              ) : audits ? (
+                audits
+                  .filter((audit) => audit.status !== 'pending')
+                  .map((audit) => (
+                    <Grid sm={12} md={6} key={audit._id}>
+                      <AuditorAuditCard audit={audit} />
+                    </Grid>
+                  ))
+              ) : (
+                <Grid xs={12} className={bem('Nothing')}>
+                  {'Nothing now :('}
+                </Grid>
+              )}
             </Grid>
           </TabPanel>
 
-          <TabPanel value="2" className={bem('TabPanel')}>
-            <Grid container spacing={2}>
-              {/* {audits
-                ? audits
-                    .filter((audit) => audit.status === 'pending')
-                    .map((audit) => (
-                      <Grid item xs={12} sm={6} md={4} lg={3} key={audit._id}>
-                        <AuditCard audit={audit} />
-                      </Grid>
-                    ))
-                : null} */}
-              Nothing now
+          <TabPanel value="2" className={bem('TabPanel', { requests: true })}>
+            <Grid container>
+              {loadingAudits ? (
+                <Grid xs={12} display="flex">
+                  <CircularProgress className={bem('Loading')} />
+                </Grid>
+              ) : audits.filter((audit) => audit.status === 'pending').length !== 0 ? (
+                audits
+                  .filter((audit) => audit.status === 'pending')
+                  .map((audit) => (
+                    <Grid sm={12} md={6} key={audit._id}>
+                      <AuditorAuditCard audit={audit} />
+                    </Grid>
+                  ))
+              ) : (
+                <Grid xs={12} className={bem('Empty')}>
+                  {'Nothing now :('}
+                </Grid>
+              )}
             </Grid>
           </TabPanel>
 

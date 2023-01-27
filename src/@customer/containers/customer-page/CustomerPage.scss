@@ -7,6 +7,10 @@
 .CustomerPage {
   @include page-panel;
 
+  @media screen and (max-width: $screen-xs-width) {
+    zoom: 120% !important;
+  }
+
   max-width: 600px !important;
   padding-top: $padding-normal !important;
   padding-bottom: $padding-normal !important;
@@ -24,6 +28,18 @@
     top: -51px;
     left: -3px;
     right: -3px;
+  }
+
+  &-Empty {
+    font-size: $xl-font-size !important;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: $margin-normal auto !important;
+  }
+
+  &-Loading {
+    margin: $margin-normal auto !important;
   }
 
   &-Tab {

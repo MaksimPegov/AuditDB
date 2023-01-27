@@ -10,9 +10,14 @@ export const selectAuditorPage = createSelector(
 
 export const selectAudits = createSelector(selectAuditorPage, (state) => state.audits)
 
+export const selectLoadingAudits = createSelector(
+  selectAuditorPage,
+  (state) => state.processing.audits,
+)
+
 export const selectLoadingAuditor = createSelector(
   selectAuditorPage,
-  (state) => state.loaders.auditor,
+  (state) => state.processing.auditor,
 )
 
 export const selectProcessingAuditor = createSelector(

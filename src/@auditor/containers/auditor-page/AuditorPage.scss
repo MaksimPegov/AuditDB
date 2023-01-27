@@ -7,6 +7,10 @@
 .AuditorPage {
   @include page-panel;
 
+  @media screen and (max-width: $screen-xs-width) {
+    zoom: 120% !important;
+  }
+
   max-width: 600px !important;
   padding-top: $padding-normal !important;
   padding-bottom: $padding-normal !important;
@@ -35,11 +39,29 @@
     background-color: $super_light_gray !important;
     text-transform: none !important;
 
+    @media screen and (max-width: $screen-sm-width) {
+      font-size: $xs !important;
+      padding: 2px !important;
+    }
+
     &_active {
       background-color: $secondary !important;
       color: $white !important;
       border: none !important;
     }
+  }
+
+  &-Loading {
+    margin: $margin-normal auto !important;
+    color: $secondary !important;
+  }
+
+  &-Empty {
+    font-size: $xl-font-size !important;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: $margin-normal auto !important;
   }
 
   &-TabPanel {
@@ -48,5 +70,17 @@
     @media screen and (max-width: $screen-sm-width) {
       padding: 0 !important;
     }
+
+    &_audits {
+      padding: 10px !important;
+    }
+
+    &_requests {
+      padding: 10px !important;
+    }
+  }
+
+  &-Button {
+    margin: $margin-normal auto !important;
   }
 }

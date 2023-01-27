@@ -66,7 +66,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </span>
 
       <span className={bem('Tags')} title={project.tags} color="text.secondary">
-        {project.tags}
+        {project.tags.replaceAll(',', ', ')}
       </span>
 
       {showStatus ? (

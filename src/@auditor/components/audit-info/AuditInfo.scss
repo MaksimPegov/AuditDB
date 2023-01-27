@@ -1,0 +1,86 @@
+@import 'styles/styles.scss';
+
+.AuditInfo {
+  padding: $padding-normal !important;
+  max-width: $page-width-sm;
+  @media screen and (max-width: $screen-xs-width) {
+    padding: 0 !important;
+  }
+
+  &-Title {
+    font-size: $xxl-font-size !important;
+    text-align: center;
+  }
+
+  &-Subtitle {
+    font-size: $xl-font-size !important;
+    text-align: center;
+    color: $text-color;
+  }
+
+  &-Price {
+    display: flex !important;
+  }
+
+  &-Text {
+    padding-top: $padding-normal !important;
+    color: $text-color;
+    font-size: $sm-font-size !important;
+  }
+
+  &-UploadTitle {
+    font-size: $md-font-size !important;
+    padding-top: $padding-normal !important;
+  }
+
+  &-Upload {
+    text-align: center;
+    color: $gray;
+    border: 1px solid $gray;
+    align-self: center;
+    padding: 3px;
+  }
+
+  &-FileTitle {
+    align-self: center;
+    display: flex;
+    margin-left: -5px;
+  }
+
+  &-FileTitleText {
+    font-size: $md-font-size !important;
+    align-self: center;
+  }
+
+  &-Mail {
+    font-size: $md-font-size !important;
+    padding-top: $padding-normal !important;
+  }
+
+  &-Telegram {
+    font-size: $md-font-size !important;
+    padding-bottom: $padding-normal !important;
+  }
+
+  &-Link {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-Icon {
+    font-size: $xl-font-size !important;
+    color: $gray;
+    padding: 5px;
+  }
+
+  &-Button {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    &_second {
+      @media screen and (max-width: $screen-xs-width) {
+        @include second-button;
+      }
+    }
+  }
+}

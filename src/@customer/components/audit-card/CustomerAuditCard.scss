@@ -1,0 +1,29 @@
+@import 'styles/styles.scss';
+
+.CustomerAuditCard {
+  @include audit-card;
+
+  &-AuditorName {
+    font-size: $lg-font-size !important;
+    margin: 0 auto !important;
+    font-weight: 300;
+    color: blue;
+    text-align: center;
+  }
+
+  &-Price {
+    font-size: $md-font-size;
+    margin: 10px auto;
+    color: $text-color;
+  }
+
+  &-Button {
+    width: 80% !important;
+    min-width: 0 !important;
+    margin: $margin-normal/2 auto !important;
+
+    &_view {
+      margin: 0px auto !important;
+    }
+  }
+}

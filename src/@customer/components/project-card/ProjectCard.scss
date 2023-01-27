@@ -17,10 +17,16 @@
   }
 
   &-Tags {
-    color: $gray !important;
+    color: $gray;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
   }
 
   &-Button {

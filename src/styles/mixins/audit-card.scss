@@ -1,0 +1,30 @@
+@mixin audit-card {
+  display: flex;
+  padding: $padding-normal !important;
+  width: fit-content !important;
+  margin: calc($margin-normal/2) !important;
+  border: 0.95px solid rgba(67, 66, 66, 0.1);
+  box-shadow: 0px 64px 76px rgba(0, 0, 0, 0.1), 0px 14px 17px rgba(0, 0, 0, 0.04),
+    0px 8px 9.5px rgba(0, 0, 0, 0.04), 0px 4px 5px rgba(0, 0, 0, 0.03),
+    0px 1.7px 2px rgba(0, 0, 0, 0.02);
+  border-radius: 25px;
+
+  &-ProjectName {
+    font-size: calc($lg-font-size * 1.5) !important;
+    margin: 0 auto !important;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  &-Tags {
+    margin: calc($margin-normal/2) auto;
+    color: $text-color;
+    font-size: $sm-font-size;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 35px;
+  }
+}

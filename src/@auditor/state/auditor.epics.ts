@@ -56,7 +56,6 @@ const loadAuditsForAuditor: Epic = (action$: Action$, state$: State$) =>
 const resetAuditorState: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(userActions.logout.match),
-    tap(() => console.log('resetAuditorState')),
     map(() => auditorActions.resetAuditorState()),
   )
 

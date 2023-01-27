@@ -7,12 +7,9 @@ export type AuditorState = {
   auditorPage: {
     audits: Audit[]
     auditor: Auditor | null
-    loaders: {
-      audits: boolean
-      auditor: boolean
-    }
     processing: {
       auditor: boolean
+      audits: boolean
       auditorError: string
       auditorSuccess: string
     }
@@ -23,11 +20,8 @@ const initialAuditorState: AuditorState = {
   auditorPage: {
     audits: [],
     auditor: null,
-    loaders: {
-      audits: false,
-      auditor: false,
-    },
     processing: {
+      audits: false,
       auditor: false,
       auditorError: '',
       auditorSuccess: '',
@@ -43,28 +37,28 @@ export const auditorSlice = createSlice({
       state = initialAuditorState
     },
     loadAuditorData(state, action: PayloadAction) {
-      state.auditorPage.loaders.auditor = true
+      state.auditorPage.processing.auditor = true
       state.auditorPage.processing.auditorError = ''
       state.auditorPage.processing.auditorSuccess = ''
     },
     loadAuditorDataSuccess(state, action: PayloadAction<Auditor | null>) {
       state.auditorPage.auditor = action.payload
-      state.auditorPage.loaders.auditor = false
+      state.auditorPage.processing.auditor = false
     },
     loadAuditorDataFail(state, action: PayloadAction<string>) {
-      state.auditorPage.loaders.auditor = false
+      state.auditorPage.processing.auditor = false
       state.auditorPage.processing.auditorError = action.payload
     },
 
     loadAuditsForAuditor(state, action: PayloadAction) {
-      state.auditorPage.loaders.audits = true
+      state.auditorPage.processing.audits = true
     },
     loadAuditsForAuditorSuccess(state, action: PayloadAction<Audit[]>) {
-      state.auditorPage.loaders.audits = false
+      state.auditorPage.processing.audits = false
       state.auditorPage.audits = action.payload
     },
     loadAuditsForAuditorFail(state, action: PayloadAction<string>) {
-      state.auditorPage.loaders.audits = false
+      state.auditorPage.processing.audits = false
     },
 
     createAuditor(state, action: PayloadAction<Auditor>) {

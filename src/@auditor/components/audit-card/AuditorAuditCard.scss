@@ -1,0 +1,28 @@
+@import 'styles/styles.scss';
+
+.AuditorAuditCard {
+  @include audit-card;
+
+  &-Price {
+    display: flex !important;
+    zoom: 75%;
+  }
+
+  &-StatusBar {
+    margin-bottom: calc($margin-normal/(-2));
+  }
+
+  &-Button {
+    width: 80% !important;
+    min-width: 0 !important;
+    margin: $margin-normal auto 0 !important;
+    height: 40px !important;
+  }
+
+  &-Copy {
+    color: $primary;
+    font-size: $sm-font-size;
+    margin: 10px auto 0;
+    cursor: pointer;
+  }
+}

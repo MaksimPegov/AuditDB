@@ -1,11 +1,6 @@
 @import 'styles/styles.scss';
 
 .MainPage {
-  // display: flex;
-  // flex-direction: column !important;
-  // height: 100%;
-  // width: 100%;
-
   &-Content {
     background-color: $secondary;
     padding: calc($padding-normal * 3) 0;
