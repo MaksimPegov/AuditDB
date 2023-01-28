@@ -71,4 +71,15 @@
   &-Alert {
     @include page-alert;
   }
+
+  &-QuickSearchItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 6px;
+
+    &:hover {
+      background-color: $light_gray;
+      cursor: pointer;
+    }
+  }
 }

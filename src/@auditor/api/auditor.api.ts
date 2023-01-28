@@ -1,13 +1,14 @@
 import { AxiosInstance } from 'axios'
 
-import { MOCK_API, PORT_FOR_AUDITORS } from 'app.constants'
 import {
   auditorAdaptorIn,
   auditorAdaptorOut,
   ServerAuditor,
 } from '@auditor/api/auditor.adaptor'
-import { Auditor, mockedAuditor } from 'shared/models/auditor'
 import api from 'app.api'
+import { MOCK_API, PORT_FOR_AUDITORS } from 'app.constants'
+import { Auditor, mockAuditor, mockedAuditor } from 'shared/models/auditor'
+import { faker } from '@faker-js/faker'
 
 let http: AxiosInstance
 const buildApi = () => (http = api(PORT_FOR_AUDITORS))
@@ -67,7 +68,7 @@ export const getAll = async (query: string): Promise<Auditor[]> => {
   if (MOCK_API) {
     return new Promise<Auditor[]>((resolve, reject) => {
       setTimeout(() => {
-        resolve([mockedAuditor, mockedAuditor, mockedAuditor])
+        resolve([mockAuditor(), mockAuditor(), mockAuditor()])
       }, 1000)
     })
   }
@@ -75,6 +76,32 @@ export const getAll = async (query: string): Promise<Auditor[]> => {
   try {
     const response = await httpNoAuth.get<ServerAuditor[]>('/auditors/all', {
       params: { tags: query },
+    })
+
+    return response.data.map((auditor) => auditorAdaptorIn(auditor))
+  } catch (e: any) {
+    if (e.response.status === 404) {
+      return []
+    }
+
+    throw new Error(e.response.data.message)
+  }
+}
+
+export const findAuditorsByName = async (query: string): Promise<Auditor[]> => {
+  const httpNoAuth = api(PORT_FOR_AUDITORS, false)
+
+  if (true) {
+    return new Promise<Auditor[]>((resolve, reject) => {
+      setTimeout(() => {
+        resolve([mockAuditor(), mockAuditor(), mockAuditor()])
+      }, 1000)
+    })
+  }
+
+  try {
+    const response = await httpNoAuth.get<ServerAuditor[]>('/auditors', {
+      params: { name: query },
     })
 
     return response.data.map((auditor) => auditorAdaptorIn(auditor))

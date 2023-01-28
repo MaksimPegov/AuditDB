@@ -8,6 +8,11 @@ export const selectCustomerPage = createSelector(
   (state) => state.customerPage,
 )
 
+export const selectProjectPage = createSelector(
+  selectCustomerSlice,
+  (state) => state.projectPage,
+)
+
 export const selectLoadingCustomer = createSelector(
   selectCustomerPage,
   (state) => state.loaders.customer,
@@ -53,9 +58,9 @@ export const selectLoadingCustomerAudits = createSelector(
   (state) => state.loaders.audits,
 )
 
-export const selectProjectPage = createSelector(
-  selectCustomerSlice,
-  (state) => state.projectPage,
+export const selectLoadingAuditors = createSelector(
+  selectProjectPage,
+  (state) => state.processing.auditorSearch,
 )
 
 export const selectProject = createSelector(selectProjectPage, (state) => state.project)
@@ -93,4 +98,24 @@ export const selectProjectErrorMessage = createSelector(
 export const selectProjectSuccessMessage = createSelector(
   selectProjectPage,
   (state) => state.processing.projectSuccess,
+)
+
+export const selectFoundAuditors = createSelector(
+  selectProjectPage,
+  (state) => state.auditors,
+)
+
+export const selectInvitingAuditor = createSelector(
+  selectProjectPage,
+  (state) => state.processing.inviteAuditor,
+)
+
+export const selectInvitingAuditorSuccessMessage = createSelector(
+  selectProjectPage,
+  (state) => state.processing.inviteAuditorSuccess,
+)
+
+export const selectInvitingAuditorErrorMessage = createSelector(
+  selectProjectPage,
+  (state) => state.processing.inviteAuditorError,
 )

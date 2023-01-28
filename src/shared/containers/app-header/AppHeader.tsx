@@ -10,11 +10,11 @@ import './AppHeader.scss'
 import { selectUser } from 'user/state/user.selectors'
 import { UserControl } from 'shared/components/user-contol/UserControl'
 import { HeaderLinks } from 'shared/components/header-links/HeaderLinks'
-import { UserNavigate } from 'shared/components/user-navigate/UserNavigate'
+// import { UserNavigate } from 'shared/components/user-navigate/UserNavigate'
 import { UserTypeSwitch } from 'shared/components/user-type-switch/UserTypeSwitch'
 import { selectUserType } from 'shared/state/shared.selectors'
 
-const componentId = 'AppHeader'
+export const componentId = 'AppHeader'
 const bem = cn(componentId)
 
 export const AppHeader: React.FC = () => {
@@ -72,6 +72,7 @@ export const AppHeader: React.FC = () => {
               exit={{ opacity: 0 }}
               className={bem('UserPanel')}
             >
+              {/* No functional defined for this elements: */}
               {/* <UserNavigate navigator={navigate} /> */}
               <UserControl user={user} />
               <UserTypeSwitch

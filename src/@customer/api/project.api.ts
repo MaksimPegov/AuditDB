@@ -139,3 +139,30 @@ export const update = async (project: Project): Promise<Project> => {
     throw new Error(e.response.data.message)
   }
 }
+
+export const inviteAuditor = async (
+  auditorId: string,
+  projectId: string,
+): Promise<string> => {
+  if (!http) buildApi()
+  if (true) {
+    return new Promise<string>((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Invitation sent')
+      }, 1000)
+    })
+  }
+
+  try {
+    await http.post('/projects/invite', null, {
+      params: {
+        auditorId,
+        projectId,
+      },
+    })
+
+    return 'Invitation sent'
+  } catch (e: any) {
+    throw new Error(e.response.data.message)
+  }
+}

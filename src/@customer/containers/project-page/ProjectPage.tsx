@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import MenuIcon from '@mui/icons-material/Menu'
@@ -14,12 +14,19 @@ import {
   TextField,
   useMediaQuery,
   Checkbox,
+  Dialog,
+  DialogContent,
 } from '@mui/material'
 
 import './ProjectPage.scss'
 import {
   selectCustomerIdForProject,
+  selectFoundAuditors,
+  selectInvitingAuditor,
+  selectInvitingAuditorErrorMessage,
+  selectInvitingAuditorSuccessMessage,
   selectIsNewProject,
+  selectLoadingAuditors,
   selectLoadingProject,
   selectProcessingProject,
   selectProject,
@@ -31,6 +38,10 @@ import { Project } from 'shared/models/project'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { customerActions } from '@customer/state/customer.reducer'
 import { RangeSlider } from 'shared/components/range-slider/RangeSlider'
+import { QuickSearch } from 'shared/components/quick-search/QuickSearch'
+import { Auditor } from 'shared/models/auditor'
+import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
+import { useSnackbar } from 'notistack'
 
 const componentId = 'ProjectPage'
 const bem = cn(componentId)
@@ -51,8 +62,13 @@ const initialProjectData: Project = {
 export const ProjectPage: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const processingQuickSearch = useSelector(selectLoadingAuditors)
   const customerIdForProject = useSelector(selectCustomerIdForProject)
   const projectIdForProject = useSelector(selectProjectIdForProject)
+  const invitationSuccess = useSelector(selectInvitingAuditorSuccessMessage)
+  const quickSeachResults = useSelector(selectFoundAuditors)
+  const invitationError = useSelector(selectInvitingAuditorErrorMessage)
+  const invitingAuditor = useSelector(selectInvitingAuditor)
   const successMessage = useSelector(selectProjectSuccessMessage)
   const isNewProject = useSelector(selectIsNewProject)
   const errorMessage = useSelector(selectProjectErrorMessage)
@@ -61,8 +77,16 @@ export const ProjectPage: React.FC = () => {
   const loading = useSelector(selectLoadingProject)
   const isXs = useMediaQuery('(max-width:600px)')
 
-  const [projectData, setProjectData] = useState<Project>(initialProjectData)
+  const showSnack = useSnackbar()
 
+  const [showSearchDialog, setShowSearchDialog] = useState(false)
+  const [projectData, setProjectData] = useState<Project>(initialProjectData)
+  const [selectedAuditor, setSelectedAuditor] = useState<Auditor | null>(null)
+  const [inviteAuditorDialog, setInviteAuditorDialog] = useState(false)
+
+  const handleInviteAuditorDialog = () => {
+    setInviteAuditorDialog((state) => !state)
+  }
   const [errors, setErrors] = useState({
     _id: undefined,
     name: false,
@@ -79,7 +103,7 @@ export const ProjectPage: React.FC = () => {
       ? dispatch(customerActions.updateProject(projectData))
       : dispatch(customerActions.createProject(projectData))
 
-  const handleFieldChange = (
+  const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     field: string,
     trim = true,
@@ -93,6 +117,38 @@ export const ProjectPage: React.FC = () => {
       ...prevState,
       [field]: false,
     }))
+  }
+
+  const handleCheckboxChange = (value: boolean, field: string): void => {
+    setProjectData((state) => ({
+      ...state,
+      [field]: value,
+    }))
+  }
+
+  const handleSearch = (search: string) => {
+    dispatch(customerActions.searchForAuditors(search))
+  }
+
+  const handleSearchSelect = (auditor: Auditor) => {
+    setShowSearchDialog(false)
+    setSelectedAuditor(auditor)
+    setTimeout(() => {
+      handleInviteAuditorDialog()
+    }, 100)
+  }
+
+  const handleSearchSubmit = (auditor: string) => {
+    console.log('submit: ', auditor)
+  }
+
+  // Mock avatar
+  const [avatar, setAvatar] = useState(
+    `/images/avatar/${Math.floor(Math.random() * 10)}.jpg`,
+  )
+
+  const handleInviteAuditor = () => {
+    dispatch(customerActions.inviteAuditor(selectedAuditor!._id!))
   }
 
   const handlePriveRangeChange = (value: number[]): void => {
@@ -162,6 +218,16 @@ export const ProjectPage: React.FC = () => {
     }
   }, [errorMessage])
 
+  //  Handle invitation messages
+  useEffect(() => {
+    if (invitationSuccess) {
+      showSnack.enqueueSnackbar(invitationSuccess, { variant: 'success' })
+      handleInviteAuditorDialog()
+    } else if (invitationError) {
+      showSnack.enqueueSnackbar(invitationError, { variant: 'error' })
+    }
+  }, [invitationSuccess, invitationError])
+
   return (
     <motion.div
       className="motion-container"
@@ -184,7 +250,8 @@ export const ProjectPage: React.FC = () => {
                   }
                   size="small"
                   variant="contained"
-                  title="Will be implemented in the phase 2"
+                  title="Invite auditor"
+                  onClick={() => setShowSearchDialog(true)}
                   className={bem('HeaderButton', {
                     disabled: !errors.noErrors || processing || !projectData._id,
                   })}
@@ -226,7 +293,7 @@ export const ProjectPage: React.FC = () => {
                   className={bem('Input', { error: errors.name })}
                   error={errors.name}
                   onChange={(e) =>
-                    handleFieldChange(
+                    handleInputChange(
                       e as React.ChangeEvent<HTMLInputElement>,
                       'name',
                       false,
@@ -247,7 +314,7 @@ export const ProjectPage: React.FC = () => {
                   className={bem('Input', { error: errors.gitUrl })}
                   error={errors.gitUrl}
                   onChange={(e) =>
-                    handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'gitUrl')
+                    handleInputChange(e as React.ChangeEvent<HTMLInputElement>, 'gitUrl')
                   }
                 />
               </Grid>
@@ -267,7 +334,7 @@ export const ProjectPage: React.FC = () => {
                   className={bem('Input', { error: errors.description })}
                   error={errors.description}
                   onChange={(e) =>
-                    handleFieldChange(
+                    handleInputChange(
                       e as React.ChangeEvent<HTMLInputElement>,
                       'description',
                       false,
@@ -288,7 +355,7 @@ export const ProjectPage: React.FC = () => {
                   className={bem('Input', { error: errors.tags })}
                   error={errors.tags}
                   onChange={(e) =>
-                    handleFieldChange(e as React.ChangeEvent<HTMLInputElement>, 'tags')
+                    handleInputChange(e as React.ChangeEvent<HTMLInputElement>, 'tags')
                   }
                 />
               </Grid>
@@ -310,13 +377,9 @@ export const ProjectPage: React.FC = () => {
                   <Checkbox
                     className={bem('Checkbox')}
                     data-testid={bem('ProjectReadyToWait')}
-                    checked={projectData.readyToWait}
+                    checked={!!projectData.readyToWait}
                     onChange={(e) =>
-                      handleFieldChange(
-                        e as React.ChangeEvent<HTMLInputElement>,
-                        'readyToWait',
-                        false,
-                      )
+                      handleCheckboxChange(!projectData.readyToWait, 'readyToWait')
                     }
                   />
                   Ready to wait for auditor availability
@@ -375,6 +438,49 @@ export const ProjectPage: React.FC = () => {
             ) : null}
           </form>
         )}
+
+        <Dialog
+          open={showSearchDialog}
+          onClose={() => setShowSearchDialog(!showSearchDialog)}
+          sx={{ bottom: '30%' }}
+          className={bem('QuickSearch')}
+        >
+          <DialogContent>
+            <QuickSearch
+              processing={processingQuickSearch}
+              onChange={handleSearch}
+              onSubmit={handleSearchSubmit}
+              searchResults={quickSeachResults}
+              inputName="Find by name..."
+              submitName="Instant search"
+              component={(a: Auditor) => (
+                <div
+                  className={bem('QuickSearchItem')}
+                  onClick={() => handleSearchSelect(a)}
+                >
+                  <span>
+                    {a.fname} {a.lname}
+                  </span>
+                  <span>{a.available ? 'Free for audit' : 'Busy'}</span>
+                </div>
+              )}
+            ></QuickSearch>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={inviteAuditorDialog} onClose={handleInviteAuditorDialog}>
+          <DialogContent>
+            <AuditorInfo
+              auditor={selectedAuditor as Auditor}
+              avatarUrl={avatar}
+              submit={handleInviteAuditor}
+              disabled={invitingAuditor}
+              submitLable={'Invite'}
+              submitColor={'primary'}
+              close={handleInviteAuditorDialog}
+            />
+          </DialogContent>
+        </Dialog>
       </Box>
     </motion.div>
   )

@@ -1,0 +1,54 @@
+@import 'styles/styles.scss';
+
+.QuickSearch {
+  background-color: $primary;
+  display: flex;
+  min-height: 90px;
+  min-width: 430px;
+
+  @media screen and (max-width: $screen-sm-width) {
+    zoom: 0.8;
+  }
+
+  &-Search {
+    align-items: center;
+    color: $gray;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+
+  &-SearchIcon {
+    left: 30px;
+    margin-right: 10px;
+    position: absolute;
+    padding-top: 5px;
+    z-index: 10;
+  }
+
+  &-InputBase {
+    @include page-input;
+  }
+
+  &-Input {
+    padding-left: 35px !important;
+  }
+
+  &-Button {
+    margin: auto 5px !important;
+
+    &_second {
+      @include second-button;
+    }
+  }
+
+  &-Menu {
+    z-index: 1500;
+    background-color: rgba(255, 255, 255, 0.853);
+    left: -1px !important;
+    border: 1px solid gray;
+    top: 0px !important;
+    width: 216px !important;
+    min-width: 360px;
+  }
+}

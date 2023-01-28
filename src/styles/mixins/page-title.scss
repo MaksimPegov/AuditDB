@@ -1,12 +1,13 @@
 @mixin page-title() {
   font-size: 1.4rem !important;
   color: $text_color !important;
-  left: -200px;
+  left: -30%;
   position: absolute;
   top: -65px;
 
   @media (max-width: $screen-xs-width) {
     font-size: 1.3rem !important;
     top: -40px;
+    left: 0;
   }
 }

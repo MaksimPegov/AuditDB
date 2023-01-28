@@ -3,19 +3,18 @@ import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Customer } from 'shared/models/customer'
 import { Project } from 'shared/models/project'
 import { Audit } from 'shared/models/audit'
+import { Auditor } from 'shared/models/auditor'
 
 export type CustomerState = {
   customerPage: {
     audits: Audit[]
     projects: Project[]
     customer: Customer | null
-
     loaders: {
       audits: boolean
       projects: boolean
       customer: boolean
     }
-
     processing: {
       customer: boolean
       customerError: string
@@ -24,6 +23,7 @@ export type CustomerState = {
   }
 
   projectPage: {
+    auditors: Auditor[]
     isNewProject: boolean
     customerIdForProject: string
     projectIdForProject: string
@@ -33,6 +33,14 @@ export type CustomerState = {
       project: boolean
       projectError: string
       projectSuccess: string
+
+      auditorSearch: boolean
+      auditorSearchError: string
+      auditorSearchSuccess: string
+
+      inviteAuditor: boolean
+      inviteAuditorError: string
+      inviteAuditorSuccess: string
     }
   }
 }
@@ -54,6 +62,7 @@ const initialCustomerState: CustomerState = {
     },
   },
   projectPage: {
+    auditors: [],
     isNewProject: false,
     customerIdForProject: '',
     projectIdForProject: '',
@@ -63,6 +72,13 @@ const initialCustomerState: CustomerState = {
       project: false,
       projectError: '',
       projectSuccess: '',
+
+      auditorSearch: false,
+      auditorSearchError: '',
+      auditorSearchSuccess: '',
+      inviteAuditor: false,
+      inviteAuditorError: '',
+      inviteAuditorSuccess: '',
     },
   },
 }
@@ -220,6 +236,36 @@ const customerSlice = createSlice({
       state.projectPage.customerIdForProject = action.payload[0]
       state.projectPage.projectIdForProject = action.payload[1]
       state.projectPage.isNewProject = !action.payload[1]
+    },
+
+    searchForAuditors(state, action: PayloadAction<string>) {
+      state.projectPage.auditors = []
+      state.projectPage.processing.auditorSearch = true
+      state.projectPage.processing.auditorSearchError = ''
+      state.projectPage.processing.auditorSearchSuccess = ''
+    },
+    searchForAuditorsSuccess(state, action: PayloadAction<Auditor[]>) {
+      state.projectPage.auditors = action.payload
+      state.projectPage.processing.auditorSearch = false
+      state.projectPage.processing.auditorSearchSuccess = 'Auditors loaded successfully'
+    },
+    searchForAuditorsFail(state, action: PayloadAction<string>) {
+      state.projectPage.processing.auditorSearch = false
+      state.projectPage.processing.auditorSearchError = action.payload
+    },
+
+    inviteAuditor(state, action: PayloadAction<string>) {
+      state.projectPage.processing.inviteAuditor = true
+      state.projectPage.processing.inviteAuditorError = ''
+      state.projectPage.processing.inviteAuditorSuccess = ''
+    },
+    inviteAuditorSuccess(state, action: PayloadAction<string>) {
+      state.projectPage.processing.inviteAuditor = false
+      state.projectPage.processing.inviteAuditorSuccess = 'Auditor invited successfully'
+    },
+    inviteAuditorFail(state, action: PayloadAction<string>) {
+      state.projectPage.processing.inviteAuditor = false
+      state.projectPage.processing.inviteAuditorError = action.payload
     },
     // #endregion
   },

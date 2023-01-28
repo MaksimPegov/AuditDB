@@ -1,3 +1,6 @@
+import { isNumberLiteral } from '@babel/types'
+import { faker } from '@faker-js/faker'
+
 export type AuditorContacts = {
   email: string
   telegram?: string
@@ -32,4 +35,22 @@ export const mockedAuditor: Auditor = {
   tags: 'bitcoin,crypto,audit',
   createdAt: '2020-01-01',
   updatedAt: '2020-01-01',
+}
+
+export const mockAuditor = (): Auditor => {
+  return {
+    _id: faker.random.alphaNumeric(10),
+    about: faker.lorem.paragraph(),
+    available: +faker.random.numeric(1) % 2 === 0,
+    fname: faker.name.firstName(),
+    lname: faker.name.lastName(),
+    price: +faker.random.numeric(2),
+    contacts: {
+      email: faker.internet.email(),
+      telegram: faker.internet.userName(),
+    },
+    tags: faker.random.words(3),
+    createdAt: faker.date.past().toISOString(),
+    updatedAt: faker.date.past().toISOString(),
+  }
 }

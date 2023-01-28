@@ -2,6 +2,7 @@
 
 .AuditorInfo {
   margin: 0 !important;
+  padding: $padding-normal !important;
 
   &-Avatar {
     @include avatar(150px);

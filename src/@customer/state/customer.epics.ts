@@ -2,10 +2,11 @@ import { combineEpics, Epic } from 'redux-observable'
 import { catchError, filter, from, map, of, switchMap, withLatestFrom } from 'rxjs'
 
 import * as auditApi from 'shared/api/audit.api'
+import * as auditorApi from '@auditor/api/auditor.api'
 import * as projectApi from '@customer/api/project.api'
 import { userActions } from 'user/state/user.reducer'
 import * as customerApi from '@customer/api/customer.api'
-import { selectCustomer } from '@customer/state/customer.selectors'
+import { selectCustomer, selectProject } from '@customer/state/customer.selectors'
 import { Action$, State$ } from 'app.store'
 import { customerActions } from '@customer/state/customer.reducer'
 
@@ -105,6 +106,29 @@ const loadAuditsForCustomer: Epic = (action$: Action$, state$: State$) =>
     ),
   )
 
+const findAuditorsByName: Epic = (action$: Action$, state$: State$) =>
+  action$.pipe(
+    filter(customerActions.searchForAuditors.match),
+    switchMap(({ payload }) =>
+      from(auditorApi.findAuditorsByName(payload)).pipe(
+        map((auditors) => customerActions.searchForAuditorsSuccess(auditors)),
+        catchError((error) => of(customerActions.searchForAuditorsFail(error.message))),
+      ),
+    ),
+  )
+
+const inviteAuditorForProject: Epic = (action$: Action$, state$: State$) =>
+  action$.pipe(
+    filter(customerActions.inviteAuditor.match),
+    withLatestFrom(state$.pipe(map(selectProject))),
+    switchMap(([{ payload }, project]) =>
+      from(projectApi.inviteAuditor(payload, project!._id!)).pipe(
+        map((message) => customerActions.inviteAuditorSuccess(message)),
+        catchError((error) => of(customerActions.inviteAuditorFail(error.message))),
+      ),
+    ),
+  )
+
 const resetCustomerState: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(userActions.logout.match),
@@ -121,4 +145,6 @@ export const customerEpics = combineEpics(
   loadCustomerProjects,
   resetCustomerState,
   loadAuditsForCustomer,
+  findAuditorsByName,
+  inviteAuditorForProject,
 )

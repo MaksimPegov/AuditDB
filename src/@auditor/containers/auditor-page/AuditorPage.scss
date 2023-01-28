@@ -65,7 +65,7 @@
   }
 
   &-TabPanel {
-    padding: 50px 80px !important;
+    padding: 50px calc(80px - $padding-normal) !important;
 
     @media screen and (max-width: $screen-sm-width) {
       padding: 0 !important;
