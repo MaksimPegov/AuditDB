@@ -23,6 +23,7 @@ export type CustomerState = {
   }
 
   projectPage: {
+    audits: Audit[]
     auditors: Auditor[]
     isNewProject: boolean
     customerIdForProject: string
@@ -33,6 +34,9 @@ export type CustomerState = {
       project: boolean
       projectError: string
       projectSuccess: string
+      projectAudits: boolean
+      projectAuditsSuccess: string
+      projectAuditsError: string
 
       auditorSearch: boolean
       auditorSearchError: string
@@ -62,6 +66,7 @@ const initialCustomerState: CustomerState = {
     },
   },
   projectPage: {
+    audits: [],
     auditors: [],
     isNewProject: false,
     customerIdForProject: '',
@@ -73,9 +78,14 @@ const initialCustomerState: CustomerState = {
       projectError: '',
       projectSuccess: '',
 
+      projectAudits: false,
+      projectAuditsSuccess: '',
+      projectAuditsError: '',
+
       auditorSearch: false,
       auditorSearchError: '',
       auditorSearchSuccess: '',
+
       inviteAuditor: false,
       inviteAuditorError: '',
       inviteAuditorSuccess: '',
@@ -236,6 +246,20 @@ const customerSlice = createSlice({
       state.projectPage.customerIdForProject = action.payload[0]
       state.projectPage.projectIdForProject = action.payload[1]
       state.projectPage.isNewProject = !action.payload[1]
+    },
+
+    loadAuditsForProject(state, action: Action) {
+      state.projectPage.processing.projectAudits = true
+      state.projectPage.processing.projectAuditsError = ''
+      state.projectPage.processing.projectAuditsSuccess = ''
+    },
+    loadAuditsForProjectSuccess(state, action: PayloadAction<Audit[]>) {
+      state.projectPage.audits = action.payload
+      state.projectPage.processing.projectAudits = false
+    },
+    loadAuditsForProjectFail(state, action: PayloadAction<string>) {
+      state.projectPage.processing.projectAudits = false
+      state.projectPage.processing.projectAuditsError = action.payload
     },
 
     searchForAuditors(state, action: PayloadAction<string>) {

@@ -13,9 +13,14 @@ const bem = cn('AuditInfo')
 export type AuditInfoProps = {
   audit: Audit
   close?: () => void
+  isPreview?: boolean
 }
 
-export const AuditInfo: React.FC<AuditInfoProps> = ({ audit, close }) => {
+export const AuditInfo: React.FC<AuditInfoProps> = ({
+  audit,
+  close,
+  isPreview = false,
+}) => {
   const isPending = (audit: Audit) => audit.status === 'pending'
 
   return (
@@ -36,7 +41,7 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({ audit, close }) => {
         {audit.discription}
       </Grid>
 
-      {!isPending(audit) ? (
+      {!isPending(audit) && !isPreview ? (
         <React.Fragment>
           <Grid xs={12} className={bem('UploadTitle')}>
             UploadAudit
@@ -54,6 +59,14 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({ audit, close }) => {
         </React.Fragment>
       ) : (
         <React.Fragment>
+          {/* Mok element */}
+          {isPreview ? (
+            <Grid xs={12} display="flex" sx={{ pt: 3 }}>
+              <div className={bem('Upload')}>here will be name of uploading file</div>
+            </Grid>
+          ) : null}
+          {/*  */}
+
           <Grid xs={12} className={bem('Mail')}>
             {audit.auditorEmail}
           </Grid>
@@ -81,22 +94,27 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({ audit, close }) => {
 
       {!isPending(audit) ? (
         <React.Fragment>
-          <Grid xs={12} sm={6} display="flex">
-            <Button
-              variant="contained"
-              color="secondary"
-              className={bem('Button', { send: true })}
-              data-testid={bem('Button', { send: true })}
-            >
-              Send to customer
-            </Button>
-          </Grid>
-
-          <Grid xs={12} sm={6} display="flex">
+          {!isPreview ? (
+            <Grid xs={12} sm={6} display="flex">
+              <Button
+                variant="contained"
+                color="secondary"
+                className={bem('Button', { send: true })}
+                data-testid={bem('Button', { send: true })}
+              >
+                Send to customer
+              </Button>
+            </Grid>
+          ) : null}
+          <Grid xs={12} sm={isPreview ? 12 : 6} display="flex">
             <Button
               variant="outlined"
               color="secondary"
-              className={bem('Button', { close: true, second: true })}
+              className={bem('Button', {
+                close: true,
+                second: isPreview,
+                preview: isPreview,
+              })}
               data-testid={bem('Button', { close: true })}
               onClick={close}
             >

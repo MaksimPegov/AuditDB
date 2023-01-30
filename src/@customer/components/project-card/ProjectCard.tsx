@@ -1,14 +1,7 @@
-import { useState } from 'react'
+import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
-import {
-  Card,
-  Button,
-  CardContent,
-  CardActions,
-  Avatar,
-  Dialog,
-  DialogContent,
-} from '@mui/material'
+import { useState } from 'react'
+import { Card, Button, CardActions, Avatar, Dialog, DialogContent } from '@mui/material'
 
 import './ProjectCard.scss'
 import { Project } from 'shared/models/project'
@@ -33,50 +26,43 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const [infoDialog, setInfoDialog] = useState(false)
   const location = useLocation()
   const showStatus = location.pathname !== '/main'
-  const [state, setState] = useState({
-    isHovered: false,
-  })
 
   const [avatar, setAvatar] = useState(
     `/images/avatar/${Math.floor(Math.random() * 10)}.jpg`,
   )
-
-  const handleMouseEnter = () => {
-    setState((old) => ({ ...old, isHovered: true }))
-  }
-
-  const handleMouseLeave = () => {
-    setState((old) => ({ ...old, isHovered: false }))
-  }
 
   const closeInfoDialog = () => {
     setInfoDialog(false)
   }
 
   return (
-    <Card
-      className={bem()}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Avatar className={bem('Avatar')} alt={project.name} src={avatar} />
+    <Grid container className={bem()}>
+      <Grid xs={12} display="flex">
+        <Avatar className={bem('Avatar')} alt={project.name} src={avatar} />
+      </Grid>
 
-      <span className={bem('Name')} title={project.name}>
-        {project.name}
-      </span>
+      <Grid xs={12} display="flex">
+        <span className={bem('Name')} title={project.name}>
+          {project.name}
+        </span>
+      </Grid>
 
-      <span className={bem('Tags')} title={project.tags} color="text.secondary">
-        {project.tags.replaceAll(',', ', ')}
-      </span>
+      <Grid xs={12} display="flex">
+        <span className={bem('Tags')} title={project.tags} color="text.secondary">
+          {project.tags.replaceAll(',', ', ')}
+        </span>
+      </Grid>
 
       {showStatus ? (
-        <StatusBar
-          color={project.status === 'shown' ? 'green' : 'secondary'}
-          desc={project.status === 'shown' ? 'Published' : 'Unpublished'}
-        />
+        <Grid xs={12} className={bem('Status')}>
+          <StatusBar
+            color={project.status === 'shown' ? 'green' : 'secondary'}
+            desc={project.status === 'shown' ? 'Published' : 'Unpublished'}
+          />
+        </Grid>
       ) : null}
 
-      <CardActions>
+      <Grid xs={12} display="flex">
         {onEdit ? (
           <Button
             component="span"
@@ -100,13 +86,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             More Info
           </Button>
         )}
-      </CardActions>
+      </Grid>
 
       <Dialog open={infoDialog} onClose={closeInfoDialog}>
         <DialogContent>
           <ProjectInfo project={project} avatarUrl={avatar} close={closeInfoDialog} />
         </DialogContent>
       </Dialog>
-    </Card>
+    </Grid>
   )
 }

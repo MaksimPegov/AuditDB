@@ -54,6 +54,29 @@ export const get = async (auditId: string): Promise<Audit | null> => {
   }
 }
 
+export const getProjectAudits = async (projectId: string): Promise<Audit[]> => {
+  if (!http) buildApi()
+  if (true) {
+    return new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        resolve([mockAudit(), mockAudit(), mockAudit(), mockAudit()])
+      }, 1000)
+    })
+  } else {
+    try {
+      const response = await http.get<Audit[]>(`/audits/project/${projectId}`)
+
+      return response.data
+    } catch (e: any) {
+      if (e.response.status === 404) {
+        return []
+      }
+
+      throw new Error(e.response.data.message)
+    }
+  }
+}
+
 export const getMyAudits = async (
   accountType: AccountType,
   id: string,

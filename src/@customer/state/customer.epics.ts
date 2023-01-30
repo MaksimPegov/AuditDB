@@ -106,6 +106,20 @@ const loadAuditsForCustomer: Epic = (action$: Action$, state$: State$) =>
     ),
   )
 
+const loadAuditsForProject: Epic = (action$: Action$, state$: State$) =>
+  action$.pipe(
+    filter(customerActions.loadAuditsForProject.match),
+    withLatestFrom(state$.pipe(map(selectProject))),
+    switchMap(([, project]) =>
+      from(auditApi.getProjectAudits(project!._id!)).pipe(
+        map((audits) => customerActions.loadAuditsForProjectSuccess(audits)),
+        catchError((error) =>
+          of(customerActions.loadAuditsForProjectFail(error.message)),
+        ),
+      ),
+    ),
+  )
+
 const findAuditorsByName: Epic = (action$: Action$, state$: State$) =>
   action$.pipe(
     filter(customerActions.searchForAuditors.match),
@@ -145,6 +159,7 @@ export const customerEpics = combineEpics(
   loadCustomerProjects,
   resetCustomerState,
   loadAuditsForCustomer,
+  loadAuditsForProject,
   findAuditorsByName,
   inviteAuditorForProject,
 )

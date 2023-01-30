@@ -1,0 +1,28 @@
+@import 'styles/styles.scss';
+
+.ProjectAudits {
+  display: flex;
+  flex-direction: column;
+
+  &-Audit {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-Name {
+    color: $primary;
+    margin: auto 5px;
+    font-weight: bold;
+  }
+
+  &-Postfix {
+    margin: auto auto auto 0;
+  }
+
+  &-Link {
+    color: $primary;
+    margin: auto 0;
+    font-size: $lg-font-size !important;
+    cursor: pointer;
+  }
+}

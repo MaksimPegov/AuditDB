@@ -100,6 +100,11 @@ export const selectProjectSuccessMessage = createSelector(
   (state) => state.processing.projectSuccess,
 )
 
+export const selectProjectAudits = createSelector(
+  selectProjectPage,
+  (state) => state.audits,
+)
+
 export const selectFoundAuditors = createSelector(
   selectProjectPage,
   (state) => state.auditors,

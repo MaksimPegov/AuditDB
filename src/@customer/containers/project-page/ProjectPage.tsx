@@ -30,6 +30,7 @@ import {
   selectLoadingProject,
   selectProcessingProject,
   selectProject,
+  selectProjectAudits,
   selectProjectErrorMessage,
   selectProjectIdForProject,
   selectProjectSuccessMessage,
@@ -38,6 +39,7 @@ import { Project } from 'shared/models/project'
 import { onlySpaces } from 'shared/helpers/dataValodation'
 import { customerActions } from '@customer/state/customer.reducer'
 import { RangeSlider } from 'shared/components/range-slider/RangeSlider'
+import { ProjectAudits } from '@customer/components/project-audits/ProjectAudits'
 import { QuickSearch } from 'shared/components/quick-search/QuickSearch'
 import { Auditor } from 'shared/models/auditor'
 import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
@@ -76,6 +78,7 @@ export const ProjectPage: React.FC = () => {
   const project = useSelector(selectProject)
   const loading = useSelector(selectLoadingProject)
   const isXs = useMediaQuery('(max-width:600px)')
+  const audits = useSelector(selectProjectAudits)
 
   const showSnack = useSnackbar()
 
@@ -218,6 +221,14 @@ export const ProjectPage: React.FC = () => {
     }
   }, [errorMessage])
 
+
+  // Load project audits
+  useEffect(() => {
+    if (projectData._id) {
+      dispatch(customerActions.loadAuditsForProject())
+    }
+  }, [projectData._id])
+
   //  Handle invitation messages
   useEffect(() => {
     if (invitationSuccess) {
@@ -227,6 +238,7 @@ export const ProjectPage: React.FC = () => {
       showSnack.enqueueSnackbar(invitationError, { variant: 'error' })
     }
   }, [invitationSuccess, invitationError])
+
 
   return (
     <motion.div
@@ -318,6 +330,17 @@ export const ProjectPage: React.FC = () => {
                   }
                 />
               </Grid>
+
+              {projectData._id ? (
+                <Grid xs={12}>
+                  <ProjectAudits
+                    audits={audits.filter(
+                      (audit) =>
+                        audit.status === 'in_progress' || audit.status === 'finalized',
+                    )}
+                  />
+                </Grid>
+              ) : null}
 
               <Grid xs={12}>
                 <InputLabel htmlFor="description-input" className={bem('InputLabel')}>
