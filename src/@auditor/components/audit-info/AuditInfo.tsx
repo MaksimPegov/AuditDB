@@ -2,7 +2,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import React from 'react'
 import { cn } from '@bem-react/classname'
 import { Button, Link } from '@mui/material'
-import { CreateNewFolder } from '@mui/icons-material'
+import { CreateNewFolder, Link as LinkIcon } from '@mui/icons-material'
 
 import { Audit } from 'shared/models/audit'
 import { Bages } from 'shared/components/bages/Bages'
@@ -14,12 +14,14 @@ export type AuditInfoProps = {
   audit: Audit
   close?: () => void
   isPreview?: boolean
+  customerView?: boolean
 }
 
 export const AuditInfo: React.FC<AuditInfoProps> = ({
   audit,
   close,
   isPreview = false,
+  customerView = false,
 }) => {
   const isPending = (audit: Audit) => audit.status === 'pending'
 
@@ -41,7 +43,7 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
         {audit.discription}
       </Grid>
 
-      {!isPending(audit) && !isPreview ? (
+      {!isPending(audit) && !isPreview && !customerView ? (
         <React.Fragment>
           <Grid xs={12} className={bem('UploadTitle')}>
             UploadAudit
@@ -53,16 +55,16 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
           </Grid>
 
           <Grid xs={12} className={bem('FileTitle')}>
-            <CreateNewFolder className={bem('Icon')} />
+            <LinkIcon className={bem('Icon')} />
             <span className={bem('FileTitleText')}>File link</span>
           </Grid>
         </React.Fragment>
       ) : (
         <React.Fragment>
           {/* Mok element */}
-          {isPreview ? (
+          {isPreview || customerView ? (
             <Grid xs={12} display="flex" sx={{ pt: 3 }}>
-              <div className={bem('Upload')}>here will be name of uploading file</div>
+              <div className={bem('Upload')}>here will be your audit.pdf</div>
             </Grid>
           ) : null}
           {/*  */}
@@ -84,6 +86,7 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
           <Link
             href={link}
             className={bem('Link')}
+            data-testid={bem('Link')}
             color="secondary"
             key={audit.githubLinks.indexOf(link)}
           >
@@ -92,7 +95,7 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
         </Grid>
       ))}
 
-      {!isPending(audit) ? (
+      {!isPending(audit) && !customerView ? (
         <React.Fragment>
           {!isPreview ? (
             <Grid xs={12} sm={6} display="flex">
@@ -100,7 +103,7 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
                 variant="contained"
                 color="secondary"
                 className={bem('Button', { send: true })}
-                data-testid={bem('Button', { send: true })}
+                data-testid={bem('SendButton')}
               >
                 Send to customer
               </Button>
@@ -124,38 +127,77 @@ export const AuditInfo: React.FC<AuditInfoProps> = ({
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Grid xs={12} sm={4} display="flex">
-            <Button
-              variant="contained"
-              color="secondary"
-              className={bem('Button', { decline: true })}
-              data-testid={bem('Button', { decline: true })}
-            >
-              Decline
-            </Button>
-          </Grid>
+          {customerView ? (
+            <React.Fragment>
+              <Grid xs={12} sm={6} display="flex">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={bem('Button', { accept: true })}
+                  data-testid={bem('AcceptButton')}
+                >
+                  Accept
+                </Button>
+              </Grid>
 
-          <Grid xs={12} sm={4} display="flex">
-            <Button
-              variant="contained"
-              className={bem('Button', { offer: true, second: true })}
-              data-testid={bem('Button', { offer: true, second: true })}
-            >
-              Make offer
-            </Button>
-          </Grid>
+              <Grid xs={12} sm={6} display="flex">
+                <Button
+                  variant="contained"
+                  className={bem('Button', { return: true, second: true })}
+                  data-testid={bem('ReturnButton')}
+                >
+                  Return for revision
+                </Button>
+              </Grid>
 
-          <Grid xs={12} sm={4} display="flex">
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={bem('Button', { close: true, second: true })}
-              data-testid={bem('Button', { close: true, second: true })}
-              onClick={close}
-            >
-              Close
-            </Button>
-          </Grid>
+              <Grid xs={12} display="flex">
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={bem('Button', { close: true, second: true, third: true })}
+                  data-testid={bem('CloseButton')}
+                  onClick={close}
+                >
+                  Close
+                </Button>
+              </Grid>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Grid xs={12} sm={4} display="flex">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={bem('Button', { decline: true })}
+                  data-testid={bem('DeclineButton')}
+                >
+                  Decline
+                </Button>
+              </Grid>
+
+              <Grid xs={12} sm={4} display="flex">
+                <Button
+                  variant="contained"
+                  className={bem('Button', { offer: true, second: true })}
+                  data-testid={bem('OfferButton')}
+                >
+                  Make offer
+                </Button>
+              </Grid>
+
+              <Grid xs={12} sm={4} display="flex">
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={bem('Button', { close: true, second: true })}
+                  data-testid={bem('CloseButton')}
+                  onClick={close}
+                >
+                  Close
+                </Button>
+              </Grid>
+            </React.Fragment>
+          )}
         </React.Fragment>
       )}
     </Grid>

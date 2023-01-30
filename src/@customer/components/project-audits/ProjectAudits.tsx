@@ -32,7 +32,7 @@ export const ProjectAudits: React.FC<{ audits: Audit[] }> = ({ audits }) => {
         }
       case 'pending':
         return {
-          color: 'green',
+          color: 'primary',
           desc: 'Waiting for response',
         }
       default:

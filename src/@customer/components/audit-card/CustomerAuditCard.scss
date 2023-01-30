@@ -2,6 +2,7 @@
 
 .CustomerAuditCard {
   @include audit-card;
+  height: 360px !important;
 
   &-AuditorName {
     font-size: $lg-font-size !important;
@@ -17,13 +18,32 @@
     color: $text-color;
   }
 
+  &-Date {
+    display: flex;
+    align-items: center;
+  }
+
+  &-StatusBar {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-SingleButtonGrid {
+    display: flex;
+    height: 111px !important;
+  }
+
   &-Button {
     width: 80% !important;
     min-width: 0 !important;
     margin: $margin-normal/2 auto !important;
 
     &_view {
-      margin: 0px auto !important;
+      margin: 0 auto !important;
+    }
+
+    &_single {
+      margin: auto !important;
     }
   }
 }

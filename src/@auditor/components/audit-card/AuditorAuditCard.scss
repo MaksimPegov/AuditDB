@@ -9,7 +9,9 @@
   }
 
   &-StatusBar {
+    display: flex;
     margin-bottom: calc($margin-normal/(-2));
+    justify-content: center;
   }
 
   &-Button {

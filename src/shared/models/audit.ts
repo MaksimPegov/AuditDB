@@ -43,13 +43,7 @@ export const mockAudit = (): Audit => ({
   discription: faker.lorem.paragraph(5),
   githubLinks: generateGitHubLinks(),
   price: faker.random.numeric(2),
-  status: faker.helpers.arrayElement([
-    'pending',
-    'in_progress',
-    'finalized',
-    'archived',
-    'error',
-  ]),
+  status: faker.helpers.arrayElement(['pending', 'in_progress', 'finalized']),
   tags:
     faker.random.words(1) +
     ', ' +

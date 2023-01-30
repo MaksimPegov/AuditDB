@@ -105,7 +105,7 @@ export const AuditorPage: React.FC = () => {
 
           <TabPanel value="1" className={bem('TabPanel', { audits: true })}>
             <Grid container>
-              <Grid sm={12} display="flex">
+              <Grid xs={12} display="flex">
                 <Button
                   variant="contained"
                   color="secondary"

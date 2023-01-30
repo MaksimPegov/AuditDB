@@ -3,9 +3,6 @@
 .AuditInfo {
   padding: $padding-normal !important;
   max-width: $page-width-sm;
-  @media screen and (max-width: $screen-xs-width) {
-    padding: 0 !important;
-  }
 
   &-Title {
     font-size: $xxl-font-size !important;
@@ -81,6 +78,10 @@
       @media screen and (max-width: $screen-xs-width) {
         @include second-button;
       }
+    }
+
+    &_third {
+      margin-top: 0 !important;
     }
   }
 }

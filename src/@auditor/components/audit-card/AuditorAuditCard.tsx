@@ -33,7 +33,7 @@ export const AuditorAuditCard: React.FC<AuditorAuditCardProps> = ({ audit }) => 
     switch (audit.status) {
       case 'in_progress':
         setStatusProps({
-          color: 'secondary',
+          color: 'green',
           desc: 'In process',
         })
         break
@@ -45,7 +45,7 @@ export const AuditorAuditCard: React.FC<AuditorAuditCardProps> = ({ audit }) => 
         break
       case 'pending':
         setStatusProps({
-          color: 'green',
+          color: 'primary',
           desc: 'Waiting for response',
         })
         break
