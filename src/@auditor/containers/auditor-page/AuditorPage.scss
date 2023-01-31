@@ -12,8 +12,8 @@
   }
 
   max-width: 600px !important;
-  padding-top: $padding-normal !important;
-  padding-bottom: $padding-normal !important;
+  padding-top: $md !important;
+  padding-bottom: $md !important;
   border: 3px solid $secondary !important;
   padding: 0 !important;
   margin-top: 151px !important;
@@ -40,7 +40,7 @@
     text-transform: none !important;
 
     @media screen and (max-width: $screen-sm-width) {
-      font-size: $xs !important;
+      font-size: $xxs-font-size !important;
       padding: 2px !important;
     }
 
@@ -52,7 +52,7 @@
   }
 
   &-Loading {
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
     color: $secondary !important;
   }
 
@@ -61,11 +61,11 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 
   &-TabPanel {
-    padding: 50px calc(80px - $padding-normal) !important;
+    padding: 50px calc(80px - $md) !important;
 
     @media screen and (max-width: $screen-sm-width) {
       padding: 0 !important;
@@ -81,6 +81,6 @@
   }
 
   &-Button {
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 }

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Dialog } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ import {
   selectProjects,
   selectProjectsError,
   selectProjectsLoading,
+  selectUserType,
 } from 'shared/state/shared.selectors'
 import { Welcome } from 'shared/components/welcome/Welcome'
 import { selectUser } from 'user/state/user.selectors'
@@ -40,10 +41,15 @@ export const MainPage = () => {
   const projects = useSelector(selectProjects)
   const loadingProjects = useSelector(selectProjectsLoading)
   const loadingProjectsError = useSelector(selectProjectsError)
+  const activeUserType = useSelector(selectUserType)
 
   const selectAccountTypeHandler = (type: AccountType) => {
     dispatch(sharedActions.setUserPreferences(type))
     navigate('/sign-up')
+  }
+
+  const handleInviteAuditor = () => {
+    console.log('invite auditor')
   }
 
   const onAuditorsSearchChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -95,7 +101,12 @@ export const MainPage = () => {
                 {loadingAuditorsError ? loadingAuditorsError : null}
                 {auditors.map((auditor) => (
                   <Grid item xs={12} sm={6} key={auditor._id}>
-                    <AuditorCard auditor={auditor}></AuditorCard>
+                    <AuditorCard
+                      auditor={auditor}
+                      invite={
+                        activeUserType === 'customer' ? handleInviteAuditor : undefined
+                      }
+                    ></AuditorCard>
                   </Grid>
                 ))}
               </Grid>

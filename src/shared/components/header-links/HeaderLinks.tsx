@@ -37,7 +37,7 @@ export const HeaderLinks: React.FC<{ navigator: (location: string) => void }> = 
         }}
       >
         <form>API</form>
-        <ArrowDropDown className={bem('Icon')} />
+        {/* <ArrowDropDown className={bem('Icon')} /> */}
       </Box>
     </motion.div>
   )

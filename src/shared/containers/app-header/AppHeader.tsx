@@ -45,7 +45,7 @@ export const AppHeader: React.FC = () => {
             >
               <Button
                 color="primary"
-                size="small"
+                size="medium"
                 variant="contained"
                 className={bem('Button')}
                 data-testid={bem('SignIn')}
@@ -56,7 +56,7 @@ export const AppHeader: React.FC = () => {
 
               <Button
                 color="secondary"
-                size="small"
+                size="medium"
                 variant="outlined"
                 className={bem('Button')}
                 data-testid={bem('SignUp')}

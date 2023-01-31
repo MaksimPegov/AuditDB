@@ -3,19 +3,18 @@
 .MainPage {
   &-Content {
     background-color: $secondary;
-    padding: calc($padding-normal * 3) 0;
+    padding: calc($md * 3) 0;
   }
 
   &-Title {
     bottom: 10px;
-    font-size: $xxl-font-size;
+    font-size: $mega-font-size;
     position: relative;
   }
 
   &-Cards {
     display: flex;
     flex-direction: column !important;
-    margin: auto;
     padding-top: 0 !important;
   }
 
@@ -30,7 +29,7 @@
     color: $white;
     display: flex;
     justify-content: space-between;
-    margin: $margin-normal;
+    margin: $sm;
   }
 
   &-WhoIsUsing {
@@ -50,13 +49,13 @@
     display: flex;
     flex-direction: column;
     font-size: $xl-font-size;
-    padding: $padding-normal;
+    padding: $md;
   }
 
   &-FooterHeader {
     display: flex;
     justify-content: space-between;
-    margin-bottom: $margin-normal;
+    margin-bottom: $sm;
   }
 
   &-FooterHeaderLogo {

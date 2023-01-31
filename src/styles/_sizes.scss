@@ -1,8 +1,4 @@
-$xs: 10px;
-$sm: 20px;
-$md: 25px;
-
-// lg > 1200px, md > 992px, sm > 768px, xs > 576px
+//Screen: lg > 1200px, md > 992px, sm > 768px, xs > 576px
 $screen-xs-width: 576px;
 $screen-sm-width: 768px;
 $screen-md-width: 992px;
@@ -13,32 +9,45 @@ $page-width-md: 600px;
 $page-width-lg: 800px;
 $page-padding: 80px;
 $page-margin: 40px;
+//----------------------------------------------
 
-$margin-normal: 20px;
-$padding-normal: 25px;
+$xxs: 10px;
+$xs: 15px;
+$sm: 20px;
+$md: 25px;
+$lg: 30px;
+$xl: 35px;
+$xxl: 40px;
 
-$page-title-font-size: 20px;
-
-$xs-font-size: 12px;
-$sm-font-size: 14px;
-$md-font-size: 16px;
-$lg-font-size: 18px;
+$xxs-font-size: 12px;
+$xs-font-size: 14px;
+$sm-font-size: 16px;
+$md-font-size: 18px;
+$lg-font-size: 20px;
 $xl-font-size: 22px;
-$xxl-font-size: $xl-font-size * 2;
+$xxl-font-size: 26px;
+$xxxl-font-size: 30px;
+$mega-font-size: 60px;
 
 $card-avatar-size: 120px;
 
 $s-bage-zoom: 75%;
 
 :export {
+  xxs: $xxs;
   xs: $xs;
   sm: $sm;
   md: $md;
+  lg: $lg;
+  xl: $xl;
+  xxl: $xxl;
 
+  xxs_font_size: $xxs-font-size;
   xs_font_size: $xs-font-size;
   sm_font_size: $sm-font-size;
   m_font_size: $md-font-size;
   l_font_size: $lg-font-size;
   xl_font_size: $xl-font-size;
-  xxl_font_size: $xxl-font-size;
+  xxl_font_size: $xxxl-font-size;
+  xxxl_font_size: $xxxl-font-size;
 }

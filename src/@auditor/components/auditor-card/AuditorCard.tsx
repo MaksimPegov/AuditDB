@@ -16,12 +16,13 @@ import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
 
 export type AuditorCardProps = {
   auditor: Auditor
+  invite?: () => void
 }
 
 export const componentId = 'AuditorCard'
 const bem = cn(componentId)
 
-export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
+export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => {
   const [infoDialog, setInfoDialog] = useState(false)
   const [state, setState] = useState({
     isHovered: false,
@@ -78,9 +79,10 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor }) => {
           <AuditorInfo
             auditor={auditor}
             avatarUrl={avatar}
-            submit={closeInfoDialog}
-            submitLable={'Close'}
+            submit={invite ? invite : closeInfoDialog}
+            submitLable={invite ? 'Invite' : 'Close'}
             submitColor={'primary'}
+            close={invite ? closeInfoDialog : undefined}
           />
         </DialogContent>
       </Dialog>

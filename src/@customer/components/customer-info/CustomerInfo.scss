@@ -5,7 +5,7 @@
 
   &-Avatar {
     @include avatar(150px);
-    margin: $margin-normal auto;
+    margin: $sm auto;
   }
 
   &-Lable {
@@ -28,6 +28,6 @@
   }
 
   &-Button {
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 }

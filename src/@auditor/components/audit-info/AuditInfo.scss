@@ -1,11 +1,11 @@
 @import 'styles/styles.scss';
 
 .AuditInfo {
-  padding: $padding-normal !important;
+  padding: $md !important;
   max-width: $page-width-sm;
 
   &-Title {
-    font-size: $xxl-font-size !important;
+    font-size: $mega-font-size;
     text-align: center;
   }
 
@@ -20,14 +20,14 @@
   }
 
   &-Text {
-    padding-top: $padding-normal !important;
+    padding-top: $md !important;
     color: $text-color;
     font-size: $sm-font-size !important;
   }
 
   &-UploadTitle {
     font-size: $md-font-size !important;
-    padding-top: $padding-normal !important;
+    padding-top: $md !important;
   }
 
   &-Upload {
@@ -51,12 +51,12 @@
 
   &-Mail {
     font-size: $md-font-size !important;
-    padding-top: $padding-normal !important;
+    padding-top: $md !important;
   }
 
   &-Telegram {
     font-size: $md-font-size !important;
-    padding-bottom: $padding-normal !important;
+    padding-bottom: $md !important;
   }
 
   &-Link {

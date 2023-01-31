@@ -3,7 +3,7 @@
 .AppHeader {
   display: flex;
   flex-direction: row;
-  margin: 0 !important;
+  margin: 20px 0 0 !important;
 
   @media screen and (max-width: $screen-xs-width) {
     zoom: 0.9;
@@ -12,12 +12,12 @@
   &-Logo {
     margin: 0 10px;
     margin: auto 0;
-    padding: 10px 35px 5px;
+    padding: 10px 35px 5px 0;
   }
 
   &-Img {
     cursor: pointer;
-    width: $lg-font-size * 10;
+    width: 220px;
 
     @media screen and (max-width: $screen-xs-width) {
       width: $sm-font-size * 10;
@@ -27,15 +27,13 @@
 
   &-Buttons {
     margin: auto;
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     margin: auto -10px auto auto;
   }
 
   &-Button {
-    min-width: 100px !important;
-    margin: 0 10px !important;
-    box-shadow: 0 0 0 0 !important;
+    margin: 0 $xs !important;
   }
 
   &-UserPanel {

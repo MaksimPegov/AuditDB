@@ -10,14 +10,14 @@
 
   &-StatusBar {
     display: flex;
-    margin-bottom: calc($margin-normal/(-2));
+    margin-bottom: calc($sm/(-2));
     justify-content: center;
   }
 
   &-Button {
     width: 80% !important;
     min-width: 0 !important;
-    margin: $margin-normal auto 0 !important;
+    margin: $sm auto 0 !important;
     height: 40px !important;
   }
 

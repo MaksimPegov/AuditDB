@@ -6,7 +6,7 @@
 
   &-Avatar {
     @include avatar(150px);
-    margin: $margin-normal auto 0 auto;
+    margin: $sm auto 0 auto;
   }
 
   &-Name {
@@ -30,6 +30,6 @@
   }
 
   &-Close {
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 }

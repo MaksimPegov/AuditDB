@@ -3,6 +3,7 @@
 .HeaderLinks {
   display: flex;
   flex-direction: row;
+  font-size: 26px !important;
   margin: auto !important;
   @media screen and (max-width: ($page-width-sm * 2)) {
     display: none;
@@ -13,7 +14,7 @@
     flex-direction: row;
     justify-content: center;
     cursor: pointer;
-    margin: 0 $margin-normal;
+    margin: 0 $sm;
     min-width: fit-content;
     color: $text_color !important;
   }

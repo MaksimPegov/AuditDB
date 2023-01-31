@@ -17,11 +17,11 @@
 
   &-Switch {
     width: 250px !important;
-    margin: 0 auto calc($margin-normal/2) !important;
+    margin: 0 auto calc($sm/2) !important;
   }
 
   &-RolesTitle {
-    margin-bottom: $margin-normal;
+    margin-bottom: $sm;
   }
 
   &-Switches {
@@ -46,7 +46,7 @@
   }
 
   &-Error {
-    margin: $margin-normal 0 0 !important;
+    margin: $sm 0 0 !important;
     background-color: $error_bg_color !important;
     padding-top: 2px !important;
     padding-bottom: 2px !important;

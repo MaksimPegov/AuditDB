@@ -7,7 +7,7 @@
 
   &-Message {
     font-size: $sm-font-size;
-    margin: 0 auto $margin-normal auto;
+    margin: 0 auto $sm auto;
     text-align: center;
     color: $text_color;
   }
@@ -30,7 +30,7 @@
   &-AuditorData {
     font-size: $xl-font-size;
     color: $text_color;
-    padding: $padding-normal/10 0;
+    padding: $md/10 0;
   }
 
   &-Lable {

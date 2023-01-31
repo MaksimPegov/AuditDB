@@ -2,7 +2,7 @@
 
 .CustomerPanel {
   display: flex;
-  padding: $padding-normal * 2 !important;
+  padding: $md * 2 !important;
   padding-bottom: 0 !important;
 
   @media screen and (max-width: $screen-xs-width) {
@@ -43,8 +43,8 @@
   }
 
   &-Button {
-    margin-bottom: $margin-normal !important;
-    margin-top: $margin-normal !important;
+    margin-bottom: $sm !important;
+    margin-top: $sm !important;
 
     &_second {
       @include second-button;

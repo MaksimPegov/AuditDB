@@ -4,7 +4,7 @@
   background-color: $super_light_gray !important;
   display: flex;
   flex-direction: column;
-  padding: $padding-normal;
+  padding: $md;
 
   &-Name {
     font-weight: bold;
@@ -27,6 +27,6 @@
 
   &-Avatar {
     @include size($card-avatar-size);
-    margin: 0 auto $margin-normal !important;
+    margin: 0 auto $sm !important;
   }
 }

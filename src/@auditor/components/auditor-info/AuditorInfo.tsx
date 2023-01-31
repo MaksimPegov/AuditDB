@@ -13,9 +13,9 @@ const bem = cn(componentId)
 export const AuditorInfo: React.FC<{
   auditor: Auditor
   avatarUrl: string
-  submit: () => void
+  submit?: () => void
   disabled?: boolean
-  submitLable: string
+  submitLable?: string
   submitColor?: 'primary' | 'secondary'
   close?: () => void
 }> = ({
@@ -103,19 +103,21 @@ export const AuditorInfo: React.FC<{
         <Tags tags={auditor.tags} />
       </Grid>
 
-      <Grid xs={12} sm={close ? 6 : 12} display="flex">
-        <Button
-          className={bem('Button')}
-          onClick={() => {
-            submit()
-          }}
-          variant="contained"
-          color={submitColor}
-          disabled={disabled}
-        >
-          {submitLable}
-        </Button>
-      </Grid>
+      {submit ? (
+        <Grid xs={12} sm={close ? 6 : 12} display="flex">
+          <Button
+            className={bem('Button')}
+            onClick={() => {
+              submit()
+            }}
+            variant="contained"
+            color={submitColor}
+            disabled={disabled}
+          >
+            {submitLable}
+          </Button>
+        </Grid>
+      ) : null}
 
       {close ? (
         <Grid xs={12} sm={6} display="flex">
@@ -125,7 +127,7 @@ export const AuditorInfo: React.FC<{
               close()
             }}
             variant="outlined"
-            color="primary"
+            color="secondary"
           >
             Close
           </Button>

@@ -35,11 +35,10 @@ export const theme = createTheme({
           fontWeight: 'bold',
           borderRadius: '8px',
           boxShadow: '0 0',
-          height: '45px',
           margin: '35px auto 0',
-          minWidth: '200px',
-          padding: '1px 20px 0',
+          padding: '0 20px',
           textTransform: 'none',
+
           '&:hover': {
             boxShadow: '0 0',
           },
@@ -69,7 +68,7 @@ export const theme = createTheme({
         outlinedPrimary: {
           background: 'none',
           border: `1px solid ${COLORS.primary}`,
-          color: COLORS.$primary,
+          color: COLORS.primary,
           '&:hover': {
             border: `1px solid ${COLORS.primary_hover}`,
           },
@@ -77,21 +76,42 @@ export const theme = createTheme({
         outlinedSecondary: {
           background: 'none',
           border: `1px solid ${COLORS.secondary}`,
+          color: COLORS.text_color,
           '&:hover': {
             border: `1px solid ${COLORS.secondary_hover}`,
           },
         },
         sizeSmall: {
           borderRadius: '6px',
-          height: '25px',
+          fontSize: '20px',
+          height: '35px',
           minWidth: '150px',
-          padding: ' 1px 10px 0',
         },
         sizeMedium: {
-          height: '45px',
+          fontSize: '26px',
+          borderRadius: '15px',
+          height: '60px',
+          minWidth: '220px',
+          padding: '0 25px',
         },
         sizeLarge: {
-          height: '60px',
+          fontSize: '26px',
+          height: '70px',
+          minWidth: '250px',
+          padding: '0 30px',
+        },
+
+        outlinedSizeMedium: {
+          borderWidth: '3px',
+          '&:hover': {
+            borderWidth: '3px',
+          },
+        },
+        outlinedSizeLarge: {
+          borderWidth: '3px',
+          '&:hover': {
+            borderWidth: '3px',
+          },
         },
       },
     },

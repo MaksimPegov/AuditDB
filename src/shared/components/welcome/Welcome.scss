@@ -1,7 +1,7 @@
 @import 'styles/styles.scss';
 
 .Welcome {
-  margin: calc($margin-normal * 5) auto calc($margin-normal * 20);
+  margin: calc($sm * 5) auto calc($sm * 20);
   display: flex;
   flex-direction: row;
   width: fit-content;
@@ -15,7 +15,8 @@
 
   &-Header {
     color: $secondary;
-    font-size: $xxl-font-size;
+    font-size: $mega-font-size;
+    font-weight: 600;
     margin: auto;
     position: relative;
     text-align: center;
@@ -25,13 +26,15 @@
 
   &-Text {
     color: $text_color;
-    font-size: $xl-font-size;
+    font-size: $xxxl-font-size;
+    line-height: $xxl;
     text-align: center;
   }
 
   &-Button {
     bottom: -40px;
     position: relative;
+    width: 360px;
 
     &_auditor {
       margin: 0 0 0 auto !important;

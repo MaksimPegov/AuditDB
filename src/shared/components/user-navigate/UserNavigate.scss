@@ -3,7 +3,7 @@
 .UserNavigate {
   display: flex;
   margin-left: auto;
-  margin-right: $margin-normal;
+  margin-right: $sm;
   @media screen and (max-width: $screen-xs-width) {
     display: none;
   }

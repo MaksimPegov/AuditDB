@@ -2,7 +2,7 @@
 
 .AuditorPanel {
   display: flex;
-  padding: calc($padding-normal * 2) !important;
+  padding: calc($md * 2) !important;
   padding-bottom: 0 !important;
 
   @media screen and (max-width: $screen-sm-width) {
@@ -48,8 +48,8 @@
   }
 
   &-Button {
-    margin-top: $margin-normal !important;
-    margin-bottom: $margin-normal !important;
+    margin-top: $sm !important;
+    margin-bottom: $sm !important;
 
     &_second {
       @include second-button;

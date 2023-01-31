@@ -1,8 +1,8 @@
 @mixin audit-card {
   display: flex;
-  padding: $padding-normal !important;
+  padding: $md !important;
   width: fit-content !important;
-  margin: calc($margin-normal/2) !important;
+  margin: calc($sm/2) !important;
   border: 0.95px solid rgba(67, 66, 66, 0.1);
   box-shadow: 0px 64px 76px rgba(0, 0, 0, 0.1), 0px 14px 17px rgba(0, 0, 0, 0.04),
     0px 8px 9.5px rgba(0, 0, 0, 0.04), 0px 4px 5px rgba(0, 0, 0, 0.03),
@@ -17,7 +17,7 @@
   }
 
   &-Tags {
-    margin: calc($margin-normal/2) auto;
+    margin: calc($sm/2) auto;
     color: $text-color;
     font-size: $sm-font-size;
     text-align: center;

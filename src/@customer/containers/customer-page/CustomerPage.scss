@@ -12,8 +12,8 @@
   }
 
   max-width: 600px !important;
-  padding-top: $padding-normal !important;
-  padding-bottom: $padding-normal !important;
+  padding-top: $md !important;
+  padding-bottom: $md !important;
   border: 3px solid $primary !important;
   padding: 0 !important;
   margin-top: 151px !important;
@@ -35,11 +35,11 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 
   &-Loading {
-    margin: $margin-normal auto !important;
+    margin: $sm auto !important;
   }
 
   &-Tab {
@@ -62,11 +62,11 @@
     padding: 50px 80px !important;
 
     &_projects {
-      padding: $padding-normal !important;
+      padding: $md !important;
     }
 
     &_audits {
-      padding: calc($padding-normal/5) !important;
+      padding: calc($md/5) !important;
     }
 
     @media screen and (max-width: $screen-sm-width) {

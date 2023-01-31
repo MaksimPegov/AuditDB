@@ -40,6 +40,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSelect }) => {
             <Button
               color="secondary"
               variant="contained"
+              size="large"
               className={bem('Button', { auditor: true })}
               onClick={() => onSelect('auditor')}
             >
@@ -51,6 +52,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSelect }) => {
             <Button
               color="primary"
               variant="contained"
+              size="large"
               className={bem('Button', { customer: true })}
               onClick={() => onSelect('customer')}
             >
