@@ -1,4 +1,4 @@
-import { Box, Grid, Dialog } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -150,25 +150,6 @@ export const MainPage = () => {
 
       <div className={bem('WhoIsUsing')}>
         <span className={bem('WhoIsUsingTitle')}>Who is using our service</span>
-      </div>
-
-      <div className={bem('Footer')}>
-        <div className="wrapper">
-          <div className={bem('FooterContent')}>
-            <div className={bem('FooterHeader')}>
-              <div className={bem('FooterHeaderTitle')}>
-                <span className={bem('FooterHeaderLogo', { Left: true })}>Audit</span>
-                <span className={bem('FooterHeaderLogoRight', { Right: true })}>DB</span>
-              </div>
-
-              <span className={bem('FooterHeaderLinks')}>Telegram Github Twitter</span>
-            </div>
-
-            <div className={bem('FooterContent')}>
-              <span className={bem('FooterContentText')}>About us</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
