@@ -11,7 +11,7 @@ const bem = cn(componentId)
 export const AppFooter = () => {
   return (
     <div className={bem()}>
-      <Container>
+      <div className="wrapper">
         <Grid container spacing={1}>
           <Grid xs={12} className={bem('FirstLine')}>
             <div className={bem('Logo')}>
@@ -28,19 +28,19 @@ export const AppFooter = () => {
 
           <Grid xs={6} className={bem('SecondLine')}>
             <Grid container>
-              <Grid xs={4}>
+              <Grid xs={12}>
                 <Link href="#" underline="hover" className={bem('Link')}>
                   Product
                 </Link>
               </Grid>
 
-              <Grid xs={4}>
+              <Grid xs={12}>
                 <Link href="#" underline="hover" className={bem('Link')}>
                   About us
                 </Link>
               </Grid>
 
-              <Grid xs={4}>
+              <Grid xs={12}>
                 <Link href="#" underline="hover" className={bem('Link')}>
                   Community
                 </Link>
@@ -52,7 +52,7 @@ export const AppFooter = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Container>
+      </div>
     </div>
   )
 }
