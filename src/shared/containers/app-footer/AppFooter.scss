@@ -1,0 +1,53 @@
+@import 'styles/styles.scss';
+
+.AppFooter {
+  background-color: $primary;
+  padding: $xxl 0;
+  margin: calc($xxl * 5) 0 0;
+
+  &-FirstLine {
+    display: flex;
+    align-items: center;
+    padding-bottom: $xl !important;
+  }
+
+  &-Logo {
+    margin-right: auto;
+  }
+
+  &-Title {
+    font-size: $xxl;
+    font-weight: 800;
+
+    &_left {
+      color: $secondary;
+    }
+
+    &_right {
+      color: white;
+    }
+  }
+
+  &-Icon {
+    width: $lg !important;
+    height: $lg !important;
+    margin: 0 5px;
+    cursor: pointer;
+    color: $secondary;
+  }
+
+  &-Link {
+    color: white !important;
+    font-size: $md !important;
+  }
+
+  &-Rights {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    bottom: -$xxl;
+    padding-bottom: $xxs !important;
+    color: $text-color;
+    font-size: $md-font-size;
+  }
+}
