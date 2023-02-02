@@ -7,6 +7,10 @@
     @include page-title;
   }
 
+  &-Control {
+    @include page-controll;
+  }
+
   &-Input {
     @include page-input;
   }
@@ -17,5 +21,9 @@
 
   &-Alert {
     @include page-alert;
+  }
+
+  &-Button {
+    @include page-button;
   }
 }

@@ -3,7 +3,7 @@
 .AppHeader {
   display: flex;
   flex-direction: row;
-  margin: 20px 0 0 !important;
+  margin: $md 0 0 !important;
 
   @media screen and (max-width: $screen-xs-width) {
     zoom: 0.9;

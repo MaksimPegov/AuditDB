@@ -67,6 +67,7 @@ export const Registation: React.FC = () => {
   }, [registerError])
 
   let registrationSuccess = useSelector(selectRegistrationSuccess)
+
   useEffect(() => {
     if (registrationSuccess) {
       navigate('/sign-in')
@@ -138,6 +139,7 @@ export const Registation: React.FC = () => {
       userNameError: false,
     }))
   }
+
   const hadnleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUserData((prevState) => ({
       ...prevState,
@@ -159,6 +161,7 @@ export const Registation: React.FC = () => {
       passwordError2: false,
     }))
   }
+
   const hadnlePasswordChange2 = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword2(event.target.value.trim())
     setState((prevState) => ({
@@ -247,11 +250,11 @@ export const Registation: React.FC = () => {
                   </Grid>
 
                   <Grid xs={12}>
-                    <Grid container spacing={0} className={bem('Switch')}>
+                    <Grid container spacing={0} className={bem('Switches')}>
                       <Grid xs={6}>
                         <div
                           id="auditor"
-                          className={bem('Switches', {
+                          className={bem('Switch', {
                             auditor: true,
                             disable: !switchSelection.auditor,
                           })}
@@ -260,10 +263,11 @@ export const Registation: React.FC = () => {
                           Auditor
                         </div>
                       </Grid>
+
                       <Grid xs={6}>
                         <div
                           id="customer"
-                          className={bem('Switches', {
+                          className={bem('Switch', {
                             customer: true,
                             disable: !switchSelection.customer,
                           })}
@@ -278,80 +282,96 @@ export const Registation: React.FC = () => {
               </Grid>
 
               <Grid xs={12}>
-                <InputLabel htmlFor="name-input" className={bem('InputLabel')}>
-                  Your user name
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="name-input" className={bem('InputLabel')}>
+                    User name
+                  </InputLabel>
 
-                <InputBase
-                  id="name-input"
-                  data-testid={bem('userName')}
-                  className={bem('Input', { error: state.userNameError })}
-                  error={state.userNameError}
-                  onChange={handleUserNameChange}
-                />
+                  <InputBase
+                    id="name-input"
+                    data-testid={bem('userName')}
+                    className={bem('Input', { error: state.userNameError })}
+                    error={state.userNameError}
+                    onChange={handleUserNameChange}
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12}>
-                <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
-                  Your e-mail
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
+                    Your e-mail
+                  </InputLabel>
 
-                <InputBase
-                  id="email-input"
-                  data-testid={bem('Email')}
-                  className={bem('Input', { error: state.emailError })}
-                  onChange={hadnleEmailChange}
-                />
+                  <InputBase
+                    id="email-input"
+                    data-testid={bem('Email')}
+                    className={bem('Input', { error: state.emailError })}
+                    onChange={hadnleEmailChange}
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12}>
-                <InputLabel htmlFor="password-input" className={bem('InputLabel')}>
-                  Your password
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="password-input" className={bem('InputLabel')}>
+                    Your password
+                  </InputLabel>
 
-                <InputBase
-                  id="password-input"
-                  data-testid={bem('Password')}
-                  className={bem('Input', { error: state.passwordError1 })}
-                  type={state.showPassword1 ? 'text' : 'password'}
-                  onChange={hadnlePasswordChange1}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        tabIndex={-1}
-                        aria-label="toggle password visibility"
-                        onClick={hidePassword1}
-                      >
-                        {state.showPassword1 ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                  <InputBase
+                    id="password-input"
+                    data-testid={bem('Password')}
+                    className={bem('Input', { error: state.passwordError1 })}
+                    type={state.showPassword1 ? 'text' : 'password'}
+                    onChange={hadnlePasswordChange1}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          tabIndex={-1}
+                          aria-label="toggle password visibility"
+                          onClick={hidePassword1}
+                        >
+                          {state.showPassword1 ? (
+                            <Visibility className={bem('Icon')} />
+                          ) : (
+                            <VisibilityOff className={bem('Icon')} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12}>
-                <InputLabel htmlFor="password2-input" className={bem('InputLabel')}>
-                  Repeat password
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="password2-input" className={bem('InputLabel')}>
+                    Repeat password
+                  </InputLabel>
 
-                <InputBase
-                  id="password2-input"
-                  data-testid={bem('password2')}
-                  className={bem('Input', { error: state.passwordError2 })}
-                  type={state.showPassword2 ? 'text' : 'password'}
-                  onChange={hadnlePasswordChange2}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        tabIndex={-1}
-                        aria-label="toggle password visibility"
-                        onClick={hidePassword2}
-                      >
-                        {state.showPassword2 ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                  <InputBase
+                    id="password2-input"
+                    data-testid={bem('password2')}
+                    className={bem('Input', { error: state.passwordError2 })}
+                    type={state.showPassword2 ? 'text' : 'password'}
+                    onChange={hadnlePasswordChange2}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          tabIndex={-1}
+                          aria-label="toggle password visibility"
+                          onClick={hidePassword2}
+                        >
+                          {state.showPassword2 ? (
+                            <Visibility className={bem('Icon')} />
+                          ) : (
+                            <VisibilityOff className={bem('Icon')} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12} display={'flex'}>

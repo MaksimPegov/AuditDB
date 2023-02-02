@@ -7,31 +7,36 @@
     @include page-title;
   }
 
+  &-Control {
+    @include page-controll;
+  }
+
   &-Input {
     @include page-input;
   }
 
-  &-InputLabel {
-    @include page-input-label;
+  &-Button {
+    @include page-button;
   }
 
-  &-Switch {
-    width: 250px !important;
-    margin: 0 auto calc($sm/2) !important;
+  &-Switches {
+    width: 100% !important;
+    margin: 0 auto $xxl !important;
   }
 
   &-RolesTitle {
     margin-bottom: $sm;
   }
 
-  &-Switches {
-    display: flex !important;
+  &-Switch {
+    align-items: center;
+    display: grid !important;
+    font-size: $xxl-font-size !important;
     font-weight: 600;
-    justify-content: center !important;
-    height: 12px;
+    justify-items: center;
+    height: 55px;
     color: $white !important;
     cursor: pointer;
-    padding: 8px 0 14px !important;
 
     &_auditor {
       background-color: $secondary !important;
@@ -43,6 +48,11 @@
       background-color: $disabled_bg_color !important;
       color: $text_color !important;
     }
+  }
+
+  &-Icon {
+    color: $litle_light_gray;
+    font-size: 20px !important;
   }
 
   &-Error {

@@ -6,8 +6,8 @@ $screen-lg-width: 1200px;
 
 $page-width-sm: 450px;
 $page-width-md: 600px;
-$page-width-lg: 800px;
-$page-padding: 80px;
+$page-width-lg: 700px;
+$page-padding: 120px;
 $page-margin: 40px;
 //----------------------------------------------
 
@@ -25,9 +25,11 @@ $sm-font-size: 16px;
 $md-font-size: 18px;
 $lg-font-size: 20px;
 $xl-font-size: 22px;
-$xxl-font-size: 26px;
-$xxxl-font-size: 30px;
-$mega-font-size: 60px;
+$xxl-font-size: 24px;
+$app-font-size: 26px;
+$font-size-30px: 30px;
+$font-size-40px: 40px;
+$font-size-60px: 60px;
 
 $card-avatar-size: 120px;
 
@@ -45,9 +47,12 @@ $s-bage-zoom: 75%;
   xxs_font_size: $xxs-font-size;
   xs_font_size: $xs-font-size;
   sm_font_size: $sm-font-size;
-  m_font_size: $md-font-size;
-  l_font_size: $lg-font-size;
+  md_font_size: $md-font-size;
+  lg_font_size: $lg-font-size;
   xl_font_size: $xl-font-size;
-  xxl_font_size: $xxxl-font-size;
-  xxxl_font_size: $xxxl-font-size;
+  xxl_font_size: $xxl-font-size;
+  app_font_size: $app-font-size;
+  font_size_30px: $font-size-30px;
+  font_size_40px: $font-size-40px;
+  font_size_60px: $font-size-60px;
 }

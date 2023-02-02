@@ -1,8 +1,4 @@
 @mixin page-input-label() {
-  color: $text_color !important;
-  font-size: $xs-font-size !important;
-  margin-bottom: 12px;
-
   &_Inline {
     display: inline !important;
   }

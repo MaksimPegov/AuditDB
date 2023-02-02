@@ -7,8 +7,8 @@
   }
 
   &-Title {
-    bottom: 10px;
-    font-size: $mega-font-size;
+    bottom: 6px;
+    font-size: $font-size-60px;
     position: relative;
   }
 
@@ -20,16 +20,17 @@
 
   &-Search {
     background-color: $secondary !important;
-    border: 1px solid $white;
-    border-radius: 20px !important;
+    border: 2px solid $white;
+    border-radius: 15px !important;
     height: 40px;
+    margin: auto 0;
   }
 
   &-CardsHeader {
     color: $white;
     display: flex;
     justify-content: space-between;
-    margin: $sm;
+    margin: $xxl $sm $sm;
   }
 
   &-WhoIsUsing {

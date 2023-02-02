@@ -1,14 +1,16 @@
 @mixin page-panel(
-  $width: $page-width-sm,
+  $width: $page-width-lg,
   $padding: $page-padding,
   $margin: $page-margin
 ) {
-  background-color: white;
+  background-color: $super_light_gray;
   box-shadow: 1px 1px 6px -2px grey;
+  border-color: $light_gray;
+  border-radius: $xs;
   margin-top: 100px !important;
   min-width: 300px !important;
   max-width: $width !important;
-  padding: calc($md * 2) $padding;
+  padding: $padding;
   position: relative;
   width: 50%;
 

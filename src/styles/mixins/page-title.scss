@@ -1,9 +1,9 @@
 @mixin page-title() {
-  font-size: 1.4rem !important;
+  font-size: $font-size-40px !important;
   color: $text_color !important;
-  left: -30%;
+  left: -26vw;
   position: absolute;
-  top: -65px;
+  top: -55px;
 
   @media (max-width: $screen-xs-width) {
     font-size: 1.3rem !important;

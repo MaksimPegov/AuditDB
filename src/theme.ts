@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material'
 import COLORS from 'styles/_colors.scss'
 import SIZES from 'styles/_sizes.scss'
 
-const baseFontSize = SIZES.sm_font_size
+const appFontSize = SIZES.app_font_size
 
 export const theme = createTheme({
   typography: {
@@ -35,7 +35,6 @@ export const theme = createTheme({
           fontWeight: 'bold',
           borderRadius: '8px',
           boxShadow: '0 0',
-          margin: '35px auto 0',
           padding: '0 20px',
           textTransform: 'none',
 
@@ -83,19 +82,19 @@ export const theme = createTheme({
         },
         sizeSmall: {
           borderRadius: '6px',
-          fontSize: '20px',
+          fontSize: SIZES.lg_font_size,
           height: '35px',
           minWidth: '150px',
         },
         sizeMedium: {
-          fontSize: '26px',
+          fontSize: appFontSize,
           borderRadius: '15px',
           height: '60px',
           minWidth: '220px',
           padding: '0 25px',
         },
         sizeLarge: {
-          fontSize: '26px',
+          fontSize: appFontSize,
           height: '70px',
           minWidth: '250px',
           padding: '0 30px',
@@ -154,10 +153,24 @@ export const theme = createTheme({
       },
     },
 
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: SIZES.md_font_size,
+          fontWeight: '600',
+          color: COLORS.text_color,
+          marginBottom: SIZES.md,
+        },
+      },
+    },
+
     MuiInputBase: {
       styleOverrides: {
         root: {
-          fontSize: baseFontSize,
+          borderWidth: '2px',
+          backgroundColor: COLORS.super_light_gray,
+          fontSize: appFontSize,
+          height: '60px',
         },
       },
     },
@@ -165,7 +178,7 @@ export const theme = createTheme({
     MuiGrid2: {
       styleOverrides: {
         root: {
-          fontSize: baseFontSize,
+          fontSize: appFontSize,
         },
       },
     },

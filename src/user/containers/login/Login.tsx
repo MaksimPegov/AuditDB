@@ -146,41 +146,45 @@ export const Login: React.FC = () => {
           <Grid xs={12}>
             <Grid container spacing={3}>
               <Grid xs={12} className="Email">
-                <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
-                  E-mail
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="email-input" className={bem('InputLabel')}>
+                    E-mail
+                  </InputLabel>
 
-                <InputBase
-                  id="email-input"
-                  className={bem('Input', { error: state.emailError })}
-                  type="email"
-                  error={state.emailError}
-                  onChange={hadnleEmailChange}
-                />
+                  <InputBase
+                    id="email-input"
+                    className={bem('Input', { error: state.emailError })}
+                    type="email"
+                    error={state.emailError}
+                    onChange={hadnleEmailChange}
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12} className={bem('Password')}>
-                <InputLabel htmlFor="password-input" className={bem('InputLabel')}>
-                  Password
-                </InputLabel>
+                <div className={bem('Control')}>
+                  <InputLabel htmlFor="password-input" className={bem('InputLabel')}>
+                    Password
+                  </InputLabel>
 
-                <InputBase
-                  id="password-input"
-                  className={bem('Input', { error: state.passwordError })}
-                  onChange={hadnlePasswordChange}
-                  type={state.showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        tabIndex={-1}
-                        aria-label="toggle password visibility"
-                        onClick={hidePassword}
-                      >
-                        {state.showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                  <InputBase
+                    id="password-input"
+                    className={bem('Input', { error: state.passwordError })}
+                    onChange={hadnlePasswordChange}
+                    type={state.showPassword ? 'text' : 'password'}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          tabIndex={-1}
+                          aria-label="toggle password visibility"
+                          onClick={hidePassword}
+                        >
+                          {state.showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </div>
               </Grid>
 
               <Grid xs={12} display="flex">
