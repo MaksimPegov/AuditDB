@@ -13,6 +13,7 @@ import {
 import './AuditorCard.scss'
 import { Auditor } from 'shared/models/auditor'
 import { AuditorInfo } from '@auditor/components/auditor-info/AuditorInfo'
+import { InviteToProject } from '@customer/containers/invite-to-project/InviteToProject'
 
 export type AuditorCardProps = {
   auditor: Auditor
@@ -27,6 +28,12 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => 
   const [state, setState] = useState({
     isHovered: false,
   })
+
+  const [inviteDialog, setInviteDialog] = useState(false)
+
+  const handleInviteDialog = () => {
+    setInviteDialog((old) => !old)
+  }
 
   const [avatar, setAvatar] = useState(
     `/images/avatar/${Math.floor(Math.random() * 10)}.jpg`,
@@ -84,6 +91,12 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => 
             submitColor={'primary'}
             close={invite ? closeInfoDialog : undefined}
           />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={inviteDialog} onClose={handleInviteDialog}>
+        <DialogContent>
+          <InviteToProject />
         </DialogContent>
       </Dialog>
     </Card>

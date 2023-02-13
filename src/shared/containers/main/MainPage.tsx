@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Dialog, DialogContent, Grid } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -27,6 +27,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from 'shared/components/search/search'
+import { InviteToProject } from '@customer/containers/invite-to-project/InviteToProject'
 
 const componentId = 'MainPage'
 const bem = cn(componentId)
