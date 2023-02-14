@@ -22,15 +22,25 @@
     background-color: $secondary !important;
     border: 2px solid $white;
     border-radius: 15px !important;
-    height: 40px;
+    height: $xxl !important;
     margin: auto 0;
+  }
+
+  &-SearchIcon {
+    bottom: -1px;
+    position: relative;
+    right: 10px;
+  }
+
+  &-SearchInput {
+    height: $xxl !important;
   }
 
   &-CardsHeader {
     color: $white;
     display: flex;
     justify-content: space-between;
-    margin: $xxl $sm $sm;
+    margin: $xxl $sm;
   }
 
   &-WhoIsUsing {

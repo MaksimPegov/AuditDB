@@ -36,7 +36,7 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
       exit={{ opacity: 0 }}
     >
       <span className={bem('UserName')} data-testid={bem('UserName')} color="inherit">
-        {user.name}
+        Hello, {user.name}!
       </span>
 
       <Tooltip title="Account">
@@ -44,9 +44,9 @@ export const UserControl: React.FC<{ user: User }> = ({ user }) => {
           className={bem('IconButton')}
           data-testid={bem('IconButton')}
           onClick={handleIconClick}
-          size="small"
+          size="large"
         >
-          <Avatar className={bem('Avatar1')} alt={user.name} src="/images/avatar/2.jpg" />
+          <Avatar className={bem('Avatar')} alt={user.name} src="/images/avatar/2.jpg" />
         </IconButton>
       </Tooltip>
 

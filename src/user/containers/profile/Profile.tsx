@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   IconButton,
   InputAdornment,
@@ -56,63 +55,55 @@ export const Profile: React.FC = () => {
       <Grid container spacing={2} className={bem()}>
         <span className={bem('Title')}>User profile</span>
 
-        <Grid xs={12} md={12} lg={3} display="flex">
-          <Avatar className={bem('Avatar')}>
-            {user.name.substring(0, 1).toUpperCase()}
-          </Avatar>
-          {/* <span
-              className={bem('EditAvatar')}
-              variant="caption"
-              onClick={() => {
-                console.log('avatar change')
-              }}
-            >
-              Edit
-            </span> */}
-        </Grid>
-
         <Grid xs={12} md={12} lg={9}>
           <Grid container spacing={2}>
             <Grid xs={12}>
-              <InputLabel htmlFor="username-input" classes={{ root: bem('InputLabel') }}>
-                User name
-              </InputLabel>
+              <div className={bem('Control')}>
+                <InputLabel
+                  htmlFor="username-input"
+                  classes={{ root: bem('InputLabel') }}
+                >
+                  User name
+                </InputLabel>
 
-              <InputBase
-                id="username-input"
-                className={bem('Input', { disabled: !changName })}
-                onChange={nameEditHandler}
-                defaultValue={user.name}
-                disabled={!changName}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <Tooltip title={changName ? 'save' : 'edit'}>
-                      <IconButton
-                        classes={{ root: bem('IconButton') }}
-                        tabIndex={-1}
-                        aria-label="toggle password visibility"
-                        onClick={editUsername}
-                      >
-                        {!changName ? <ModeEdit /> : <CheckCircleOutline />}
-                      </IconButton>
-                    </Tooltip>
-                  </InputAdornment>
-                }
-              />
+                <InputBase
+                  id="username-input"
+                  className={bem('Input', { disabled: !changName })}
+                  onChange={nameEditHandler}
+                  defaultValue={user.name}
+                  disabled={!changName}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <Tooltip title={changName ? 'save' : 'edit'}>
+                        <IconButton
+                          classes={{ root: bem('IconButton') }}
+                          tabIndex={-1}
+                          aria-label="toggle password visibility"
+                          onClick={editUsername}
+                        >
+                          {!changName ? <ModeEdit /> : <CheckCircleOutline />}
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  }
+                />
+              </div>
             </Grid>
           </Grid>
 
           <Grid xs={12}>
-            <InputLabel htmlFor="email-input" classes={{ root: bem('InputLabel') }}>
-              E-mail
-            </InputLabel>
+            <div className={bem('Control')}>
+              <InputLabel htmlFor="email-input" classes={{ root: bem('InputLabel') }}>
+                E-mail
+              </InputLabel>
 
-            <InputBase
-              id="email-input"
-              className={bem('Input', { disabled: true })}
-              defaultValue={user.email}
-              disabled
-            />
+              <InputBase
+                id="email-input"
+                className={bem('Input', { disabled: true })}
+                defaultValue={user.email}
+                disabled
+              />
+            </div>
           </Grid>
         </Grid>
 

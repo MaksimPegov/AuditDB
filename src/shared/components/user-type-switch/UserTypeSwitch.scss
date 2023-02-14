@@ -12,13 +12,19 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    width: 115px;
+    width: 220px;
     height: $xl;
     cursor: pointer;
   }
 
+  &-Icon {
+    font-size: $font-size-40px !important;
+    position: relative;
+    top: 2px;
+  }
+
   &-Type {
-    font-size: $xs-font-size;
+    // font-size: $xs-font-size;
   }
 
   &_auditor {

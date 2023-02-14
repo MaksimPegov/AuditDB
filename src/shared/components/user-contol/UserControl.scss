@@ -5,14 +5,21 @@
   flex-direction: row;
   margin-right: 1%;
 
+  &-Avatar {
+    @include size(80px);
+  }
+
   &-IconButton {
-    height: fit-content;
     margin: auto !important;
   }
 
   &-UserName {
-    margin: auto !important;
+    font-weight: 600;
     color: black;
+    margin: auto;
+    margin-right: $sm;
+    text-align: end;
+    width: 350px;
 
     @media screen and (max-width: $screen-xs-width) {
       display: none !important;

@@ -4,13 +4,10 @@
   background-color: $super_light_gray !important;
   display: flex;
   flex-direction: column;
-  padding: $md;
-  margin: 5px;
-  //Styles will me moved to mixins when final design version will be ready
+  padding: calc($xxl * 2) $md;
+  margin: $xs $md !important;
+  min-height: 500px;
   border-radius: 25px;
-  box-shadow: 0px 64px 76px rgb(0 0 0 / 10%), 0px 14px 17px rgb(0 0 0 / 4%),
-    0px 8px 9.5px rgb(0 0 0 / 4%), 0px 4px 5px rgb(0 0 0 / 3%),
-    0px 1.7px 2px rgb(0 0 0 / 2%);
 
   &-Name {
     margin: auto;
@@ -32,7 +29,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-align: center;
-    height: 50px;
+    height: calc($xxl * 2);
     padding-top: 5px;
   }
 

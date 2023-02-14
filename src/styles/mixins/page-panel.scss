@@ -1,18 +1,19 @@
-@mixin page-panel(
-  $width: $page-width-lg,
-  $padding: $page-padding,
-  $margin: $page-margin
-) {
+@mixin page-panel($no-top-border-radius: false) {
   background-color: $super_light_gray;
   box-shadow: 1px 1px 6px -2px grey;
   border-color: $light_gray;
   border-radius: $xs;
   margin-top: 100px !important;
-  min-width: 300px !important;
-  max-width: $width !important;
-  padding: $padding;
+  min-width: 600px !important;
+  max-width: $page-width-lg !important;
+  padding: $page-padding;
   position: relative;
   width: 50%;
+
+  @if $no-top-border-radius {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
   @media (max-width: $screen-xs-width) {
     margin-top: 40px !important;

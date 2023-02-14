@@ -1,14 +1,7 @@
 import { useState } from 'react'
 import { cn } from '@bem-react/classname'
-import {
-  Card,
-  Button,
-  CardContent,
-  CardActions,
-  Avatar,
-  Dialog,
-  DialogContent,
-} from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
+import { Button, Avatar, Dialog, DialogContent } from '@mui/material'
 
 import './AuditorCard.scss'
 import { Auditor } from 'shared/models/auditor'
@@ -32,35 +25,27 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => 
     `/images/avatar/${Math.floor(Math.random() * 10)}.jpg`,
   )
 
-  const handleMouseEnter = () => {
-    setState((old) => ({ ...old, isHovered: true }))
-  }
-
-  const handleMouseLeave = () => {
-    setState((old) => ({ ...old, isHovered: false }))
-  }
-
   const closeInfoDialog = () => {
     setInfoDialog(false)
   }
 
   return (
-    <Card
-      className={bem()}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <CardContent>
+    <Grid container className={bem()}>
+      <Grid xs={12} display="flex">
         <Avatar className={bem('Avatar')} alt={auditor.fname} src={avatar} />
+      </Grid>
 
+      <Grid xs={12} display="flex">
         <span className={bem('Name')}>
           {auditor.fname} {auditor.lname}
         </span>
+      </Grid>
 
+      <Grid xs={12} display="flex">
         <span className={bem('Tags')}>{auditor.tags}</span>
-      </CardContent>
+      </Grid>
 
-      <CardActions>
+      <Grid xs={12} display="flex">
         <Button
           component="span"
           variant="contained"
@@ -72,7 +57,7 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => 
         >
           More Info
         </Button>
-      </CardActions>
+      </Grid>
 
       <Dialog open={infoDialog} onClose={closeInfoDialog}>
         <DialogContent>
@@ -86,6 +71,6 @@ export const AuditorCard: React.FC<AuditorCardProps> = ({ auditor, invite }) => 
           />
         </DialogContent>
       </Dialog>
-    </Card>
+    </Grid>
   )
 }

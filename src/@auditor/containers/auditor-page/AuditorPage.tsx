@@ -129,7 +129,7 @@ export const AuditorPage: React.FC = () => {
                   ))
               ) : (
                 <Grid xs={12} className={bem('Nothing')}>
-                  {'Nothing now :('}
+                  {'Nothing yet...'}
                 </Grid>
               )}
             </Grid>
@@ -151,7 +151,7 @@ export const AuditorPage: React.FC = () => {
                   ))
               ) : (
                 <Grid xs={12} className={bem('Empty')}>
-                  {'Nothing now :('}
+                  {'Nothing yet...'}
                 </Grid>
               )}
             </Grid>

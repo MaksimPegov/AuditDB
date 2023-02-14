@@ -2,7 +2,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
 
 import './AppFooter.scss'
-import { Container, Link } from '@mui/material'
+import { Link } from '@mui/material'
 import { Instagram, Twitter, YouTube } from '@mui/icons-material'
 
 const componentId = 'AppFooter'

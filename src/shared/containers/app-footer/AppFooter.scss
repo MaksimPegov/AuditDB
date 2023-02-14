@@ -38,17 +38,18 @@
   }
 
   &-Link {
+    display: block !important;
     color: white !important;
-    font-size: $md !important;
+    margin-bottom: $xxs !important;
   }
 
   &-Rights {
     position: relative;
     justify-content: center;
     display: flex;
-    bottom: -$xxl;
+    bottom: -$sm;
     padding-bottom: $xxs !important;
     color: $text-color;
-    font-size: $md-font-size;
+    font-size: $md-font-size !important;
   }
 }

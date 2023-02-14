@@ -133,7 +133,7 @@ export const CustomerPage: React.FC = () => {
                 </Grid>
               ) : audits.length < 1 ? (
                 <Grid xs={12} className={bem('Empty')}>
-                  {'Nothing now :('}
+                  {'Nothing yet...'}
                 </Grid>
               ) : (
                 audits.map((audit) => (

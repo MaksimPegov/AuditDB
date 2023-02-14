@@ -86,9 +86,11 @@ export const MainPage = () => {
 
                 <Search className={bem('Search')}>
                   <SearchIconWrapper>
-                    <SearchIcon />
+                    <SearchIcon className={bem('SearchIcon')} fontSize="large" />
                   </SearchIconWrapper>
+
                   <StyledInputBase
+                    className={bem('SearchInput')}
                     onChange={onAuditorsSearchChange}
                     placeholder="Search by tag…"
                     inputProps={{ 'aria-label': 'search' }}
@@ -124,10 +126,11 @@ export const MainPage = () => {
 
                 <Search className={bem('Search')}>
                   <SearchIconWrapper>
-                    <SearchIcon />
+                    <SearchIcon className={bem('SearchIcon')} fontSize="large" />
                   </SearchIconWrapper>
 
                   <StyledInputBase
+                    className={bem('SearchInput')}
                     onChange={onProjectsSearchChange}
                     placeholder="Search by tag…"
                     inputProps={{ 'aria-label': 'search' }}

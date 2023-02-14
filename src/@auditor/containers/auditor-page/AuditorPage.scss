@@ -5,13 +5,12 @@
 }
 
 .AuditorPage {
-  @include page-panel;
+  @include page-panel(true);
 
   @media screen and (max-width: $screen-xs-width) {
     zoom: 120% !important;
   }
 
-  max-width: 600px !important;
   padding-top: $md !important;
   padding-bottom: $md !important;
   border: 3px solid $secondary !important;

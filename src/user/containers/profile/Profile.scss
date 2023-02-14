@@ -1,7 +1,7 @@
 @import 'styles/styles.scss';
 
 .Profile {
-  @include page-panel($page-width-md);
+  @include page-panel;
 
   &-Title {
     @include page-title;
@@ -14,6 +14,10 @@
     margin: auto;
   }
 
+  &-Control {
+    @include page-controll;
+  }
+
   &-Input {
     @include page-input;
   }
@@ -23,6 +27,8 @@
   }
 
   &-Button {
+    @include page-button;
+
     &_Password {
       background-color: $primary !important;
     }

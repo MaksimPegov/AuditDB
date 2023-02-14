@@ -231,7 +231,7 @@ export const Registation: React.FC = () => {
       className="motion-container"
     >
       <Grid container spacing={0} className={bem()}>
-        <span className={bem('Title')}>Sign in</span>
+        <span className={bem('Title')}>Sign up</span>
 
         <form className={bem('Form')} autoComplete="off">
           <Grid xs={12}>

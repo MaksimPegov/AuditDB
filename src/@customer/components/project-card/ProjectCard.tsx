@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Unstable_Grid2'
 import { cn } from '@bem-react/classname'
 import { useState } from 'react'
-import { Card, Button, CardActions, Avatar, Dialog, DialogContent } from '@mui/material'
+import { Button, Avatar, Dialog, DialogContent } from '@mui/material'
 
 import './ProjectCard.scss'
 import { Project } from 'shared/models/project'

@@ -1,7 +1,7 @@
 @import 'styles/styles.scss';
 
 .Welcome {
-  margin: calc($sm * 5) auto calc($sm * 20);
+  margin: 100px auto 300px;
   display: flex;
   flex-direction: row;
   width: fit-content;
@@ -28,6 +28,7 @@
     color: $text_color;
     font-size: $font-size-30px;
     line-height: $xxl;
+    padding: inherit;
     text-align: center;
   }
 
